@@ -6,7 +6,7 @@
 <title>CorpFinLab · FIA 203 Corporate Finance-I</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#05080f;--surf:#0a0f1a;--surf2:#111827;--accent:#3b82f6;--accent2:#60a5fa;--text:#eef2f7;--text2:#7f8fa6;--text3:#3d4f6b;--border:rgba(59,130,246,0.15);--border2:rgba(255,255,255,0.06);--green:#00e676;--gold:#f59e0b;}
+:root{--bg:#f5f6fa;--surf:#ffffff;--surf2:#f0f2f8;--accent:#2563eb;--accent2:#3b82f6;--text:#0f172a;--text2:#475569;--text3:#94a3b8;--border:rgba(37,99,235,0.15);--border2:rgba(15,23,42,0.08);--green:#0a7c3e;--gold:#b45309;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(59,130,246,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
@@ -20,10 +20,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,8,15,0.85);backdrop-f
 .logo-text span{color:var(--accent);}
 .logo-sub{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text2);letter-spacing:0.08em;display:block;margin-top:1px;}
 .hright{display:flex;align-items:center;gap:16px;}
-.student-pill{display:flex;align-items:center;gap:8px;background:rgba(59,130,246,0.07);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--accent2);}
+.student-pill{display:flex;align-items:center;gap:8px;background:rgba(37,99,235,0.06);border:1px solid var(--border);border-radius:100px;padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--accent2);}
 .student-pill::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);}
 .btn-signout{background:transparent;border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 14px;color:var(--text2);font-family:'Syne',sans-serif;font-size:0.75rem;cursor:pointer;transition:all 0.2s;}
-.btn-signout:hover{border-color:rgba(255,107,107,0.4);color:#ff6b6b;}
+.btn-signout:hover{border-color:rgba(255,107,107,0.4);color:#dc2626;}
 
 /* ── HERO ── */
 .hero{position:relative;z-index:1;padding:60px 40px 40px;}
@@ -58,16 +58,16 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,8,15,0.85);backdrop-f
 /* ── MODULE CARD ── */
 .mcard{background:var(--surf);border:1px solid var(--border2);border-radius:14px;padding:28px;cursor:pointer;transition:all 0.25s;position:relative;overflow:hidden;text-decoration:none;display:block;color:inherit;}
 .mcard::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,0.04) 0%,transparent 60%);opacity:0;transition:opacity 0.25s;}
-.mcard:hover{border-color:rgba(59,130,246,0.3);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.35);}
+.mcard:hover{border-color:rgba(37,99,235,0.3);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.35);}
 .mcard:hover::before{opacity:1;}
-.mcard.done{border-color:rgba(59,130,246,0.2);background:linear-gradient(135deg,rgba(59,130,246,0.04),var(--surf));}
+.mcard.done{border-color:rgba(37,99,235,0.2);background:linear-gradient(135deg,rgba(59,130,246,0.04),var(--surf));}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px;}
 .mnum{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text3);letter-spacing:0.12em;}
 .mbadge{font-family:'JetBrains Mono',monospace;font-size:0.6rem;padding:4px 10px;border-radius:100px;letter-spacing:0.06em;}
-.mbadge.done{background:rgba(0,230,118,0.1);color:var(--green);border:1px solid rgba(0,230,118,0.2);}
-.mbadge.new{background:rgba(59,130,246,0.1);color:var(--accent2);border:1px solid rgba(59,130,246,0.2);}
+.mbadge.done{background:rgba(0,230,118,0.1);color:var(--green);border:1px solid rgba(10,124,62,0.25);}
+.mbadge.new{background:rgba(37,99,235,0.07);color:var(--accent2);border:1px solid rgba(37,99,235,0.2);}
 .micon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:14px;flex-shrink:0;}
-.mi1{background:rgba(59,130,246,0.1);}
+.mi1{background:rgba(37,99,235,0.07);}
 .mi2{background:rgba(245,158,11,0.1);}
 .mi3{background:rgba(16,185,129,0.1);}
 .mi4{background:rgba(139,92,246,0.1);}
@@ -76,7 +76,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,8,15,0.85);backdrop-f
 .mcard p{font-size:0.8rem;color:var(--text2);line-height:1.55;margin-bottom:20px;}
 .mfooter{display:flex;align-items:center;justify-content:space-between;}
 .mtags{display:flex;gap:6px;flex-wrap:wrap;}
-.mtag{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text3);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:4px;padding:3px 8px;}
+.mtag{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text3);background:rgba(255,255,255,0.04);border:1px solid rgba(15,23,42,0.09);border-radius:4px;padding:3px 8px;}
 .marrow{color:var(--accent);font-size:1.1rem;transition:transform 0.2s;}
 .mcard:hover .marrow{transform:translateX(4px);}
 .msessions{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text3);margin-bottom:3px;}
@@ -110,7 +110,8 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,8,15,0.85);backdrop-f
     </div>
     <div class="hright">
       <div class="student-pill" id="studentPill">Loading…</div>
-      <button class="btn-signout" onclick="signOut()">Sign Out</button>
+      <a href="cf_bigpicture.html" style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#0e8c65;text-decoration:none;padding:6px 12px;border:1px solid rgba(14,140,101,0.3);border-radius:6px;display:flex;align-items:center;gap:6px;transition:all 0.2s;" onmouseover="this.style.background='rgba(14,140,101,0.08)'" onmouseout="this.style.background='transparent'"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#0e8c65" stroke-width="1"/><line x1="6" y1="2" x2="6" y2="10" stroke="#0e8c65" stroke-width="1"/><line x1="2" y1="6" x2="10" y2="6" stroke="#0e8c65" stroke-width="1"/></svg>Big Picture</a>
+<button class="btn-signout" onclick="signOut()">Sign Out</button>
     </div>
   </div>
 </header>
@@ -121,10 +122,10 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,8,15,0.85);backdrop-f
     <h1>Corporate<br><em>Finance-I</em></h1>
     <div class="hero-sub">FIA 203 · PGDM / PGDM (Marketing) · Dr. Chakrapani Chaturvedula</div>
     <div class="stats-row">
-      <div class="stat"><div class="stat-val">5<span class="u"> mod</span></div><div class="stat-lbl">Modules</div></div>
-      <div class="stat"><div class="stat-val">20<span class="u"> sess</span></div><div class="stat-lbl">Sessions</div></div>
-      <div class="stat"><div class="stat-val">75<span class="u"> min</span></div><div class="stat-lbl">Per Session</div></div>
-      <div class="stat"><div class="stat-val">4<span class="u"> CO</span></div><div class="stat-lbl">Outcomes</div></div>
+      <div class="stat"><div class="stat-val">5</div><div class="stat-lbl">Modules</div></div>
+      <div class="stat"><div class="stat-val">20</div><div class="stat-lbl">Sessions</div></div>
+      <div class="stat"><div class="stat-val">75 min</div><div class="stat-lbl">Per Session</div></div>
+      <div class="stat"><div class="stat-val">4 CO</div><div class="stat-lbl">Outcomes</div></div>
     </div>
   </div>
 </section>
@@ -239,7 +240,7 @@ function signOut(){if(confirm('Sign out of CorpFinLab?')){localStorage.removeIte
 
 const s=getSession();
 if(!s||s.expires<Date.now()){localStorage.removeItem(SESSION_KEY);window.location.href='index.html';}
-else{document.getElementById('studentPill').textContent=s.enrollId;}
+else{document.getElementById('studentPill').textContent=s.enrollId||s.id||'Student';}
 
 // Progress from localStorage
 const seen=[];

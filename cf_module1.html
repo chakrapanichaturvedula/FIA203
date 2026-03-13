@@ -3,363 +3,1185 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Module 1 — Intro to Corporate Finance & TVM · CorpFinLab</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<title>Module 1 — Corporate Finance & TVM · CorpFinLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#05080f;--surf:#0a0f1a;--surf2:#111827;--accent:#3b82f6;--accent2:#60a5fa;--text:#eef2f7;--text2:#7f8fa6;--text3:#3d4f6b;--border:rgba(59,130,246,0.15);--border2:rgba(255,255,255,0.06);--green:#00e676;--gold:#f59e0b;--red:#ff6b6b;}
+:root{
+  --bg:#f5f6fa;--surf:#ffffff;--surf2:#f0f2f8;--surf3:#e8ecf5;
+  --blue:#2563eb;--blue2:#3b82f6;--teal:#0e8c65;--teal2:#1D9E75;
+  --amber:#c97b10;--purple:#5b52c8;--purple2:#7F77DD;
+  --green:#0a7c3e;--red:#dc2626;--gold:#b45309;
+  --text:#0f172a;--text2:#475569;--text3:#94a3b8;
+  --border:rgba(37,99,235,0.18);--border2:rgba(15,23,42,0.1);
+}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.6;}
-body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(59,130,246,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
-header{position:sticky;top:0;z-index:100;background:rgba(5,8,15,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);padding:0 40px;}
-.hinner{max-width:960px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;}
-.back{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text2);text-decoration:none;transition:color 0.2s;}
-.back:hover{color:var(--accent2);}
-.hmod{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--accent);letter-spacing:0.1em;}
-main{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:48px 40px 100px;}
-.mod-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--accent);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
-.mod-eyebrow::before{content:'';width:22px;height:1px;background:var(--accent);}
-h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:8px;}
-h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:var(--accent);}
-.sub{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);letter-spacing:0.06em;margin-bottom:40px;}
-/* content sections */
-.section{margin-bottom:48px;}
-h2{font-size:1.25rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border2);color:var(--text);}
-h2 .tag{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--accent);background:rgba(59,130,246,0.1);border-radius:4px;padding:2px 8px;margin-left:10px;font-weight:400;letter-spacing:0.06em;vertical-align:middle;}
-p{color:var(--text2);font-size:0.93rem;margin-bottom:14px;line-height:1.7;}
-strong{color:var(--text);}
-/* concept cards */
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin:20px 0;}
-.ccard{background:var(--surf);border:1px solid var(--border2);border-radius:10px;padding:20px;}
-.ccard-icon{font-size:1.4rem;margin-bottom:10px;}
-.ccard h4{font-size:0.9rem;font-weight:700;margin-bottom:6px;}
-.ccard p{font-size:0.8rem;color:var(--text2);margin:0;line-height:1.55;}
-/* formula box */
-.formula-box{background:var(--surf2);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin:20px 0;font-family:'JetBrains Mono',monospace;}
-.formula-label{font-size:0.6rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;}
-.formula{font-size:1rem;color:var(--text);line-height:1.7;}
-.formula .var{color:var(--accent2);}
-.formula-note{font-size:0.68rem;color:var(--text3);margin-top:10px;line-height:1.6;}
-/* example box */
-.example{background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(96,165,250,0.02));border:1px solid rgba(59,130,246,0.2);border-radius:10px;padding:20px 24px;margin:20px 0;}
-.ex-label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--accent2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
-.ex-label::before{content:'📌';}
-.example p{font-size:0.85rem;margin-bottom:8px;}
-.example p:last-child{margin-bottom:0;}
-/* table */
-.tbl-wrap{overflow-x:auto;margin:20px 0;}
-table{width:100%;border-collapse:collapse;font-size:0.82rem;}
-th{background:rgba(59,130,246,0.1);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
-td{padding:10px 14px;border-bottom:1px solid var(--border2);color:var(--text2);}
-td strong{color:var(--text);}
-tr:hover td{background:rgba(255,255,255,0.02);}
-/* callout */
-.callout{display:flex;gap:14px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:18px 20px;margin:20px 0;}
-.callout-icon{font-size:1.2rem;flex-shrink:0;}
-.callout-body p{font-size:0.84rem;color:var(--text2);margin:0;}
-.callout-body strong{color:var(--gold);}
-/* key insight */
-.insight{background:rgba(0,230,118,0.04);border-left:3px solid var(--green);padding:14px 18px;margin:20px 0;border-radius:0 8px 8px 0;}
-.insight p{font-size:0.84rem;color:var(--text2);margin:0;}
-.insight strong{color:var(--green);}
-/* quiz */
-.quiz-section{background:var(--surf);border:1px solid var(--border2);border-radius:14px;padding:32px;margin-top:56px;}
+body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(37,99,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.04) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:100;background:rgba(245,246,250,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);box-shadow:0 1px 0 rgba(15,23,42,0.06);padding:0 32px;}
+.hinner{max-width:1000px;margin:0 auto;height:58px;display:flex;align-items:center;gap:16px;}
+.back{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);text-decoration:none;transition:color 0.2s;white-space:nowrap;}
+.back:hover{color:var(--blue2);}
+.hmod{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--blue);letter-spacing:0.1em;}
+.hspacer{flex:1;}
+.bp-btn{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--teal);text-decoration:none;
+  padding:5px 11px;border:1px solid rgba(29,158,117,0.3);border-radius:6px;
+  display:flex;align-items:center;gap:5px;transition:background 0.2s;white-space:nowrap;}
+.bp-btn:hover{background:rgba(29,158,117,0.1);}
+
+/* ── PAGE LAYOUT ── */
+main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:40px 32px 100px;}
+.mod-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--blue);letter-spacing:0.18em;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.mod-eyebrow::before{content:'';width:20px;height:1px;background:var(--blue);}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:6px;}
+h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:var(--blue);}
+.mod-sub{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text2);letter-spacing:0.06em;margin-bottom:36px;}
+
+/* ── CONCEPT TABS (top level) ── */
+.ctab-bar{display:flex;gap:4px;margin-bottom:0;border-bottom:1px solid var(--border2);}
+.ctab{font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:10px 18px;cursor:pointer;
+  border-radius:8px 8px 0 0;color:var(--text2);border:1px solid transparent;
+  border-bottom:none;transition:all 0.18s;letter-spacing:0.04em;white-space:nowrap;}
+.ctab:hover{color:var(--text);background:rgba(15,23,42,0.04);}
+.ctab.active{color:var(--text);background:var(--surf);border-color:var(--border2);
+  border-bottom:1px solid var(--surf);}
+
+/* ── CONCEPT PANEL ── */
+.cpanel{display:none;background:var(--surf);border:1px solid var(--border2);border-top:none;
+  border-radius:0 0 14px 14px;padding:28px 28px 32px;box-shadow:0 4px 16px rgba(15,23,42,0.06);}
+.cpanel.active{display:block;}
+
+/* ── SECTION PILLS (inside each concept) ── */
+.spill-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;}
+.spill{font-family:'JetBrains Mono',monospace;font-size:0.62rem;padding:6px 14px;
+  border-radius:20px;cursor:pointer;border:1px solid var(--border2);
+  color:var(--text2);background:var(--bg);transition:all 0.18s;letter-spacing:0.04em;}
+.spill:hover{color:var(--text);}
+.spill.active{background:var(--text);color:#fff;border-color:var(--text);}
+.spill.active.s-concepts{background:var(--blue);color:#fff;border-color:var(--blue);}
+.spill.active.s-formulas{background:var(--purple);color:#fff;border-color:var(--purple);}
+.spill.active.s-decoded{background:var(--teal);color:#fff;border-color:var(--teal);}
+.spill.active.s-game{background:var(--amber);color:#000;border-color:var(--amber);}
+.spill.active.s-quiz{background:var(--blue);color:#fff;border-color:var(--blue);}
+
+/* ── SECTION PANELS ── */
+.spanel{display:none;}
+.spanel.active{display:block;}
+
+/* ── CONCEPTS SECTION ── */
+.concept-intro{font-size:0.9rem;color:var(--text2);line-height:1.75;margin-bottom:24px;}
+.concept-intro strong{color:var(--text);}
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:20px 0;}
+.pillar{border-radius:10px;padding:20px;border:1px solid var(--border2);}
+.pillar-num{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:0.12em;margin-bottom:8px;}
+.pillar h4{font-size:0.95rem;font-weight:700;margin-bottom:8px;}
+.pillar p{font-size:0.82rem;color:var(--text2);line-height:1.6;margin:0;}
+.pillar .badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.55rem;
+  padding:2px 8px;border-radius:4px;margin-top:10px;letter-spacing:0.06em;}
+.concept-block{margin-bottom:28px;}
+.concept-block h3{font-size:1rem;font-weight:700;margin-bottom:12px;color:var(--text);}
+.ccard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:14px 0;}
+.ccard{background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:18px;}
+.ccard h4{font-size:0.88rem;font-weight:700;margin-bottom:6px;}
+.ccard p{font-size:0.8rem;color:var(--text2);line-height:1.55;margin:0;}
+.callout{display:flex;gap:12px;border-radius:10px;padding:16px 18px;margin:16px 0;}
+.callout-body{font-size:0.84rem;color:var(--text2);line-height:1.7;}
+.callout-body strong{color:var(--text);}
+.callout.insight{background:rgba(14,140,101,0.06);border:1px solid rgba(14,140,101,0.2);}
+.callout.insight .callout-body strong{color:var(--teal);}
+.callout.warning{background:rgba(180,83,9,0.05);border:1px solid rgba(180,83,9,0.2);}
+.callout.warning .callout-body strong{color:var(--gold);}
+.callout.info{background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.2);}
+.callout.info .callout-body strong{color:var(--blue);}
+.example-box{background:rgba(14,140,101,0.06);border:1px solid rgba(14,140,101,0.22);
+  border-radius:10px;padding:18px 20px;margin:16px 0;}
+.ex-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--teal);
+  letter-spacing:0.15em;margin-bottom:10px;}
+.example-box p{font-size:0.84rem;color:var(--text2);line-height:1.7;margin-bottom:8px;}
+.example-box p:last-child{margin:0;}
+.comparison-tbl{width:100%;border-collapse:collapse;font-size:0.82rem;margin:16px 0;}
+.comparison-tbl th{background:rgba(37,99,235,0.06);color:var(--blue);font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;letter-spacing:0.08em;padding:9px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.comparison-tbl td{padding:9px 14px;border-bottom:1px solid var(--border2);color:var(--text2);}
+.comparison-tbl td strong{color:var(--text);}
+.comparison-tbl tr:hover td{background:rgba(15,23,42,0.03);}
+
+/* ── FORMULAS SECTION ── */
+.formula-grid{display:grid;gap:14px;}
+.fcard{background:var(--surf2);border:1px solid rgba(91,82,200,0.2);border-radius:10px;padding:20px 24px;}
+.fcard-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--purple);
+  letter-spacing:0.15em;margin-bottom:10px;}
+.fcard-formula{font-family:'JetBrains Mono',monospace;font-size:1.05rem;color:var(--text);
+  line-height:1.5;margin-bottom:12px;}
+.fcard-formula .v{color:var(--blue2);}
+.fcard-vars{display:grid;gap:5px;margin-bottom:10px;}
+.fcard-var{display:flex;gap:10px;font-family:'JetBrains Mono',monospace;font-size:0.68rem;}
+.fcard-var .sym{color:var(--blue2);min-width:40px;}
+.fcard-var .def{color:var(--text2);}
+.fcard-example{background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.1);border-radius:7px;padding:12px 14px;
+  font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text2);line-height:1.7;margin-top:10px;}
+.fcard-example strong{color:var(--text);}
+
+/* ── FINANCE DECODED (flashcards) ── */
+.decoded-intro{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text2);
+  line-height:1.7;margin-bottom:20px;}
+.fc-progress{display:flex;gap:3px;margin-bottom:20px;}
+.fc-pip{height:3px;border-radius:2px;background:var(--surf3);flex:1;transition:background 0.3s;}
+.fc-pip.done{background:var(--teal);}
+.fc-pip.current{background:var(--teal2);}
+.fc-counter{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text2);margin-bottom:14px;}
+.flashcard{border-radius:12px;min-height:180px;cursor:pointer;user-select:none;
+  transition:transform 0.1s;position:relative;margin-bottom:14px;}
+.flashcard:active{transform:scale(0.99);}
+.fc-front{background:var(--surf);border:1px solid var(--border2);box-shadow:0 2px 8px rgba(15,23,42,0.06);border-radius:12px;
+  padding:32px 28px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;min-height:180px;}
+.fc-front .fc-type{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text3);
+  letter-spacing:0.15em;margin-bottom:14px;}
+.fc-front .fc-term{font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;color:var(--text);}
+.fc-front .fc-hint{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text3);margin-top:14px;}
+.fc-back{background:rgba(14,140,101,0.05);border:1px solid rgba(14,140,101,0.22);border-radius:12px;
+  padding:24px 28px;display:none;min-height:180px;}
+.fc-back.show{display:block;}
+.fc-def-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--teal);
+  letter-spacing:0.12em;margin-bottom:8px;}
+.fc-def{font-size:0.9rem;color:var(--text);line-height:1.7;margin-bottom:14px;}
+.fc-plain-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text2);
+  letter-spacing:0.12em;margin-bottom:6px;}
+.fc-plain{font-size:0.82rem;color:var(--text2);line-height:1.6;}
+.fc-nav{display:flex;gap:8px;}
+.fc-btn{flex:1;padding:9px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;
+  cursor:pointer;border:1px solid var(--border2);background:var(--surf);color:var(--text2);transition:all 0.18s;}
+.fc-btn:hover{color:var(--text);border-color:rgba(15,23,42,0.25);}
+.fc-btn.primary{background:var(--teal);color:#fff;border-color:var(--teal);}
+.fc-btn.primary:hover{background:#0b6e4f;}
+
+/* ── GAME SECTION ── */
+.game-wrap{background:var(--surf2);border:1px solid rgba(201,123,16,0.25);border-radius:14px;overflow:hidden;}
+.game-header{background:rgba(201,123,16,0.06);border-bottom:1px solid rgba(201,123,16,0.18);
+  padding:18px 24px;display:flex;align-items:center;gap:12px;}
+.game-title{font-size:1rem;font-weight:700;color:var(--amber);}
+.game-desc{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);margin-top:3px;}
+.game-body{padding:24px;}
+/* CFO game */
+.cfo-score{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);margin-bottom:20px;}
+.cfo-score span{color:var(--amber);font-size:1rem;font-weight:700;}
+.decision-card{background:var(--bg);border:1px solid var(--border2);border-radius:10px;
+  padding:18px 20px;margin-bottom:14px;}
+.decision-scenario{font-size:0.88rem;color:var(--text);line-height:1.6;margin-bottom:14px;}
+.decision-scenario strong{color:var(--blue2);}
+.decision-opts{display:flex;gap:8px;flex-wrap:wrap;}
+.d-opt{font-family:'JetBrains Mono',monospace;font-size:0.65rem;padding:7px 14px;
+  border-radius:20px;cursor:pointer;border:1px solid var(--border2);
+  background:var(--surf);color:var(--text2);transition:all 0.18s;}
+.d-opt:hover{color:var(--text);border-color:rgba(15,23,42,0.25);}
+.d-opt.selected-inv{border-color:var(--blue);color:var(--blue);background:rgba(59,130,246,0.1);}
+.d-opt.selected-fin{border-color:var(--purple2);color:var(--purple2);background:rgba(127,119,221,0.1);}
+.d-opt.selected-wc{border-color:var(--teal2);color:var(--teal2);background:rgba(29,158,117,0.1);}
+.d-feedback{display:none;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;
+  padding:10px 14px;border-radius:7px;line-height:1.6;}
+.d-feedback.show{display:block;}
+.d-feedback.ok{background:rgba(10,124,62,0.07);border:1px solid rgba(10,124,62,0.25);color:var(--green);}
+.d-feedback.bad{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);color:var(--red);}
+/* TVM game */
+.tvm-level-bar{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:20px;}
+.tvm-lvl{font-family:'JetBrains Mono',monospace;font-size:0.6rem;padding:5px 10px;
+  border-radius:6px;cursor:pointer;border:1px solid var(--border2);
+  background:var(--bg);color:var(--text2);transition:all 0.18s;}
+.tvm-lvl.active{background:var(--surf2);color:var(--amber);border-color:rgba(239,159,39,0.4);}
+.tvm-lvl.done{background:rgba(10,124,62,0.08);color:var(--green);border-color:rgba(10,124,62,0.3);}
+.tvm-score-bar{display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:20px;padding:10px 16px;background:var(--surf2);border:1px solid var(--border2);border-radius:8px;
+  font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);}
+.tvm-score-bar strong{color:var(--amber);}
+.tvm-panel{background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:24px;}
+.tvm-level-title{font-size:0.95rem;font-weight:700;margin-bottom:4px;}
+.tvm-level-desc{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text2);margin-bottom:20px;}
+.timeline{display:flex;gap:0;margin-bottom:22px;overflow-x:auto;padding-bottom:4px;}
+.tl-item{display:flex;flex-direction:column;align-items:center;min-width:90px;position:relative;}
+.tl-item::before{content:'';position:absolute;top:8px;left:50%;right:-50%;height:1px;background:var(--border2);}
+.tl-item:last-child::before{display:none;}
+.tl-dot{width:16px;height:16px;border-radius:50%;background:var(--surf2);border:1px solid var(--border2);
+  z-index:1;margin-bottom:6px;}
+.tl-time{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text3);margin-bottom:6px;}
+.tl-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text);
+  background:var(--surf2);border:1px solid var(--border2);border-radius:6px;
+  padding:4px 8px;text-align:center;white-space:nowrap;}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px;}
+.choice-btn{background:var(--surf);border:1px solid var(--border2);border-radius:10px;
+  padding:14px 16px;cursor:pointer;text-align:left;color:var(--text2);
+  font-family:'Syne',sans-serif;font-size:0.82rem;transition:all 0.18s;}
+.choice-btn:hover{border-color:rgba(15,23,42,0.25);color:var(--text);}
+.choice-btn.selected{border-color:var(--amber);color:var(--text);background:rgba(201,123,16,0.07);}
+.choice-btn h5{font-weight:700;margin-bottom:4px;font-size:0.85rem;}
+.choice-btn p{font-size:0.75rem;color:var(--text2);margin:0;}
+.tvm-input-row{display:flex;gap:10px;align-items:center;margin-bottom:16px;flex-wrap:wrap;}
+.tvm-input{background:var(--surf);border:1px solid var(--border2);border-radius:8px;
+  padding:10px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.85rem;
+  width:180px;outline:none;transition:border-color 0.2s;}
+.tvm-input:focus{border-color:var(--amber);}
+.tvm-slider-row{margin-bottom:18px;}
+.tvm-slider-row label{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);
+  display:block;margin-bottom:8px;}
+.tvm-slider-row input[type=range]{width:100%;accent-color:var(--amber);}
+.hint-pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.hint-pill{font-family:'JetBrains Mono',monospace;font-size:0.65rem;padding:5px 12px;
+  border-radius:20px;cursor:pointer;background:var(--surf);border:1px solid var(--border2);
+  color:var(--text2);transition:all 0.18s;}
+.hint-pill:hover{color:var(--text);border-color:rgba(15,23,42,0.25);}
+.tvm-submit{background:var(--amber);color:#fff;border:none;border-radius:8px;
+  padding:10px 24px;font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;
+  cursor:pointer;transition:all 0.2s;}
+.tvm-submit:hover{background:#a06208;transform:translateY(-1px);}
+.tvm-result{display:none;margin-top:14px;padding:14px 18px;border-radius:8px;
+  font-family:'JetBrains Mono',monospace;font-size:0.75rem;line-height:1.65;}
+.tvm-result.show{display:block;}
+.tvm-result.ok{background:rgba(10,124,62,0.07);border:1px solid rgba(10,124,62,0.25);color:var(--green);}
+.tvm-result.info{background:rgba(37,99,235,0.06);border:1px solid rgba(37,99,235,0.2);color:var(--blue);}
+.tvm-next{margin-top:10px;background:var(--surf);border:1px solid var(--border2);border-radius:8px;
+  padding:9px 20px;font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;
+  color:var(--text2);cursor:pointer;transition:all 0.18s;}
+.tvm-next:hover{color:var(--text);border-color:rgba(15,23,42,0.25);}
+.game-reset{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;
+  font-size:0.62rem;color:var(--text2);background:none;border:none;cursor:pointer;
+  padding:0;margin-top:16px;transition:color 0.2s;}
+.game-reset:hover{color:var(--text2);}
+
+/* ── QUIZ SECTION ── */
+.quiz-wrap{background:var(--surf);border:1px solid var(--border2);box-shadow:0 1px 3px rgba(15,23,42,0.08);border-radius:14px;padding:28px;}
 .quiz-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
-.quiz-head h2{border:none;padding:0;margin:0;font-size:1.1rem;}
-.quiz-badge{font-family:'JetBrains Mono',monospace;font-size:0.6rem;background:rgba(59,130,246,0.1);border:1px solid var(--border);color:var(--accent2);padding:4px 10px;border-radius:100px;}
+.quiz-title{font-size:1rem;font-weight:700;}
+.quiz-badge{font-family:'JetBrains Mono',monospace;font-size:0.58rem;
+  background:rgba(37,99,235,0.07);border:1px solid rgba(37,99,235,0.2);
+  color:var(--blue2);padding:3px 10px;border-radius:100px;}
 .q-block{margin-bottom:28px;}
-.q-text{font-size:0.9rem;font-weight:600;margin-bottom:14px;line-height:1.5;}
-.q-num{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--accent);margin-bottom:6px;letter-spacing:0.1em;}
-.options{display:flex;flex-direction:column;gap:8px;}
-.opt{display:flex;align-items:flex-start;gap:10px;background:var(--surf2);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:10px 14px;cursor:pointer;transition:all 0.18s;font-size:0.84rem;color:var(--text2);}
-.opt:hover{border-color:rgba(59,130,246,0.3);color:var(--text);}
-.opt.selected{border-color:var(--accent);color:var(--text);background:rgba(59,130,246,0.08);}
-.opt.correct{border-color:var(--green);background:rgba(0,230,118,0.07);color:var(--green);}
-.opt.wrong{border-color:var(--red);background:rgba(255,107,107,0.07);color:var(--red);}
-.opt-key{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text3);min-width:18px;}
-.feedback{display:none;margin-top:10px;font-size:0.8rem;padding:10px 14px;border-radius:6px;font-family:'JetBrains Mono',monospace;line-height:1.55;}
-.feedback.show{display:block;}
-.feedback.ok{background:rgba(0,230,118,0.07);border:1px solid rgba(0,230,118,0.2);color:var(--green);}
-.feedback.bad{background:rgba(255,107,107,0.07);border:1px solid rgba(255,107,107,0.2);color:var(--red);}
-.btn-submit{margin-top:8px;background:var(--accent);color:#fff;border:none;border-radius:7px;padding:11px 28px;font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;}
-.btn-submit:hover{background:#2563eb;transform:translateY(-1px);}
-.btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
-.quiz-result{display:none;margin-top:24px;background:rgba(59,130,246,0.07);border:1px solid var(--border);border-radius:10px;padding:20px 24px;text-align:center;}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--blue);letter-spacing:0.1em;margin-bottom:6px;}
+.q-text{font-size:0.9rem;font-weight:600;margin-bottom:14px;line-height:1.55;}
+.options{display:flex;flex-direction:column;gap:7px;}
+.opt{display:flex;align-items:flex-start;gap:10px;background:var(--bg);
+  border:1px solid rgba(15,23,42,0.1);border-radius:8px;padding:10px 14px;
+  cursor:pointer;transition:all 0.18s;font-size:0.84rem;color:var(--text2);}
+.opt:hover{border-color:rgba(37,99,235,0.35);color:var(--text);background:rgba(37,99,235,0.04);}
+.opt.selected{border-color:var(--blue);color:var(--text);background:rgba(37,99,235,0.07);}
+.opt.correct{border-color:var(--green);background:rgba(10,124,62,0.08);color:var(--green);}
+.opt.wrong{border-color:var(--red);background:rgba(220,38,38,0.07);color:var(--red);}
+.opt-key{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text3);min-width:16px;}
+.q-feedback{display:none;margin-top:10px;font-size:0.78rem;padding:10px 14px;
+  border-radius:6px;font-family:'JetBrains Mono',monospace;line-height:1.55;}
+.q-feedback.show{display:block;}
+.q-feedback.ok{background:rgba(10,124,62,0.07);border:1px solid rgba(10,124,62,0.25);color:var(--green);}
+.q-feedback.bad{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);color:var(--red);}
+.btn-submit{margin-top:8px;background:var(--blue);color:#fff;border:none;border-radius:8px;
+  padding:10px 26px;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:700;
+  cursor:pointer;transition:all 0.2s;}
+.btn-submit:hover{background:#2563eb;}
+.btn-submit:disabled{opacity:0.4;cursor:not-allowed;}
+.quiz-result{display:none;margin-top:24px;background:rgba(59,130,246,0.06);
+  border:1px solid var(--border);border-radius:10px;padding:20px 24px;text-align:center;}
 .quiz-result.show{display:block;}
-.qr-score{font-size:2rem;font-weight:800;color:var(--accent);letter-spacing:-0.03em;}
+.qr-score{font-size:2rem;font-weight:800;color:var(--blue);letter-spacing:-0.03em;}
 .qr-msg{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);margin-top:6px;}
-@media(max-width:680px){header,main{padding-left:20px;padding-right:20px;}}
+
+@media(max-width:680px){
+  header,main{padding-left:16px;padding-right:16px;}
+  .choice-grid{grid-template-columns:1fr;}
+  .pillars{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
 <header>
   <div class="hinner">
-    <a class="back" href="cf_course.html">← Back to Modules</a>
-    <div class="hmod">MODULE 01 · TVM</div>
+    <a class="back" href="cf_course.html">← Modules</a>
+    <div class="hmod">MODULE 01 · Ch. 1 & 4</div>
+    <div class="hspacer"></div>
+    <a href="cf_bigpicture.html" class="bp-btn">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+        <circle cx="6" cy="6" r="5" stroke="#1D9E75" stroke-width="1"/>
+        <line x1="6" y1="2" x2="6" y2="10" stroke="#1D9E75" stroke-width="1"/>
+        <line x1="2" y1="6" x2="10" y2="6" stroke="#1D9E75" stroke-width="1"/>
+      </svg>Big Picture
+    </a>
   </div>
 </header>
 
 <main>
   <div class="mod-eyebrow">Ch. 1 &amp; 4 · RWJK 13e · 4 Sessions</div>
   <h1>Introduction to Corporate Finance<br>&amp; <em>Time Value of Money</em></h1>
-  <div class="sub">CO1 · ESTIMATE PRESENT AND FUTURE VALUE OF CASH FLOWS</div>
+  <div class="mod-sub">CO1 · ESTIMATE PRESENT AND FUTURE VALUE OF CASH FLOWS</div>
 
-  <!-- 1. GOAL OF THE FIRM -->
-  <div class="section">
-    <h2>1. The Goal of Corporate Finance <span class="tag">Ch. 1</span></h2>
-    <p>Corporate Finance answers three fundamental questions: <strong>What long-term investments should the firm make?</strong> (Capital Budgeting), <strong>How should the firm raise funds?</strong> (Capital Structure), and <strong>How should short-term cash flows be managed?</strong> (Working Capital Management).</p>
-    <div class="cards">
-      <div class="ccard"><div class="ccard-icon">🏭</div><h4>Capital Budgeting</h4><p>Which long-term projects to invest in? Tata Steel deciding whether to build a new plant.</p></div>
-      <div class="ccard"><div class="ccard-icon">💰</div><h4>Capital Structure</h4><p>Equity vs. debt mix. Reliance Industries choosing how to fund a ₹75,000 cr investment.</p></div>
-      <div class="ccard"><div class="ccard-icon">🔄</div><h4>Working Capital</h4><p>Managing day-to-day cash, receivables and payables. Infosys optimising its cash cycle.</p></div>
-    </div>
-    <div class="insight"><p><strong>Core Principle:</strong> The goal of the firm is to <strong>maximise shareholder wealth</strong> — i.e. maximise the current stock price. This differs from maximising profit (which ignores risk and timing).</p></div>
+  <!-- ══════ CONCEPT TABS ══════ -->
+  <div class="ctab-bar">
+    <div class="ctab active" onclick="switchCTab(0)">Goal of financial management</div>
+    <div class="ctab" onclick="switchCTab(1)">Time value of money</div>
   </div>
 
-  <!-- 2. TIME VALUE OF MONEY -->
-  <div class="section">
-    <h2>2. Time Value of Money <span class="tag">Ch. 4</span></h2>
-    <p>A rupee today is worth more than a rupee tomorrow — because today's rupee can be invested to earn a return. This single idea underpins almost every financial decision.</p>
-
-    <div class="formula-box">
-      <div class="formula-label">Future Value</div>
-      <div class="formula">FV = <span class="var">PV</span> × (1 + <span class="var">r</span>)<sup><span class="var">t</span></sup></div>
-      <div class="formula-note">PV = Present Value &nbsp;|&nbsp; r = interest rate per period &nbsp;|&nbsp; t = number of periods</div>
+  <!-- ════════════════════════════════════════════════
+       CONCEPT TAB 1 — GOAL OF FINANCIAL MANAGEMENT
+  ════════════════════════════════════════════════ -->
+  <div class="cpanel active" id="ct0">
+    <div class="spill-bar">
+      <div class="spill s-concepts active" onclick="switchSTab(0,0)">Concepts</div>
+      <div class="spill s-formulas" onclick="switchSTab(0,1)">Formulas</div>
+      <div class="spill s-decoded" onclick="switchSTab(0,2)">Finance Decoded</div>
+      <div class="spill s-game" onclick="switchSTab(0,3)">Game</div>
+      <div class="spill s-quiz" onclick="switchSTab(0,4)">Quiz</div>
     </div>
 
-    <div class="formula-box">
-      <div class="formula-label">Present Value</div>
-      <div class="formula">PV = <span class="var">FV</span> / (1 + <span class="var">r</span>)<sup><span class="var">t</span></sup> &nbsp;=&nbsp; <span class="var">FV</span> × <span class="var">DF</span></div>
-      <div class="formula-note">DF = Discount Factor = 1/(1+r)<sup>t</sup></div>
-    </div>
-
-    <div class="example">
-      <div class="ex-label">Indian Market Example</div>
-      <p>You deposit <strong>₹1,00,000</strong> in an SBI FD at <strong>7% p.a.</strong> for 3 years.</p>
-      <p>FV = 1,00,000 × (1.07)³ = <strong>₹1,22,504</strong></p>
-      <p>Reverse: what is the PV of ₹1,22,504 receivable in 3 years at 7%?</p>
-      <p>PV = 1,22,504 / (1.07)³ = <strong>₹1,00,000</strong> ✓</p>
-    </div>
-  </div>
-
-  <!-- 3. ANNUITY -->
-  <div class="section">
-    <h2>3. Annuity &amp; Growing Annuity <span class="tag">Ch. 4</span></h2>
-    <p>An <strong>annuity</strong> is a series of equal cash flows at regular intervals. A <strong>growing annuity</strong> has cash flows that grow at a constant rate <em>g</em> each period.</p>
-
-    <div class="formula-box">
-      <div class="formula-label">PV of Annuity (ordinary — first CF at t=1)</div>
-      <div class="formula">PV = <span class="var">C</span> × [ 1 – 1/(1+<span class="var">r</span>)<sup><span class="var">t</span></sup> ] / <span class="var">r</span></div>
-      <div class="formula-note">C = cash flow per period</div>
-    </div>
-
-    <div class="formula-box">
-      <div class="formula-label">PV of Growing Annuity</div>
-      <div class="formula">PV = <span class="var">C</span> / (<span class="var">r</span> – <span class="var">g</span>) × [ 1 – ((1+<span class="var">g</span>)/(1+<span class="var">r</span>))<sup><span class="var">t</span></sup> ]</div>
-      <div class="formula-note">g = growth rate per period &nbsp;(r ≠ g)</div>
-    </div>
-
-    <div class="example">
-      <div class="ex-label">Home Loan EMI — HDFC Bank</div>
-      <p>Loan: <strong>₹50,00,000</strong> at <strong>8.5% p.a.</strong> (i.e. 0.708% per month) for <strong>20 years</strong> (240 months).</p>
-      <p>EMI = PV × r / [1 – (1+r)<sup>–n</sup>] = 50,00,000 × 0.00708 / [1 – (1.00708)<sup>–240</sup>] ≈ <strong>₹43,391/month</strong></p>
-    </div>
-  </div>
-
-  <!-- 4. PERPETUITY -->
-  <div class="section">
-    <h2>4. Perpetuity &amp; Growing Perpetuity <span class="tag">Ch. 4</span></h2>
-
-    <div class="cards">
-      <div class="ccard">
-        <div class="ccard-icon">♾️</div>
-        <h4>Perpetuity</h4>
-        <p>Equal CF forever.<br><strong>PV = C / r</strong></p>
+    <!-- CONCEPTS -->
+    <div class="spanel active" id="ct0-s0">
+      <div class="concept-intro">
+        Corporate finance answers <strong>three fundamental questions</strong> that every firm — from a Bengaluru startup to a Nifty 50 giant — must answer continuously. All three flow from a single goal: <strong>maximising shareholder wealth</strong>.
       </div>
-      <div class="ccard">
-        <div class="ccard-icon">📈</div>
-        <h4>Growing Perpetuity</h4>
-        <p>CF grows at g% forever.<br><strong>PV = C / (r – g)</strong></p>
+
+      <div class="pillars">
+        <div class="pillar" style="background:rgba(37,99,235,0.05);border-color:rgba(37,99,235,0.22);">
+          <div class="pillar-num" style="color:var(--blue);">PILLAR 1 · CF-I MODULE 3</div>
+          <h4>Investment decision</h4>
+          <p>Which long-term assets should the firm invest in? This is capital budgeting — evaluating projects using NPV, IRR, and payback period.</p>
+          <p style="font-size:0.78rem;color:var(--text3);margin-top:8px;">Example: Should Tata Motors invest ₹18,000 cr in a new EV plant?</p>
+          <span class="badge" style="background:rgba(37,99,235,0.08);color:var(--blue);border:1px solid rgba(37,99,235,0.2);">LEFT SIDE OF BALANCE SHEET</span>
+        </div>
+        <div class="pillar" style="background:rgba(201,123,16,0.05);border-color:rgba(201,123,16,0.22);">
+          <div class="pillar-num" style="color:var(--amber);">PILLAR 2 · CF-I MODULE 5 + CF-II</div>
+          <h4>Financing decision</h4>
+          <p>How should the firm raise the money? Debt vs equity mix, cost of capital, WACC. CF-I covers cost of capital. Capital structure theory and sources of finance are in CF-II.</p>
+          <p style="font-size:0.78rem;color:var(--text3);margin-top:8px;">Example: Should Zomato raise funds via IPO (equity) or bonds (debt)?</p>
+          <span class="badge" style="background:rgba(239,159,39,0.1);color:var(--amber);border:1px solid rgba(201,123,16,0.25);">RIGHT SIDE OF BALANCE SHEET</span>
+        </div>
+        <div class="pillar" style="background:rgba(14,140,101,0.05);border-color:rgba(14,140,101,0.22);">
+          <div class="pillar-num" style="color:var(--teal);">PILLAR 3 · CF-II</div>
+          <h4>Working capital decision</h4>
+          <p>How should the firm manage its day-to-day cash flows? Receivables, payables, inventory. Ensures the firm stays liquid and operationally smooth.</p>
+          <p style="font-size:0.78rem;color:var(--text3);margin-top:8px;">Example: How many days of credit should Infosys extend to clients?</p>
+          <span class="badge" style="background:rgba(14,140,101,0.08);color:var(--teal);border:1px solid rgba(14,140,101,0.2);">CURRENT ASSETS & LIABILITIES</span>
+        </div>
+      </div>
+
+      <div class="concept-block">
+        <h3>The goal of the firm</h3>
+        <div class="callout insight">
+          <div class="callout-body">
+            <strong>Maximise shareholder wealth</strong> — not accounting profit, not sales, not market share. Shareholder wealth = the present value of all future cash flows to equity holders, reflected in the current stock price. This goal accounts for both the <strong>magnitude</strong> and <strong>timing</strong> of cash flows, and the <strong>risk</strong> involved.
+          </div>
+        </div>
+        <div class="comparison-tbl-wrap" style="overflow-x:auto;margin:16px 0;">
+          <table class="comparison-tbl">
+            <thead><tr><th>Objective</th><th>What it ignores</th><th>Why it fails as a goal</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Maximise profit</strong></td><td>Timing of cash flows, risk</td><td>Short-term profits can be boosted by cutting R&D — destroys long-term value</td></tr>
+              <tr><td><strong>Maximise sales</strong></td><td>Profitability, capital cost</td><td>A firm can grow revenues while destroying shareholder value</td></tr>
+              <tr><td><strong>Maximise shareholder wealth</strong></td><td>Nothing significant</td><td>Incorporates time, risk, and magnitude — the correct goal</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="concept-block">
+        <h3>Agency problem and corporate governance</h3>
+        <p class="concept-intro">Shareholders (principals) hire managers (agents) to run the firm. But managers may pursue their own interests — empire building, excessive perks, avoiding risk to protect their jobs.</p>
+        <div class="ccard-grid">
+          <div class="ccard"><h4>Agency costs</h4><p>Monitoring costs, bonding costs, residual loss. The cost of misalignment between manager and shareholder goals.</p></div>
+          <div class="ccard"><h4>Solutions</h4><p>Performance-linked pay (ESOPs), independent board, SEBI regulations, threat of hostile takeover.</p></div>
+          <div class="ccard"><h4>Indian context</h4><p>Promoter-owned firms (Reliance, Tata) face different agency dynamics than professionally managed firms. Promoter interests can align or diverge from minority shareholders.</p></div>
+        </div>
+        <div class="callout warning">
+          <div class="callout-body">
+            <strong>Important distinction:</strong> The firm's goal is to maximise shareholder wealth — but it must operate ethically and within legal boundaries. Firms that maximise short-term stock price by breaking laws (like the 2009 Satyam scandal) ultimately destroy wealth.
+          </div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="ex-label">INDIAN MARKET EXAMPLES</div>
+        <p><strong>Investment decision:</strong> Reliance Jio — ₹1,50,000 cr investment in telecom infrastructure in 2016. Classic capital budgeting: huge upfront cost, long-term cash flow payoff.</p>
+        <p><strong>Financing decision:</strong> Infosys ₹9,200 cr buyback in 2022 — returning capital to shareholders instead of retaining cash. A financing decision that signals confidence in firm value.</p>
+        <p><strong>Working capital:</strong> A seasonal firm like Haldiram's must manage inventory spikes before Diwali without running out of cash — pure working capital management.</p>
       </div>
     </div>
 
-    <div class="example">
-      <div class="ex-label">Example — Preference Share Valuation</div>
-      <p>Tata Steel preference shares pay a <strong>₹12 annual dividend</strong> forever. If required return = <strong>10%</strong>, intrinsic value = 12/0.10 = <strong>₹120 per share</strong>.</p>
-      <p>If dividends grow at <strong>3% p.a.</strong>, value = 12/(0.10–0.03) = <strong>₹171.43</strong> — demonstrating why growth matters enormously.</p>
-    </div>
-  </div>
-
-  <!-- 5. NOMINAL vs EFFECTIVE -->
-  <div class="section">
-    <h2>5. Nominal vs Effective Rate of Return <span class="tag">Ch. 4</span></h2>
-    <p>Banks quote a <strong>nominal (stated) rate</strong>, but compounding frequency determines what you actually earn — the <strong>Effective Annual Rate (EAR)</strong>.</p>
-
-    <div class="formula-box">
-      <div class="formula-label">Effective Annual Rate</div>
-      <div class="formula">EAR = (1 + <span class="var">r_nom</span>/<span class="var">m</span>)<sup><span class="var">m</span></sup> – 1</div>
-      <div class="formula-note">m = number of compounding periods per year</div>
-    </div>
-
-    <div class="tbl-wrap">
-      <table>
-        <tr><th>Nominal Rate</th><th>Compounding</th><th>EAR</th><th>Indian Example</th></tr>
-        <tr><td><strong>8.0%</strong></td><td>Annual</td><td>8.00%</td><td>Some Govt bonds</td></tr>
-        <tr><td><strong>8.0%</strong></td><td>Quarterly</td><td>8.24%</td><td>LIC endowment plans</td></tr>
-        <tr><td><strong>8.0%</strong></td><td>Monthly</td><td>8.30%</td><td>HDFC Home Loan EMI</td></tr>
-        <tr><td><strong>8.0%</strong></td><td>Daily</td><td>8.33%</td><td>Credit card revolving balance</td></tr>
-      </table>
-    </div>
-
-    <div class="callout">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body"><p><strong>RBI Regulation:</strong> SEBI requires mutual funds to advertise returns as <em>annualised</em> (EAR-equivalent). Credit card companies must disclose the annualised percentage rate — which can be 36–42% p.a. even if they quote 3% per month!</p></div>
-    </div>
-  </div>
-
-  <!-- QUIZ -->
-  <div class="quiz-section">
-    <div class="quiz-head">
-      <h2>Module 1 Quiz</h2>
-      <span class="quiz-badge">CO1 · 4 Questions</span>
-    </div>
-
-    <div class="q-block" id="q1">
-      <div class="q-num">Q 1 / 4</div>
-      <div class="q-text">You invest ₹50,000 today at 9% p.a. compounded annually for 4 years. What is the future value?</div>
-      <div class="options">
-        <div class="opt" onclick="pick(1,'A')"><span class="opt-key">A</span>₹70,580</div>
-        <div class="opt" onclick="pick(1,'B')"><span class="opt-key">B</span>₹68,024</div>
-        <div class="opt" onclick="pick(1,'C')"><span class="opt-key">C</span>₹72,540</div>
-        <div class="opt" onclick="pick(1,'D')"><span class="opt-key">D</span>₹69,900</div>
+    <!-- FORMULAS -->
+    <div class="spanel" id="ct0-s1">
+      <div class="formula-grid">
+        <div class="fcard">
+          <div class="fcard-label">Accounting profit vs shareholder wealth</div>
+          <div class="fcard-formula">Accounting profit = <span class="v">Revenue</span> − <span class="v">Costs</span></div>
+          <div class="fcard-formula">Shareholder wealth = <span class="v">P₀</span> = PV of all future cash flows</div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">P₀</span><span class="def">Current stock price = present value of expected dividends/cash flows</span></div>
+            <div class="fcard-var"><span class="sym">PV</span><span class="def">Present value — discounts future CFs at the required rate of return</span></div>
+          </div>
+          <div class="fcard-example"><strong>Key insight:</strong> Accounting profit ignores timing and risk. Two firms can have identical profits but very different shareholder values depending on how risky and how far in the future those profits are.</div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">Single-period return</div>
+          <div class="fcard-formula">R = (<span class="v">P₁</span> − <span class="v">P₀</span> + <span class="v">D₁</span>) / <span class="v">P₀</span></div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">R</span><span class="def">Total return over one period</span></div>
+            <div class="fcard-var"><span class="sym">P₁</span><span class="def">Price at end of period</span></div>
+            <div class="fcard-var"><span class="sym">P₀</span><span class="def">Price at start of period</span></div>
+            <div class="fcard-var"><span class="sym">D₁</span><span class="def">Dividend received during the period</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> You buy Infosys at ₹1,400. It pays ₹34 dividend and the price rises to ₹1,540. Return = (1540 − 1400 + 34)/1400 = <strong>12.4%</strong></div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">Agency cost relationship</div>
+          <div class="fcard-formula">Agency cost = <span class="v">Monitoring</span> + <span class="v">Bonding</span> + <span class="v">Residual loss</span></div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">Monitoring</span><span class="def">Cost to shareholders of overseeing managers (audits, board meetings)</span></div>
+            <div class="fcard-var"><span class="sym">Bonding</span><span class="def">Cost to managers of committing to act in shareholders' interests (contracts, ESOPs)</span></div>
+            <div class="fcard-var"><span class="sym">Residual</span><span class="def">Remaining loss even after monitoring and bonding</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> A CEO's ESOP plan (bonding cost) aligns interests by making the CEO a shareholder — reduces residual loss.</div>
+        </div>
       </div>
-      <div class="feedback" id="fb1"></div>
     </div>
 
-    <div class="q-block" id="q2">
-      <div class="q-num">Q 2 / 4</div>
-      <div class="q-text">A preference share pays ₹15 dividend annually forever. If the required rate of return is 12%, what is its value?</div>
-      <div class="options">
-        <div class="opt" onclick="pick(2,'A')"><span class="opt-key">A</span>₹120</div>
-        <div class="opt" onclick="pick(2,'B')"><span class="opt-key">B</span>₹150</div>
-        <div class="opt" onclick="pick(2,'C')"><span class="opt-key">C</span>₹125</div>
-        <div class="opt" onclick="pick(2,'D')"><span class="opt-key">D</span>₹180</div>
+    <!-- FINANCE DECODED -->
+    <div class="spanel" id="ct0-s2">
+      <div class="decoded-intro">10 key terms from this concept — tap a card to flip it, then move to the next.</div>
+      <div class="fc-progress" id="fc0-progress"></div>
+      <div class="fc-counter" id="fc0-counter"></div>
+      <div id="fc0-front" class="fc-front flashcard" onclick="flipCard(0)"></div>
+      <div id="fc0-back" class="fc-back flashcard"></div>
+      <div class="fc-nav">
+        <button class="fc-btn" onclick="prevCard(0)">← Previous</button>
+        <button class="fc-btn primary" onclick="nextCard(0)">Next term →</button>
       </div>
-      <div class="feedback" id="fb2"></div>
     </div>
 
-    <div class="q-block" id="q3">
-      <div class="q-num">Q 3 / 4</div>
-      <div class="q-text">A bank offers 10% p.a. compounded quarterly. What is the Effective Annual Rate (EAR)?</div>
-      <div class="options">
-        <div class="opt" onclick="pick(3,'A')"><span class="opt-key">A</span>10.00%</div>
-        <div class="opt" onclick="pick(3,'B')"><span class="opt-key">B</span>10.38%</div>
-        <div class="opt" onclick="pick(3,'C')"><span class="opt-key">C</span>10.25%</div>
-        <div class="opt" onclick="pick(3,'D')"><span class="opt-key">D</span>10.47%</div>
+    <!-- GAME -->
+    <div class="spanel" id="ct0-s3">
+      <div class="game-wrap">
+        <div class="game-header">
+          <div>
+            <div class="game-title">CFO in the Hot Seat</div>
+            <div class="game-desc">8 real Indian corporate decisions — classify each as Investment, Financing, or Working Capital</div>
+          </div>
+        </div>
+        <div class="game-body">
+          <div class="cfo-score">Score: <span id="cfo-score">0</span> / 8 &nbsp;·&nbsp; <span id="cfo-correct">0</span> correct</div>
+          <div id="cfo-decisions"></div>
+        </div>
       </div>
-      <div class="feedback" id="fb3"></div>
     </div>
 
-    <div class="q-block" id="q4">
-      <div class="q-num">Q 4 / 4</div>
-      <div class="q-text">Which of the following is NOT one of the three core questions of Corporate Finance?</div>
-      <div class="options">
-        <div class="opt" onclick="pick(4,'A')"><span class="opt-key">A</span>What long-term investments should the firm make?</div>
-        <div class="opt" onclick="pick(4,'B')"><span class="opt-key">B</span>How should short-term cash flows be managed?</div>
-        <div class="opt" onclick="pick(4,'C')"><span class="opt-key">C</span>How should the firm raise funds?</div>
-        <div class="opt" onclick="pick(4,'D')"><span class="opt-key">D</span>What price should the firm charge for its products?</div>
+    <!-- QUIZ -->
+    <div class="spanel" id="ct0-s4">
+      <div class="quiz-wrap">
+        <div class="quiz-head">
+          <div class="quiz-title">Goal of financial management</div>
+          <div class="quiz-badge">4 questions</div>
+        </div>
+        <div id="quiz0"></div>
       </div>
-      <div class="feedback" id="fb4"></div>
-    </div>
-
-    <button class="btn-submit" id="submitBtn" onclick="submitQuiz()">Submit Answers</button>
-
-    <div class="quiz-result" id="quizResult">
-      <div class="qr-score" id="qrScore"></div>
-      <div class="qr-msg" id="qrMsg"></div>
     </div>
   </div>
 
+  <!-- ════════════════════════════════════════════════
+       CONCEPT TAB 2 — TIME VALUE OF MONEY
+  ════════════════════════════════════════════════ -->
+  <div class="cpanel" id="ct1">
+    <div class="spill-bar">
+      <div class="spill s-concepts active" onclick="switchSTab(1,0)">Concepts</div>
+      <div class="spill s-formulas" onclick="switchSTab(1,1)">Formulas</div>
+      <div class="spill s-decoded" onclick="switchSTab(1,2)">Finance Decoded</div>
+      <div class="spill s-game" onclick="switchSTab(1,3)">Game ★</div>
+      <div class="spill s-quiz" onclick="switchSTab(1,4)">Quiz</div>
+    </div>
+
+    <!-- CONCEPTS -->
+    <div class="spanel active" id="ct1-s0">
+      <div class="concept-intro">
+        <strong>A rupee today is worth more than a rupee tomorrow.</strong> This single idea — the time value of money — underpins every formula in corporate finance. It explains why firms discount future cash flows, why bond prices fall when interest rates rise, and why a 30-year SIP creates more wealth than a lump sum invested later.
+      </div>
+
+      <div class="concept-block">
+        <h3>Why does money have time value?</h3>
+        <div class="ccard-grid">
+          <div class="ccard"><h4>Opportunity cost</h4><p>Money received today can be invested immediately and earn a return. Waiting means losing that return.</p></div>
+          <div class="ccard"><h4>Inflation</h4><p>₹100 today buys more goods than ₹100 next year. Purchasing power erodes over time.</p></div>
+          <div class="ccard"><h4>Risk</h4><p>A future payment is uncertain. You might not receive it. The further away, the riskier.</p></div>
+        </div>
+      </div>
+
+      <div class="concept-block">
+        <h3>Compounding — money growing forward</h3>
+        <p class="concept-intro">If you invest ₹100 at 10% per year, it grows to ₹110 after year 1. In year 2 you earn interest on ₹110 — not just the original ₹100. This is <strong>compounding</strong>: interest on interest.</p>
+        <div class="example-box">
+          <div class="ex-label">NSC / PPF EXAMPLE</div>
+          <p>₹1,00,000 invested in PPF at 7.1% compounded annually. After 15 years: ₹1,00,000 × (1.071)¹⁵ = <strong>₹2,80,543</strong>. The extra ₹80,543 beyond simple interest is the compounding effect.</p>
+        </div>
+      </div>
+
+      <div class="concept-block">
+        <h3>Discounting — bringing money back to today</h3>
+        <p class="concept-intro">Discounting is compounding in reverse. If someone will pay you ₹110 one year from now and your discount rate is 10%, the <strong>present value</strong> is ₹100. You are "discounting" the future payment to find its equivalent value today.</p>
+        <div class="callout info">
+          <div class="callout-body"><strong>Key connection:</strong> Discounting and compounding are mirror images. FV = PV × (1+r)ⁿ rearranges to PV = FV / (1+r)ⁿ. The same formula, viewed from different directions.</div>
+        </div>
+      </div>
+
+      <div class="concept-block">
+        <h3>Annuities and perpetuities</h3>
+        <div class="ccard-grid">
+          <div class="ccard"><h4>Ordinary annuity</h4><p>Equal payments at the <em>end</em> of each period. EMI on a home loan. Coupon payments on a bond.</p></div>
+          <div class="ccard"><h4>Annuity due</h4><p>Equal payments at the <em>start</em> of each period. Rent paid at the beginning of the month.</p></div>
+          <div class="ccard"><h4>Perpetuity</h4><p>Equal payments <em>forever</em>. British consols. Preference shares with no maturity. PV = C/r.</p></div>
+          <div class="ccard"><h4>Growing perpetuity</h4><p>Payments that grow at rate g forever. Stock valuation (DDM) uses this. PV = C/(r−g).</p></div>
+          <div class="ccard"><h4>Growing annuity</h4><p>Payments that grow at rate g for n periods. Salary growing with inflation over a career. Most complex TVM formula.</p></div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="ex-label">INDIAN MARKET EXAMPLES</div>
+        <p><strong>SIP (Systematic Investment Plan):</strong> ₹5,000/month for 20 years at 12% CAGR = ₹49.9 lakhs. This is the future value of an annuity — compounding over time.</p>
+        <p><strong>Home loan EMI:</strong> A ₹50 lakh loan at 8.5% for 20 years → EMI = ₹43,391. This is present value of an annuity — the bank discounts your future payments.</p>
+        <p><strong>Stock valuation:</strong> If Hindustan Unilever pays ₹22 dividend, growing at 5% forever, and your required return is 9%, the stock is worth ₹22/(0.09−0.05) = ₹550. This is a growing perpetuity.</p>
+      </div>
+    </div>
+
+    <!-- FORMULAS -->
+    <div class="spanel" id="ct1-s1">
+      <div class="formula-grid">
+        <div class="fcard">
+          <div class="fcard-label">Future value — compounding</div>
+          <div class="fcard-formula"><span class="v">FV</span> = <span class="v">PV</span> × (1 + <span class="v">r</span>)ⁿ</div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">FV</span><span class="def">Future value — what the investment grows to</span></div>
+            <div class="fcard-var"><span class="sym">PV</span><span class="def">Present value — the amount invested today</span></div>
+            <div class="fcard-var"><span class="sym">r</span><span class="def">Interest / discount rate per period</span></div>
+            <div class="fcard-var"><span class="sym">n</span><span class="def">Number of periods</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> ₹1,00,000 at 8% for 5 years → FV = 1,00,000 × (1.08)⁵ = <strong>₹1,46,933</strong></div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">Present value — discounting</div>
+          <div class="fcard-formula"><span class="v">PV</span> = <span class="v">FV</span> / (1 + <span class="v">r</span>)ⁿ</div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">PV</span><span class="def">Present value today</span></div>
+            <div class="fcard-var"><span class="sym">FV</span><span class="def">Future cash flow to be received</span></div>
+            <div class="fcard-var"><span class="sym">r</span><span class="def">Discount rate (= opportunity cost of capital)</span></div>
+            <div class="fcard-var"><span class="sym">n</span><span class="def">Periods until the cash flow is received</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> Receive ₹1,46,933 in 5 years, discount rate 8% → PV = 1,46,933/1.08⁵ = <strong>₹1,00,000</strong></div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">Present value of an ordinary annuity</div>
+          <div class="fcard-formula"><span class="v">PV</span> = <span class="v">C</span> × [1 − (1+<span class="v">r</span>)⁻ⁿ] / <span class="v">r</span></div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">C</span><span class="def">Equal cash flow per period (coupon, EMI, SIP)</span></div>
+            <div class="fcard-var"><span class="sym">r</span><span class="def">Interest / discount rate per period</span></div>
+            <div class="fcard-var"><span class="sym">n</span><span class="def">Total number of periods</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> EMI on ₹50L loan at 8.5%/12 monthly for 240 months → PV of payments = ₹50L (bank's present value of receiving your EMIs)</div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">Present value of a perpetuity</div>
+          <div class="fcard-formula"><span class="v">PV</span> = <span class="v">C</span> / <span class="v">r</span></div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">C</span><span class="def">Constant cash flow received every period forever</span></div>
+            <div class="fcard-var"><span class="sym">r</span><span class="def">Discount rate</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> Preference share paying ₹8 dividend forever, required return 8% → PV = 8/0.08 = <strong>₹100</strong>. An infinite stream still has finite value!</div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">Present value of a growing perpetuity</div>
+          <div class="fcard-formula"><span class="v">PV</span> = <span class="v">C₁</span> / (<span class="v">r</span> − <span class="v">g</span>)</div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">C₁</span><span class="def">Cash flow at end of period 1 (next period)</span></div>
+            <div class="fcard-var"><span class="sym">r</span><span class="def">Discount rate (must be > g)</span></div>
+            <div class="fcard-var"><span class="sym">g</span><span class="def">Constant growth rate of cash flows</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> HUL dividend ₹22 growing at 5%/year, required return 9% → P = 22/(0.09−0.05) = <strong>₹550</strong>. This is the Gordon Growth Model for stock valuation.</div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">Present value of a growing annuity</div>
+          <div class="fcard-formula"><span class="v">PV</span> = <span class="v">C₁</span> × [1 − ((1+<span class="v">g</span>)/(1+<span class="v">r</span>))ⁿ] / (<span class="v">r</span>−<span class="v">g</span>)</div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">C₁</span><span class="def">First cash flow</span></div>
+            <div class="fcard-var"><span class="sym">r</span><span class="def">Discount rate</span></div>
+            <div class="fcard-var"><span class="sym">g</span><span class="def">Growth rate per period</span></div>
+            <div class="fcard-var"><span class="sym">n</span><span class="def">Number of periods (finite)</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> Salary starts at ₹6L, grows 5%/year for 30 years, discount rate 10% → PV of career earnings = <strong>₹1.02 cr</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINANCE DECODED -->
+    <div class="spanel" id="ct1-s2">
+      <div class="decoded-intro">8 key TVM terms — tap each card to reveal the plain-English explanation.</div>
+      <div class="fc-progress" id="fc1-progress"></div>
+      <div class="fc-counter" id="fc1-counter"></div>
+      <div id="fc1-front" class="fc-front flashcard" onclick="flipCard(1)"></div>
+      <div id="fc1-back" class="fc-back flashcard"></div>
+      <div class="fc-nav">
+        <button class="fc-btn" onclick="prevCard(1)">← Previous</button>
+        <button class="fc-btn primary" onclick="nextCard(1)">Next term →</button>
+      </div>
+    </div>
+
+    <!-- GAME ★ -->
+    <div class="spanel" id="ct1-s3">
+      <div class="game-wrap">
+        <div class="game-header">
+          <div>
+            <div class="game-title">The Time Traveler ★</div>
+            <div class="game-desc">7-level progressive puzzle — from ₹100 today vs tomorrow to perpetuities and growing annuities</div>
+          </div>
+        </div>
+        <div class="game-body">
+          <div class="tvm-level-bar" id="tvm-level-bar"></div>
+          <div class="tvm-score-bar">
+            <span>Score: <strong id="tvm-score">0</strong> pts</span>
+            <span id="tvm-progress-text">Level 1 of 7</span>
+          </div>
+          <div id="tvm-panel"></div>
+          <button class="game-reset" onclick="resetTVM()">↺ Restart game</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="spanel" id="ct1-s4">
+      <div class="quiz-wrap">
+        <div class="quiz-head">
+          <div class="quiz-title">Time value of money</div>
+          <div class="quiz-badge">4 questions</div>
+        </div>
+        <div id="quiz1"></div>
+      </div>
+    </div>
+  </div>
 </main>
 
 <script>
-const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwEA2oFByWVURilCo6gfrU9IcrkEPXS5DcFgvMWvMhPm-HpiE--1rLxI26SxxDRDWu8RQ/exec';
-const MODULE_NUM='1';
-const ANSWERS={1:'A',2:'C',3:'C',4:'D'};
-const EXPLANATIONS={
-  1:'FV = 50,000 × (1.09)⁴ = 50,000 × 1.4116 = ₹70,580. Option A is correct.',
-  2:'PV of perpetuity = C/r = 15/0.12 = ₹125. Option C is correct.',
-  3:'EAR = (1 + 0.10/4)⁴ – 1 = (1.025)⁴ – 1 = 1.1038 – 1 = 10.38%. Option B is correct.',
-  4:'The three core questions are capital budgeting, capital structure, and working capital management. Pricing strategy is a marketing/economics decision. Option D is correct.'
-};
-const picks={};
-
-function pick(q,opt){
-  const block=document.getElementById('q'+q);
-  block.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
-  block.querySelectorAll('.opt')[['A','B','C','D'].indexOf(opt)].classList.add('selected');
-  picks[q]=opt;
+// ══════════════════════════════════════════
+// TAB SWITCHING
+// ══════════════════════════════════════════
+function switchCTab(idx) {
+  document.querySelectorAll('.ctab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  document.querySelectorAll('.cpanel').forEach((p,i) => p.classList.toggle('active', i===idx));
+}
+function switchSTab(ctab, stab) {
+  var cp = document.getElementById('ct'+ctab);
+  cp.querySelectorAll('.spill').forEach((s,i) => s.classList.toggle('active', i===stab));
+  cp.querySelectorAll('.spanel').forEach((p,i) => p.classList.toggle('active', i===stab));
 }
 
-function submitQuiz(){
-  if(Object.keys(picks).length<4){alert('Please answer all 4 questions.');return;}
-  let score=0;
-  for(let q=1;q<=4;q++){
-    const correct=ANSWERS[q];
-    const chosen=picks[q];
-    const opts=document.getElementById('q'+q).querySelectorAll('.opt');
-    opts.forEach(o=>o.style.pointerEvents='none');
-    opts[['A','B','C','D'].indexOf(correct)].classList.add('correct');
-    if(chosen!==correct)opts[['A','B','C','D'].indexOf(chosen)].classList.add('wrong');
-    else score++;
-    const fb=document.getElementById('fb'+q);
-    fb.textContent=EXPLANATIONS[q];
-    fb.className='feedback show '+(chosen===correct?'ok':'bad');
+// ══════════════════════════════════════════
+// FLASHCARD DATA
+// ══════════════════════════════════════════
+var flashcards = [
+  // Tab 0 — Goal of FM
+  [
+    {term:'Capital budgeting', def:'The process of evaluating and selecting long-term investment projects — deciding which assets the firm should acquire.', plain:'Think of a firm deciding whether to build a new factory. Capital budgeting is the toolbox (NPV, IRR) used to say yes or no.'},
+    {term:'Capital structure', def:'The mix of debt and equity a firm uses to finance its assets. Determines the proportion of bonds vs shares in the right side of the balance sheet.', plain:'If Zomato raises ₹10,000 cr — how much comes from issuing shares (equity) vs taking loans (debt)? That ratio is the capital structure.'},
+    {term:'Working capital', def:'Current assets minus current liabilities. The net liquid resources available for day-to-day operations.', plain:'The cash and short-term resources a firm uses to pay its bills this month, before long-term projects pay off.'},
+    {term:'Shareholder wealth', def:'The present value of all expected future cash flows to equity shareholders, reflected in the current stock price.', plain:'Not just how much profit the firm makes today, but the present value of ALL future profits — accounting for timing and risk.'},
+    {term:'Agency problem', def:'The conflict of interest that arises when a manager (agent) does not act in the best interest of the shareholders (principals).', plain:'A CEO might prefer a "quiet life" over risky but profitable projects. This gap between what the CEO wants and what shareholders want is the agency problem.'},
+    {term:'Equity', def:'Ownership capital — funds raised by issuing shares. Shareholders are residual claimants: they receive what is left after all obligations are paid.', plain:'If a firm is a pizza, equity holders get the last slice — only after the bank, employees, and tax authorities are paid. But in a good year, that last slice can be huge.'},
+    {term:'Dividend', def:'A distribution of a portion of company earnings to shareholders, declared by the board of directors.', plain:'The firm\'s way of sharing profits with you. Like interest on a bond, except it\'s not guaranteed.'},
+    {term:'IPO', def:'Initial Public Offering — the first time a company offers its shares to the public on a stock exchange.', plain:'Going from private to public. Zomato\'s 2021 IPO raised ₹9,375 cr by selling shares to public investors for the first time.'},
+    {term:'Buyback', def:'A company repurchasing its own shares from the market, reducing the number of shares outstanding.', plain:'The opposite of an IPO. Infosys buying back its own shares is saying: "We have excess cash and believe our stock is undervalued."'},
+    {term:'ESOP', def:'Employee Stock Option Plan — gives employees the right to purchase shares at a fixed price, aligning employee and shareholder interests.', plain:'A tool to fix the agency problem. If employees own shares, their interests align with shareholders — everyone wins when the stock price rises.'},
+  ],
+  // Tab 1 — TVM
+  [
+    {term:'Present value (PV)', def:'The current worth of a future sum of money, discounted at an appropriate rate.', plain:'₹110 one year from now is worth ₹100 today if the discount rate is 10%. PV is "what is that future money worth to me RIGHT NOW?"'},
+    {term:'Future value (FV)', def:'The value of a current sum of money at a specific point in the future, after earning interest.', plain:'₹100 today grows to ₹110 in one year at 10%. FV asks: "How much will this money be worth LATER?"'},
+    {term:'Discount rate', def:'The rate used to convert a future cash flow into its present value. Reflects time preference, risk, and opportunity cost.', plain:'The "cost of waiting." If your discount rate is 10%, you demand ₹10 extra for every ₹100 you agree to receive one year later.'},
+    {term:'Compounding', def:'Earning interest on both principal and previously earned interest — growth that accelerates over time.', plain:'Year 1: earn ₹10 on ₹100. Year 2: earn ₹11 on ₹110. Year 3: earn ₹12.1 on ₹121. Each year the base gets larger.'},
+    {term:'Annuity', def:'A series of equal cash flows made at regular intervals for a fixed number of periods.', plain:'Your home loan EMI is an annuity. Same amount, every month, for 240 months. The bank lent you money; you pay it back in equal instalments.'},
+    {term:'Perpetuity', def:'A constant stream of cash flows that continues forever with no end date.', plain:'Imagine a preference share paying ₹8 every year, forever. It sounds infinite — but PV = 8/r gives it a finite value today.'},
+    {term:'Opportunity cost', def:'The return forgone on the next best alternative use of money or resources.', plain:'If you leave ₹1L in a savings account at 4% instead of investing in a 10% FD, your opportunity cost is 6% per year.'},
+    {term:'Cash flow', def:'The actual movement of money into or out of a firm or investment over a period of time.', plain:'Not the same as profit. A firm can be profitable on paper but run out of cash. Cash flow is the real money moving — what can actually be invested or returned to shareholders.'},
+  ]
+];
+
+var fcState = [{idx:0,flipped:false},{idx:0,flipped:false}];
+
+function renderCard(tabIdx) {
+  var cards = flashcards[tabIdx];
+  var st = fcState[tabIdx];
+  var card = cards[st.idx];
+  // progress
+  var prog = document.getElementById('fc'+tabIdx+'-progress');
+  prog.innerHTML = cards.map((_,i) => '<div class="fc-pip'+(i<st.idx?' done':i===st.idx?' current':'')+'"></div>').join('');
+  document.getElementById('fc'+tabIdx+'-counter').textContent = (st.idx+1)+' of '+cards.length+' terms';
+  // front
+  var front = document.getElementById('fc'+tabIdx+'-front');
+  front.innerHTML = '<div class="fc-type">TERM</div><div class="fc-term">'+card.term+'</div><div class="fc-hint">tap to reveal definition →</div>';
+  front.style.display = st.flipped ? 'none' : 'flex';
+  // back
+  var back = document.getElementById('fc'+tabIdx+'-back');
+  back.innerHTML = '<div class="fc-def-label">DEFINITION</div><div class="fc-def">'+card.def+'</div><div class="fc-plain-label">PLAIN ENGLISH</div><div class="fc-plain">'+card.plain+'</div>';
+  back.style.display = st.flipped ? 'block' : 'none';
+}
+
+function flipCard(tabIdx) {
+  fcState[tabIdx].flipped = !fcState[tabIdx].flipped;
+  renderCard(tabIdx);
+}
+function nextCard(tabIdx) {
+  var cards = flashcards[tabIdx];
+  fcState[tabIdx].idx = Math.min(fcState[tabIdx].idx+1, cards.length-1);
+  fcState[tabIdx].flipped = false;
+  renderCard(tabIdx);
+}
+function prevCard(tabIdx) {
+  fcState[tabIdx].idx = Math.max(fcState[tabIdx].idx-1, 0);
+  fcState[tabIdx].flipped = false;
+  renderCard(tabIdx);
+}
+
+// ══════════════════════════════════════════
+// CFO GAME
+// ══════════════════════════════════════════
+var cfoDecisions = [
+  {scenario:'<strong>Tata Motors</strong> approves a ₹18,000 crore capital expenditure to build a new EV manufacturing plant in Pune.', correct:'I', explanation:'Building a manufacturing plant is a long-term asset acquisition — a classic capital budgeting (Investment) decision.'},
+  {scenario:'<strong>Zomato</strong> launches its IPO, raising ₹9,375 crore by issuing fresh shares to public investors.', correct:'F', explanation:'Raising money by issuing equity shares is a financing decision — choosing equity over debt to fund operations.'},
+  {scenario:'<strong>Infosys</strong> extends its payment terms with a key vendor from 30 days to 60 days to preserve cash.', correct:'W', explanation:'Managing vendor payment terms is working capital management — optimising the cash conversion cycle.'},
+  {scenario:'<strong>HDFC Bank</strong> issues ₹3,000 crore of Additional Tier 1 (AT1) bonds to strengthen its capital base.', correct:'F', explanation:'Issuing bonds is a financing decision — raising debt capital. AT1 bonds are a specific type of perpetual debt instrument.'},
+  {scenario:'<strong>Maruti Suzuki</strong> commits ₹35,000 crore over 5 years to launch new CNG and hybrid vehicle models.', correct:'I', explanation:'R&D and new model launches involve investing in long-term assets and capabilities — an investment decision evaluated by capital budgeting.'},
+  {scenario:'<strong>Reliance Industries</strong> reduces its debtor collection period from 45 days to 30 days by offering early payment discounts.', correct:'W', explanation:'Managing receivables and collection periods is a working capital decision — improving the firm\'s cash cycle efficiency.'},
+  {scenario:'<strong>Infosys</strong> announces a ₹9,200 crore share buyback, repurchasing shares from the open market.', correct:'F', explanation:'A buyback returns cash to shareholders — the opposite of an equity issue. It is a financing decision about how to deploy surplus capital.'},
+  {scenario:'<strong>ITC</strong> acquires a 100% stake in Sunrise Foods for ₹2,150 crore to enter the spices segment.', correct:'I', explanation:'An acquisition is an investment in a long-term asset (another company). It is evaluated like any capital budgeting decision — does it create value for shareholders?'},
+];
+var cfoAnswered = new Array(8).fill(false);
+var cfoCorrect = 0;
+
+function renderCFO() {
+  var html = '';
+  cfoDecisions.forEach(function(d, i) {
+    html += '<div class="decision-card" id="dc'+i+'">';
+    html += '<div class="decision-scenario">'+d.scenario+'</div>';
+    html += '<div class="decision-opts">';
+    html += '<button class="d-opt" id="dc'+i+'-I" onclick="answerCFO('+i+',\'I\')">Investment decision</button>';
+    html += '<button class="d-opt" id="dc'+i+'-F" onclick="answerCFO('+i+',\'F\')">Financing decision</button>';
+    html += '<button class="d-opt" id="dc'+i+'-W" onclick="answerCFO('+i+',\'W\')">Working capital</button>';
+    html += '</div>';
+    html += '<div class="d-feedback" id="dc'+i+'-fb"></div>';
+    html += '</div>';
+  });
+  document.getElementById('cfo-decisions').innerHTML = html;
+}
+
+function answerCFO(idx, choice) {
+  if (cfoAnswered[idx]) return;
+  cfoAnswered[idx] = true;
+  var d = cfoDecisions[idx];
+  var correct = choice === d.correct;
+  if (correct) cfoCorrect++;
+  var scoreEl = document.getElementById('cfo-score');
+  var correctEl = document.getElementById('cfo-correct');
+  scoreEl.textContent = cfoAnswered.filter(Boolean).length;
+  correctEl.textContent = cfoCorrect;
+  // highlight chosen button
+  var classMap = {I:'selected-inv',F:'selected-fin',W:'selected-wc'};
+  var btn = document.getElementById('dc'+idx+'-'+choice);
+  btn.classList.add(classMap[choice]);
+  // show feedback
+  var fb = document.getElementById('dc'+idx+'-fb');
+  fb.className = 'd-feedback show '+(correct?'ok':'bad');
+  fb.textContent = (correct?'✓ Correct! ':'✗ Not quite. ')+d.explanation;
+  // disable all opts for this card
+  ['I','F','W'].forEach(function(c){
+    document.getElementById('dc'+idx+'-'+c).style.pointerEvents='none';
+    if (c === d.correct && !correct) {
+      document.getElementById('dc'+idx+'-'+c).style.opacity='0.6';
+    }
+  });
+}
+
+// ══════════════════════════════════════════
+// TVM GAME — 7 levels
+// ══════════════════════════════════════════
+var tvmLevels = [
+  {
+    id:1, title:'Today vs Tomorrow', icon:'⏰',
+    desc:'Pure intuition. Why does timing matter at all?',
+    type:'choice_slider',
+    timeline:[{t:'Today',l:'₹100'},{t:'Tomorrow',l:'Option B'},{t:'Later',l:''},{t:'Further',l:''},{t:'End',l:''}],
+    question:'Would you prefer ₹100 today, or a larger amount tomorrow? Drag the slider until both options feel equally attractive.',
+    choiceA:{h:'A. ₹100 today',p:'Certainty now'},
+    choiceB_template:{h:'B. ₹{v} tomorrow',p:'Wait one day'},
+    sliderMin:100,sliderMax:130,sliderDefault:100,
+    insight:'Most people prefer ₹100 today. The slider reveals your personal discount rate — the premium you need to wait even one day.',
+    points_correct:10, points_partial:6,
+    check: function(state){ return state.slider > 100; }
+  },
+  {
+    id:2, title:'Discover the Interest Rate', icon:'💡',
+    desc:'Reverse-engineer the rate that makes two amounts equivalent.',
+    type:'input',
+    timeline:[{t:'Today',l:'₹100'},{t:'1 year',l:'₹110'},{t:'2 years',l:''},{t:'3 years',l:''},{t:'4 years',l:''}],
+    question:'₹100 today grows to ₹110 in one year. What annual interest rate does this imply?',
+    placeholder:'Enter % e.g. 10',
+    answer:10, tolerance:0.25,
+    insight:'The answer is 10%. FV = PV × (1+r) → 110 = 100 × (1+r) → r = 10%. Compounding and discounting are mirror images.',
+    points_correct:14, points_partial:8
+  },
+  {
+    id:3, title:'The Compounding Challenge', icon:'✨',
+    desc:'One year is easy. What about two years?',
+    type:'input_hints',
+    timeline:[{t:'Today',l:'₹100'},{t:'1 year',l:'×1.10'},{t:'2 years',l:'?'},{t:'3 years',l:''},{t:'4 years',l:''}],
+    question:'At 10% per year, how much does ₹100 grow to after 2 years?',
+    placeholder:'Enter future value',
+    hints:['₹110','₹120','₹121','₹122'],
+    answer:121, tolerance:0.25,
+    insight:'₹100 × 1.10 × 1.10 = ₹121. Not ₹120! The extra ₹1 is interest on the first year\'s interest. This is compounding.',
+    points_correct:14, points_partial:8
+  },
+  {
+    id:4, title:'The Payment Stream Puzzle', icon:'💰',
+    desc:'One payment becomes many — welcome to annuities.',
+    type:'input_choice',
+    timeline:[{t:'Today',l:'₹250 lump sum'},{t:'1 yr',l:'₹100'},{t:'2 yr',l:'₹100'},{t:'3 yr',l:'₹100'},{t:'4 yr',l:''}],
+    question:'Discount rate is 10%. Estimate the present value of receiving ₹100 at the end of each of the next 3 years.',
+    choiceA:{h:'A. Take ₹250 today',p:'Lump sum now'},
+    choiceB:{h:'B. ₹100 × 3 years',p:'Payment stream'},
+    placeholder:'Enter PV of the stream',
+    answer:248.69, tolerance:2,
+    insight:'PV = 100/1.1 + 100/1.1² + 100/1.1³ = 90.91 + 82.64 + 75.13 = ₹248.69. The stream is worth slightly less than ₹250 — so take option A!',
+    points_correct:16, points_partial:10
+  },
+  {
+    id:5, title:'The Infinite Money Puzzle', icon:'♾',
+    desc:'Can an infinite stream of money have a finite value?',
+    type:'input_hints',
+    timeline:[{t:'Today',l:'₹1,000?'},{t:'1 yr',l:'₹100'},{t:'2 yr',l:'₹100'},{t:'3 yr',l:'₹100'},{t:'Forever',l:'...'}],
+    question:'Discount rate is 10%. What is the present value of ₹100 received every year forever?',
+    placeholder:'Enter present value',
+    hints:['₹500','₹1,000','₹1,500','₹2,000'],
+    answer:1000, tolerance:0.5,
+    insight:'PV = C/r = 100/0.10 = ₹1,000. Infinite payments still have finite value because far-future payments are worth almost nothing today.',
+    points_correct:16, points_partial:10
+  },
+  {
+    id:6, title:'The Growth Puzzle', icon:'📈',
+    desc:'What if the perpetual payment grows every year?',
+    type:'slider_input',
+    timeline:[{t:'Today',l:''},{t:'1 yr',l:'₹100'},{t:'2 yr',l:'grows'},{t:'3 yr',l:'grows'},{t:'Forever',l:'...'}],
+    question:'Adjust the discount rate (r) and growth rate (g), then estimate the present value. First payment next year = ₹100.',
+    sliderR:{min:6,max:18,default:10,label:'Discount rate r'},
+    sliderG:{min:0,max:9,default:5,label:'Growth rate g'},
+    placeholder:'Enter present value',
+    getAnswer: function(r,g){ return r>g ? 100/((r-g)/100) : null; },
+    tolerance:5,
+    insight:'PV = C₁/(r−g). Growth makes perpetuities much more valuable. The gap (r−g) is tiny when g approaches r — small changes in g have huge impact on value.',
+    points_correct:18, points_partial:12
+  },
+  {
+    id:7, title:'Final Boss: Growing Annuity', icon:'🏆',
+    desc:'Growing payments for a limited number of years — the complete TVM formula.',
+    type:'input_choice',
+    timeline:[{t:'Today',l:'₹400 lump'},{t:'1 yr',l:'₹100'},{t:'2 yr',l:'₹105'},{t:'3 yr',l:'₹110.25'},{t:'5 yr',l:'ends'}],
+    question:'Discount rate 10%, growth rate 5%, 5 years. Estimate PV of this growing annuity stream vs ₹400 today.',
+    choiceA:{h:'A. ₹400 today',p:'Lump sum'},
+    choiceB:{h:'B. Growing stream',p:'₹100, then +5%/yr × 5yrs'},
+    placeholder:'Enter PV of stream',
+    answer: 100*((1-Math.pow((1.05/1.10),5))/(0.10-0.05)),
+    tolerance:5,
+    insight:'',  // filled in JS
+    points_correct:20, points_partial:12
   }
-  document.getElementById('submitBtn').disabled=true;
-  const pct=Math.round(score/4*100);
-  const res=document.getElementById('quizResult');
-  document.getElementById('qrScore').textContent=score+'/4 ('+pct+'%)';
-  document.getElementById('qrMsg').textContent=pct>=75?'Well done! CO1 objectives demonstrated.':'Review the sections above and try again.';
-  res.classList.add('show');
-  localStorage.setItem('cf_m1_quiz',pct);
-  track({action:'quiz',module:MODULE_NUM,score:pct});
+];
+
+var tvmState = {
+  level:0, score:0,
+  completed:{},
+  lvlState: tvmLevels.map(function(){ return {}; })
+};
+
+function fmt(n){ return '₹'+Number(n).toLocaleString('en-IN',{maximumFractionDigits:2}); }
+function closeEnough(a,b,tol){ return Math.abs(Number(a)-Number(b))<=tol; }
+
+function renderTVMLevelBar(){
+  var bar = document.getElementById('tvm-level-bar');
+  bar.innerHTML = tvmLevels.map(function(l,i){
+    var cls = 'tvm-lvl'+(i===tvmState.level?' active':'')+(tvmState.completed[i]?' done':'');
+    return '<div class="'+cls+'" onclick="goTVMLevel('+i+')">'+l.id+'. '+l.title+'</div>';
+  }).join('');
+  document.getElementById('tvm-score').textContent = tvmState.score;
+  document.getElementById('tvm-progress-text').textContent = 'Level '+(tvmState.level+1)+' of 7';
 }
 
-// ── Tracking ──
-function getSession(){try{return JSON.parse(localStorage.getItem('cfSession')||'null');}catch(e){return null;}}
-function track(params){
+function renderTimeline(items){
+  return '<div class="timeline">'+items.map(function(item){
+    return '<div class="tl-item"><div class="tl-dot"></div><div class="tl-time">'+item.t+'</div>'+(item.l?'<div class="tl-label">'+item.l+'</div>':'')+'</div>';
+  }).join('')+'</div>';
+}
+
+function renderTVMPanel(){
+  var l = tvmLevels[tvmState.level];
+  var st = tvmState.lvlState[tvmState.level];
+  var done = !!tvmState.completed[tvmState.level];
+  var html = '<div class="tvm-panel">';
+  html += '<div class="tvm-level-title">Level '+l.id+': '+l.title+' '+l.icon+'</div>';
+  html += '<div class="tvm-level-desc">'+l.desc+'</div>';
+  html += renderTimeline(l.timeline);
+  html += '<p style="font-size:0.86rem;color:var(--text2);margin-bottom:18px;line-height:1.65;">'+l.question+'</p>';
+
+  if(l.type==='choice_slider'){
+    var sliderVal = st.slider||l.sliderDefault;
+    html += '<div class="choice-grid">';
+    html += '<button class="choice-btn'+(st.choice==='A'?' selected':'')+'" onclick="tvmChoose(\'A\')"><h5>A. ₹100 today</h5><p>Certainty now</p></button>';
+    html += '<button class="choice-btn'+(st.choice==='B'?' selected':'')+'" onclick="tvmChoose(\'B\')"><h5>B. '+fmt(sliderVal)+' tomorrow</h5><p>Wait one day</p></button>';
+    html += '</div>';
+    html += '<div class="tvm-slider-row"><label>Tomorrow\'s amount: <strong style="color:var(--amber)">'+fmt(sliderVal)+'</strong></label><input type="range" min="'+l.sliderMin+'" max="'+l.sliderMax+'" value="'+sliderVal+'" oninput="tvmSlider(this.value)"></div>';
+    html += '<button class="tvm-submit" onclick="submitTVM()">Lock this level</button>';
+  }
+  else if(l.type==='input'){
+    html += '<div class="tvm-input-row"><input class="tvm-input" type="number" id="tvm-inp" placeholder="'+l.placeholder+'" value="'+(st.val||'')+'"><button class="tvm-submit" onclick="submitTVM()">Check answer</button></div>';
+  }
+  else if(l.type==='input_hints'){
+    html += '<div class="hint-pills">'+l.hints.map(function(h){ return '<button class="hint-pill" onclick="tvmHint(\''+h+'\')">'+h+'</button>'; }).join('')+'</div>';
+    html += '<div class="tvm-input-row"><input class="tvm-input" type="number" id="tvm-inp" placeholder="'+l.placeholder+'" value="'+(st.val||'')+'"><button class="tvm-submit" onclick="submitTVM()">Reveal result</button></div>';
+  }
+  else if(l.type==='input_choice'){
+    html += '<div class="choice-grid">';
+    html += '<button class="choice-btn'+(st.choice==='A'?' selected':'')+'" onclick="tvmChoose(\'A\')"><h5>'+l.choiceA.h+'</h5><p>'+l.choiceA.p+'</p></button>';
+    html += '<button class="choice-btn'+(st.choice==='B'?' selected':'')+'" onclick="tvmChoose(\'B\')"><h5>'+l.choiceB.h+'</h5><p>'+l.choiceB.p+'</p></button>';
+    html += '</div>';
+    html += '<div class="tvm-input-row"><input class="tvm-input" type="number" id="tvm-inp" placeholder="'+l.placeholder+'" value="'+(st.val||'')+'"><button class="tvm-submit" onclick="submitTVM()">Check stream value</button></div>';
+  }
+  else if(l.type==='slider_input'){
+    var r = st.r||l.sliderR.default;
+    var g = st.g||l.sliderG.default;
+    html += '<div class="tvm-slider-row"><label>'+l.sliderR.label+': <strong style="color:var(--amber)">'+r+'%</strong></label><input type="range" min="'+l.sliderR.min+'" max="'+l.sliderR.max+'" value="'+r+'" oninput="tvmSliderRG(\'r\',this.value)"></div>';
+    html += '<div class="tvm-slider-row"><label>'+l.sliderG.label+': <strong style="color:var(--amber)">'+g+'%</strong></label><input type="range" min="'+l.sliderG.min+'" max="'+l.sliderG.max+'" value="'+g+'" oninput="tvmSliderRG(\'g\',this.value)"></div>';
+    html += '<div class="tvm-input-row"><input class="tvm-input" type="number" id="tvm-inp" placeholder="'+l.placeholder+'" value="'+(st.val||'')+'"><button class="tvm-submit" onclick="submitTVM()">Test growth logic</button></div>';
+  }
+
+  // Result
+  if(done){
+    var res = tvmState.completed[tvmState.level];
+    html += '<div class="tvm-result show '+(res.correct?'ok':'info')+'">'+res.msg+'<br><br>';
+    if(tvmState.level < 6){
+      html += '<button class="tvm-next" onclick="goTVMLevel('+(tvmState.level+1)+')">Next level →</button>';
+    } else {
+      html += '<div style="color:var(--green);margin-top:8px;font-weight:700;">★ You completed the Time Traveler! Final score: '+tvmState.score+' pts</div>';
+    }
+    html += '</div>';
+  }
+
+  html += '</div>';
+  document.getElementById('tvm-panel').innerHTML = html;
+}
+
+function tvmChoose(c){ tvmState.lvlState[tvmState.level].choice=c; renderTVMPanel(); }
+function tvmHint(v){ tvmState.lvlState[tvmState.level].val=v.replace(/[₹,]/g,''); renderTVMPanel(); }
+function tvmSlider(v){ tvmState.lvlState[tvmState.level].slider=Number(v); renderTVMPanel(); }
+function tvmSliderRG(which,v){ tvmState.lvlState[tvmState.level][which]=Number(v); renderTVMPanel(); }
+
+function submitTVM(){
+  var l = tvmLevels[tvmState.level];
+  var st = tvmState.lvlState[tvmState.level];
+  if(tvmState.completed[tvmState.level]) return;
+  var correct = false;
+  var answer, msg;
+
+  if(l.type==='choice_slider'){
+    correct = (st.slider||l.sliderDefault) > l.sliderMin;
+    var pts = correct ? l.points_correct : l.points_partial;
+    msg = (correct?'+'+pts+' pts · ':'') + l.insight;
+  } else if(l.type==='slider_input'){
+    var r = st.r||l.sliderR.default;
+    var g = st.g||l.sliderG.default;
+    answer = l.getAnswer(r,g);
+    var val = parseFloat((document.getElementById('tvm-inp')||{value:st.val}).value||st.val||0);
+    if(answer===null){ msg='When r ≤ g the growing perpetuity formula breaks down — the value is infinite. Make r > g.'; correct=false; }
+    else { correct = closeEnough(val, answer, l.tolerance); msg=(correct?'+'+l.points_correct+' pts · ':'Correct answer: '+fmt(Math.round(answer))+' · ')+l.insight; }
+  } else if(l.type==='input'||l.type==='input_hints'){
+    var inp = document.getElementById('tvm-inp');
+    val = parseFloat(inp?inp.value:st.val||0);
+    st.val = val;
+    correct = closeEnough(val, l.answer, l.tolerance);
+    msg = (correct?'+'+l.points_correct+' pts · ':('Correct answer: '+fmt(l.answer)+' · '))+l.insight;
+  } else if(l.type==='input_choice'){
+    var inp2 = document.getElementById('tvm-inp');
+    val = parseFloat(inp2?inp2.value:st.val||0);
+    st.val = val;
+    var ans = l.id===7 ? l.answer : l.answer;
+    if(l.id===7){
+      var roundAns = Math.round(ans*100)/100;
+      var ins = closeEnough(val,roundAns,l.tolerance)?
+        '+'+l.points_correct+' pts · The growing stream is worth '+fmt(Math.round(roundAns))+' today — it beats ₹400! Choose B.' :
+        'The stream is worth '+fmt(Math.round(roundAns))+'. Growing annuity = finite life + discounting + growth, combined.';
+      correct = closeEnough(val,roundAns,l.tolerance);
+      msg = ins;
+    } else {
+      correct = closeEnough(val, l.answer, l.tolerance);
+      msg = (correct?'+'+l.points_correct+' pts · ':('Correct answer: '+fmt(Math.round(l.answer))+' · '))+l.insight;
+    }
+  }
+
+  var pts = correct ? l.points_correct : l.points_partial;
+  if(l.type==='choice_slider') pts = correct ? l.points_correct : l.points_partial;
+  tvmState.score += pts;
+  tvmState.completed[tvmState.level] = {correct:correct, msg:msg};
+
+  // save to localStorage
   try{
-    const s=getSession();if(!s||!s.enrollId)return;
-    params.id=s.enrollId;
-    const cbName='tcb_'+Math.random().toString(36).slice(2);
-    const qs=Object.entries(params).map(([k,v])=>encodeURIComponent(k)+'='+encodeURIComponent(v)).join('&');
-    const sc=document.createElement('script');
-    sc.src=APPS_SCRIPT_URL+'?'+qs+'&callback='+cbName;
-    window[cbName]=function(){delete window[cbName];sc.remove();};
-    sc.onerror=function(){delete window[cbName];sc.remove();};
-    document.head.appendChild(sc);
+    var sess = JSON.parse(localStorage.getItem('cfSession')||'{}');
+    var key = 'cf_m1_tvm_score';
+    var prev = parseInt(localStorage.getItem(key)||'0');
+    if(tvmState.score > prev) localStorage.setItem(key, tvmState.score);
+  }catch(e){}
+
+  renderTVMLevelBar();
+  renderTVMPanel();
+}
+
+function goTVMLevel(idx){
+  tvmState.level = idx;
+  renderTVMLevelBar();
+  renderTVMPanel();
+}
+
+function resetTVM(){
+  tvmState = {level:0,score:0,completed:{},lvlState:tvmLevels.map(function(){return{};})};
+  renderTVMLevelBar();
+  renderTVMPanel();
+}
+
+// ══════════════════════════════════════════
+// QUIZ DATA & RENDER
+// ══════════════════════════════════════════
+var quizData = [
+  // Quiz 0 — Goal of FM
+  [
+    {q:'Which of the following BEST describes the primary financial goal of a corporation?',
+     opts:['Maximise revenue from operations','Maximise accounting profit each year','Maximise current shareholder wealth (stock price)','Minimise the debt-to-equity ratio'],
+     ans:2, exp:'Maximising shareholder wealth accounts for timing, magnitude, and risk of cash flows — it is the only objective that is comprehensive. Profit maximisation ignores all three.'},
+    {q:'Tata Motors is deciding whether to invest ₹18,000 crore in a new EV plant. This is an example of which of the three core decisions in corporate finance?',
+     opts:['Working capital decision','Financing decision','Agency decision','Capital budgeting (investment) decision'],
+     ans:3, exp:'Capital budgeting involves deciding which long-term assets to invest in. Building a plant is a long-term asset acquisition — the classic investment decision.'},
+    {q:'A CEO avoids a risky but positive-NPV project to protect her own job security. This is an example of:',
+     opts:['Sound risk management','The agency problem','Good capital structure planning','Working capital optimisation'],
+     ans:1, exp:'The agency problem arises when managers (agents) do not act in the best interest of shareholders (principals). Avoiding a good project to protect personal interests is a textbook example.'},
+    {q:'Infosys announces a ₹9,200 crore share buyback. Which corporate finance decision does this represent?',
+     opts:['Investment decision — acquiring an asset','Working capital decision — managing cash','Financing decision — returning capital to shareholders','Capital budgeting — evaluating a project'],
+     ans:2, exp:'A buyback is a financing decision. The firm is deciding how to use surplus capital — in this case, returning it to shareholders by repurchasing shares rather than retaining cash or paying dividends.'},
+  ],
+  // Quiz 1 — TVM
+  [
+    {q:'₹10,000 is invested at 8% per annum, compounded annually. What is its value after 3 years?',
+     opts:['₹12,400','₹12,597','₹12,000','₹12,800'],
+     ans:1, exp:'FV = 10,000 × (1.08)³ = 10,000 × 1.2597 = ₹12,597. Note that this is MORE than ₹12,400 (simple interest) because of compounding — earning interest on interest.'},
+    {q:'A preference share pays a dividend of ₹12 per year forever. If the required return is 8%, what is the present value of this perpetuity?',
+     opts:['₹96','₹120','₹150','₹200'],
+     ans:2, exp:'PV of perpetuity = C/r = 12/0.08 = ₹150. An infinite stream of payments has a finite present value because distant payments are discounted to near-zero.'},
+    {q:'You will receive ₹5,000 at the end of each year for 4 years. Discount rate is 10%. The present value of this annuity is closest to:',
+     opts:['₹20,000','₹17,320','₹15,849','₹18,500'],
+     ans:2, exp:'PV = 5000×[1−(1.10)⁻⁴]/0.10 = 5000 × 3.1699 = ₹15,849. Always less than the sum (₹20,000) because each payment is discounted.'},
+    {q:'Hindustan Unilever is expected to pay a dividend of ₹20 next year. Dividends are expected to grow at 4% per year forever. If the required return is 9%, what is the stock price today?',
+     opts:['₹222','₹400','₹500','₹313'],
+     ans:1, exp:'P = D₁/(r−g) = 20/(0.09−0.04) = 20/0.05 = ₹400. This is the Gordon Growth Model — a growing perpetuity. The required return must exceed the growth rate for a finite answer.'},
+  ]
+];
+
+var quizState = [
+  {answers:[], submitted:[], done:false},
+  {answers:[], submitted:[], done:false}
+];
+
+function renderQuiz(qIdx) {
+  var qs = quizData[qIdx];
+  var st = quizState[qIdx];
+  var html = '';
+  qs.forEach(function(q,i){
+    html += '<div class="q-block"><div class="q-num">Q'+(i+1)+'</div>';
+    html += '<div class="q-text">'+q.q+'</div><div class="options">';
+    q.opts.forEach(function(o,j){
+      var cls = 'opt';
+      if(st.submitted[i]!==undefined){
+        if(j===q.ans) cls+=' correct';
+        else if(j===st.answers[i]) cls+=' wrong';
+      } else if(j===st.answers[i]) cls+=' selected';
+      html += '<div class="'+cls+'" onclick="quizSelect('+qIdx+','+i+','+j+')"><span class="opt-key">'+['A','B','C','D'][j]+'</span>'+o+'</div>';
+    });
+    html += '</div>';
+    html += '<div class="q-feedback'+(st.submitted[i]!==undefined?' show '+(st.answers[i]===q.ans?'ok':'bad'):'')+'">'+
+      (st.submitted[i]!==undefined?(st.answers[i]===q.ans?'✓ Correct! ':'✗ Incorrect. ')+q.exp:'')+'</div>';
+    html += '<button class="btn-submit" onclick="quizSubmit('+qIdx+','+i+')"'+(st.submitted[i]!==undefined?' disabled':'')+'>Submit</button>';
+    html += '</div>';
+  });
+  if(st.done){
+    var score = qs.filter(function(_,i){ return st.answers[i]===qs[i].ans; }).length;
+    html += '<div class="quiz-result show"><div class="qr-score">'+score+'/'+qs.length+'</div>';
+    html += '<div class="qr-msg">'+(['Try reviewing the concepts and retaking','Good effort — review any wrong answers','Great work!','Perfect score!'][score]||'')+'</div></div>';
+  }
+  document.getElementById('quiz'+qIdx).innerHTML = html;
+  // Save score
+  if(st.done){
+    try{
+      var score2 = quizData[qIdx].filter(function(_,i){ return quizState[qIdx].answers[i]===quizData[qIdx][i].ans; }).length;
+      var key = 'cf_m1_q'+qIdx+'_score';
+      var prev = parseInt(localStorage.getItem(key)||'0');
+      if(score2 > prev) localStorage.setItem(key, score2);
+    }catch(e){}
+  }
+}
+
+function quizSelect(qIdx, qNum, optIdx){
+  if(quizState[qIdx].submitted[qNum]!==undefined) return;
+  quizState[qIdx].answers[qNum] = optIdx;
+  renderQuiz(qIdx);
+}
+function quizSubmit(qIdx, qNum){
+  if(quizState[qIdx].answers[qNum]===undefined) return;
+  quizState[qIdx].submitted[qNum] = true;
+  var allDone = quizData[qIdx].every(function(_,i){ return quizState[qIdx].submitted[i]; });
+  if(allDone) quizState[qIdx].done = true;
+  renderQuiz(qIdx);
+}
+
+// ══════════════════════════════════════════
+// TRACKING
+// ══════════════════════════════════════════
+var SESSION_KEY='cfSession';
+var APPSURL='https://script.google.com/macros/s/AKfycbwEA2oFByWVURilCo6gfrU9IcrkEPXS5DcFgvMWvMhPm-HpiE--1rLxI26SxxDRDWu8RQ/exec';
+function getSession(){try{return JSON.parse(localStorage.getItem(SESSION_KEY)||'null');}catch(e){return null;}}
+function callGS(params){
+  try{
+    var qs=Object.keys(params).map(function(k){return k+'='+encodeURIComponent(params[k]);}).join('&');
+    var cb='cf_cb_'+Date.now();
+    window[cb]=function(){};
+    var s=document.createElement('script');
+    s.src=APPSURL+'?'+qs+'&callback='+cb;
+    document.head.appendChild(s);
   }catch(e){}
 }
-
-let totalMins=0,isVisible=true,activeStart=Date.now();
-document.addEventListener('visibilitychange',function(){
-  if(document.hidden){if(isVisible)totalMins+=(Date.now()-activeStart)/60000;isVisible=false;}
-  else{isVisible=true;activeStart=Date.now();}
-});
-setInterval(function(){
-  if(!document.hidden){totalMins+=(Date.now()-activeStart)/60000;activeStart=Date.now();
-    if(totalMins>=1){track({action:'time',module:MODULE_NUM,mins:totalMins.toFixed(1)});totalMins=0;}}
-},5*60*1000);
-window.addEventListener('beforeunload',function(){
-  if(!document.hidden)totalMins+=(Date.now()-activeStart)/60000;
-  if(totalMins>0.1)track({action:'time',module:MODULE_NUM,mins:totalMins.toFixed(1)});
-  track({action:'log',event:'MODULE_EXIT',module:MODULE_NUM,detail:'',mins:totalMins.toFixed(1)});
-});
-window.addEventListener('load',function(){
-  const s=getSession();if(!s||!s.enrollId)return;
+var sess=getSession();
+if(!sess||sess.expires<Date.now()){window.location.href='index.html';}
+else{
   localStorage.setItem('cf_m1_seen','1');
-  track({action:'log',event:'MODULE_OPEN',module:MODULE_NUM,detail:'',mins:0});
+  callGS({action:'module_open',id:sess.enrollId,module:'1'});
+}
+var _startTime=Date.now();var _active=true;
+document.addEventListener('visibilitychange',function(){_active=!document.hidden;});
+setInterval(function(){
+  if(_active&&sess){callGS({action:'time_update',id:sess.enrollId,module:'1',mins:Math.round((Date.now()-_startTime)/60000)});}
+},300000);
+window.addEventListener('beforeunload',function(){
+  if(sess){callGS({action:'module_exit',id:sess.enrollId,module:'1',mins:Math.round((Date.now()-_startTime)/60000)});}
 });
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+renderCard(0);
+renderCard(1);
+renderCFO();
+renderTVMLevelBar();
+renderTVMPanel();
+renderQuiz(0);
+renderQuiz(1);
 </script>
 </body>
 </html>

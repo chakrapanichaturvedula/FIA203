@@ -6,7 +6,7 @@
 <title>Module 3 — Capital Budgeting · CorpFinLab</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#05080f;--surf:#0a0f1a;--surf2:#111827;--accent:#3b82f6;--accent2:#60a5fa;--text:#eef2f7;--text2:#7f8fa6;--text3:#3d4f6b;--border:rgba(59,130,246,0.15);--border2:rgba(255,255,255,0.06);--green:#00e676;--gold:#f59e0b;--red:#ff6b6b;}
+:root{--bg:#f5f6fa;--surf:#ffffff;--surf2:#f0f2f8;--accent:#2563eb;--accent2:#3b82f6;--text:#0f172a;--text2:#475569;--text3:#94a3b8;--border:rgba(37,99,235,0.15);--border2:rgba(15,23,42,0.08);--green:#0a7c3e;--gold:#b45309;--red:#dc2626;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.6;}
 body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(59,130,246,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
@@ -23,7 +23,7 @@ h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;col
 .sub{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);letter-spacing:0.06em;margin-bottom:40px;}
 .section{margin-bottom:48px;}
 h2{font-size:1.25rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border2);}
-h2 .tag{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--accent);background:rgba(59,130,246,0.1);border-radius:4px;padding:2px 8px;margin-left:10px;font-weight:400;letter-spacing:0.06em;vertical-align:middle;}
+h2 .tag{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--accent);background:rgba(37,99,235,0.07);border-radius:4px;padding:2px 8px;margin-left:10px;font-weight:400;letter-spacing:0.06em;vertical-align:middle;}
 p{color:var(--text2);font-size:0.93rem;margin-bottom:14px;line-height:1.7;}strong{color:var(--text);}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:20px 0;}
 .ccard{background:var(--surf);border:1px solid var(--border2);border-radius:10px;padding:18px;}
@@ -38,45 +38,45 @@ p{color:var(--text2);font-size:0.93rem;margin-bottom:14px;line-height:1.7;}stron
 .formula{font-size:1rem;color:var(--text);line-height:1.7;}
 .formula .var{color:var(--accent2);}
 .formula-note{font-size:0.68rem;color:var(--text3);margin-top:10px;line-height:1.6;}
-.example{background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(96,165,250,0.02));border:1px solid rgba(59,130,246,0.2);border-radius:10px;padding:20px 24px;margin:20px 0;}
+.example{background:linear-gradient(135deg,rgba(37,99,235,0.05),rgba(96,165,250,0.02));border:1px solid rgba(37,99,235,0.2);border-radius:10px;padding:20px 24px;margin:20px 0;}
 .ex-label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--accent2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
 .ex-label::before{content:'📌';}
 .example p{font-size:0.85rem;margin-bottom:8px;}
 .example p:last-child{margin-bottom:0;}
 .tbl-wrap{overflow-x:auto;margin:20px 0;}
 table{width:100%;border-collapse:collapse;font-size:0.82rem;}
-th{background:rgba(59,130,246,0.1);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+th{background:rgba(37,99,235,0.07);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
 td{padding:10px 14px;border-bottom:1px solid var(--border2);color:var(--text2);}
-td strong{color:var(--text);}tr:hover td{background:rgba(255,255,255,0.02);}
+td strong{color:var(--text);}tr:hover td{background:rgba(15,23,42,0.03);}
 .callout{display:flex;gap:14px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:18px 20px;margin:20px 0;}
 .callout-icon{font-size:1.2rem;flex-shrink:0;}
 .callout-body p{font-size:0.84rem;color:var(--text2);margin:0;}
 .callout-body strong{color:var(--gold);}
-.insight{background:rgba(0,230,118,0.04);border-left:3px solid var(--green);padding:14px 18px;margin:20px 0;border-radius:0 8px 8px 0;}
+.insight{background:rgba(10,124,62,0.06);border-left:3px solid var(--green);padding:14px 18px;margin:20px 0;border-radius:0 8px 8px 0;}
 .insight p{font-size:0.84rem;color:var(--text2);margin:0;}
 .insight strong{color:var(--green);}
 .quiz-section{background:var(--surf);border:1px solid var(--border2);border-radius:14px;padding:32px;margin-top:56px;}
 .quiz-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
 .quiz-head h2{border:none;padding:0;margin:0;font-size:1.1rem;}
-.quiz-badge{font-family:'JetBrains Mono',monospace;font-size:0.6rem;background:rgba(59,130,246,0.1);border:1px solid var(--border);color:var(--accent2);padding:4px 10px;border-radius:100px;}
+.quiz-badge{font-family:'JetBrains Mono',monospace;font-size:0.6rem;background:rgba(37,99,235,0.07);border:1px solid var(--border);color:var(--accent2);padding:4px 10px;border-radius:100px;}
 .q-block{margin-bottom:28px;}
 .q-text{font-size:0.9rem;font-weight:600;margin-bottom:14px;line-height:1.5;}
 .q-num{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--accent);margin-bottom:6px;letter-spacing:0.1em;}
 .options{display:flex;flex-direction:column;gap:8px;}
 .opt{display:flex;align-items:flex-start;gap:10px;background:var(--surf2);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:10px 14px;cursor:pointer;transition:all 0.18s;font-size:0.84rem;color:var(--text2);}
-.opt:hover{border-color:rgba(59,130,246,0.3);color:var(--text);}
-.opt.selected{border-color:var(--accent);color:var(--text);background:rgba(59,130,246,0.08);}
-.opt.correct{border-color:var(--green);background:rgba(0,230,118,0.07);color:var(--green);}
-.opt.wrong{border-color:var(--red);background:rgba(255,107,107,0.07);color:var(--red);}
+.opt:hover{border-color:rgba(37,99,235,0.3);color:var(--text);}
+.opt.selected{border-color:var(--accent);color:var(--text);background:rgba(37,99,235,0.07);}
+.opt.correct{border-color:var(--green);background:rgba(10,124,62,0.08);color:var(--green);}
+.opt.wrong{border-color:var(--red);background:rgba(220,38,38,0.07);color:var(--red);}
 .opt-key{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text3);min-width:18px;}
 .feedback{display:none;margin-top:10px;font-size:0.8rem;padding:10px 14px;border-radius:6px;font-family:'JetBrains Mono',monospace;line-height:1.55;}
 .feedback.show{display:block;}
-.feedback.ok{background:rgba(0,230,118,0.07);border:1px solid rgba(0,230,118,0.2);color:var(--green);}
-.feedback.bad{background:rgba(255,107,107,0.07);border:1px solid rgba(255,107,107,0.2);color:var(--red);}
+.feedback.ok{background:rgba(10,124,62,0.08);border:1px solid rgba(10,124,62,0.25);color:var(--green);}
+.feedback.bad{background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.2);color:var(--red);}
 .btn-submit{margin-top:8px;background:var(--accent);color:#fff;border:none;border-radius:7px;padding:11px 28px;font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;}
 .btn-submit:hover{background:#2563eb;transform:translateY(-1px);}
 .btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
-.quiz-result{display:none;margin-top:24px;background:rgba(59,130,246,0.07);border:1px solid var(--border);border-radius:10px;padding:20px 24px;text-align:center;}
+.quiz-result{display:none;margin-top:24px;background:rgba(37,99,235,0.06);border:1px solid var(--border);border-radius:10px;padding:20px 24px;text-align:center;}
 .quiz-result.show{display:block;}
 .qr-score{font-size:2rem;font-weight:800;color:var(--accent);letter-spacing:-0.03em;}
 .qr-msg{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);margin-top:6px;}
@@ -85,9 +85,10 @@ td strong{color:var(--text);}tr:hover td{background:rgba(255,255,255,0.02);}
 </head>
 <body>
 <header>
-  <div class="hinner">
+  <div class="hinner" style="display:flex;align-items:center;width:100%;">
     <a class="back" href="cf_course.html">← Back to Modules</a>
     <div class="hmod">MODULE 03 · CAPEX</div>
+  <a href="cf_bigpicture.html" style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#0e8c65;text-decoration:none;padding:6px 12px;border:1px solid rgba(14,140,101,0.3);border-radius:6px;display:flex;align-items:center;gap:6px;margin-left:auto;" onmouseover="this.style.background='rgba(14,140,101,0.08)'" onmouseout="this.style.background='transparent'"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#0e8c65" stroke-width="1"/><line x1="6" y1="2" x2="6" y2="10" stroke="#0e8c65" stroke-width="1"/><line x1="2" y1="6" x2="10" y2="6" stroke="#0e8c65" stroke-width="1"/></svg>Big Picture</a>
   </div>
 </header>
 <main>

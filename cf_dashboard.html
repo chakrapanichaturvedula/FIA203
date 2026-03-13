@@ -6,7 +6,7 @@
 <title>CorpFinLab · Instructor Dashboard · FIA 203</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#05080f;--surf:#0a0f1a;--surf2:#111827;--accent:#3b82f6;--accent2:#60a5fa;--text:#eef2f7;--text2:#7f8fa6;--text3:#3d4f6b;--border:rgba(59,130,246,0.15);--border2:rgba(255,255,255,0.06);--green:#00e676;--gold:#f59e0b;--red:#ff6b6b;}
+:root{--bg:#f5f6fa;--surf:#ffffff;--surf2:#f0f2f8;--accent:#2563eb;--accent2:#3b82f6;--text:#0f172a;--text2:#475569;--text3:#94a3b8;--border:rgba(37,99,235,0.15);--border2:rgba(15,23,42,0.08);--green:#0a7c3e;--gold:#f59e0b;--red:#dc2626;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;}
 body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(59,130,246,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
@@ -173,11 +173,11 @@ function loadData(){
   window[cbName]=function(data){
     delete window[cbName];
     if(data&&data.summary){renderTable(data.summary);}
-    else{document.getElementById('tableLoading').innerHTML='<span style="color:#ff6b6b">Could not load data. Check Apps Script URL.</span>';}
+    else{document.getElementById('tableLoading').innerHTML='<span style="color:#dc2626">Could not load data. Check Apps Script URL.</span>';}
   };
   const sc=document.createElement('script');
   sc.src=APPS_SCRIPT_URL+'?action=summary&callback='+cbName;
-  sc.onerror=function(){delete window[cbName];document.getElementById('tableLoading').innerHTML='<span style="color:#ff6b6b">Network error. Check Apps Script URL.</span>';};
+  sc.onerror=function(){delete window[cbName];document.getElementById('tableLoading').innerHTML='<span style="color:#dc2626">Network error. Check Apps Script URL.</span>';};
   document.head.appendChild(sc);
 }
 
