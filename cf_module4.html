@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module 4 — Risk & Return · CorpFinLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05080f;--surf:#0a0f1a;--surf2:#111827;--accent:#3b82f6;--accent2:#60a5fa;--text:#eef2f7;--text2:#7f8fa6;--text3:#3d4f6b;--border:rgba(59,130,246,0.15);--border2:rgba(255,255,255,0.06);--green:#00e676;--gold:#f59e0b;--red:#ff6b6b;--purple:#a855f7;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.6;}
+body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(59,130,246,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
+header{position:sticky;top:0;z-index:100;background:rgba(5,8,15,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);padding:0 40px;}
+.hinner{max-width:960px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;}
+.back{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text2);text-decoration:none;transition:color 0.2s;}
+.back:hover{color:var(--accent2);}
+.hmod{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--accent);letter-spacing:0.1em;}
+main{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:48px 40px 100px;}
+.mod-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--accent);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.mod-eyebrow::before{content:'';width:22px;height:1px;background:var(--accent);}
+h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:8px;}
+h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:var(--accent);}
+.sub{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);letter-spacing:0.06em;margin-bottom:40px;}
+.section{margin-bottom:48px;}
+h2{font-size:1.25rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border2);}
+h2 .tag{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--accent);background:rgba(59,130,246,0.1);border-radius:4px;padding:2px 8px;margin-left:10px;font-weight:400;letter-spacing:0.06em;vertical-align:middle;}
+p{color:var(--text2);font-size:0.93rem;margin-bottom:14px;line-height:1.7;}strong{color:var(--text);}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:20px 0;}
+.ccard{background:var(--surf);border:1px solid var(--border2);border-radius:10px;padding:18px;}
+.ccard-icon{font-size:1.3rem;margin-bottom:8px;}
+.ccard h4{font-size:0.88rem;font-weight:700;margin-bottom:5px;}
+.ccard p{font-size:0.78rem;color:var(--text2);margin:0;line-height:1.5;}
+.formula-box{background:var(--surf2);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin:20px 0;font-family:'JetBrains Mono',monospace;}
+.formula-label{font-size:0.6rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;}
+.formula{font-size:1rem;color:var(--text);line-height:1.7;}
+.formula .var{color:var(--accent2);}
+.formula-note{font-size:0.68rem;color:var(--text3);margin-top:10px;line-height:1.6;}
+.example{background:linear-gradient(135deg,rgba(59,130,246,0.05),rgba(96,165,250,0.02));border:1px solid rgba(59,130,246,0.2);border-radius:10px;padding:20px 24px;margin:20px 0;}
+.ex-label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--accent2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.ex-label::before{content:'📌';}
+.example p{font-size:0.85rem;margin-bottom:8px;}
+.example p:last-child{margin-bottom:0;}
+.tbl-wrap{overflow-x:auto;margin:20px 0;}
+table{width:100%;border-collapse:collapse;font-size:0.82rem;}
+th{background:rgba(59,130,246,0.1);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+td{padding:10px 14px;border-bottom:1px solid var(--border2);color:var(--text2);}
+td strong{color:var(--text);}tr:hover td{background:rgba(255,255,255,0.02);}
+.callout{display:flex;gap:14px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:18px 20px;margin:20px 0;}
+.callout-icon{font-size:1.2rem;flex-shrink:0;}
+.callout-body p{font-size:0.84rem;color:var(--text2);margin:0;}
+.callout-body strong{color:var(--gold);}
+.insight{background:rgba(0,230,118,0.04);border-left:3px solid var(--green);padding:14px 18px;margin:20px 0;border-radius:0 8px 8px 0;}
+.insight p{font-size:0.84rem;color:var(--text2);margin:0;}
+.insight strong{color:var(--green);}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;}
+.risk-box{padding:20px;border-radius:10px;}
+.risk-systematic{background:rgba(255,107,107,0.06);border:1px solid rgba(255,107,107,0.2);}
+.risk-unsystematic{background:rgba(0,230,118,0.05);border:1px solid rgba(0,230,118,0.2);}
+.risk-box h4{font-size:0.9rem;font-weight:700;margin-bottom:8px;}
+.risk-box p{font-size:0.8rem;color:var(--text2);margin:0;line-height:1.55;}
+.risk-systematic h4{color:var(--red);}
+.risk-unsystematic h4{color:var(--green);}
+.quiz-section{background:var(--surf);border:1px solid var(--border2);border-radius:14px;padding:32px;margin-top:56px;}
+.quiz-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+.quiz-head h2{border:none;padding:0;margin:0;font-size:1.1rem;}
+.quiz-badge{font-family:'JetBrains Mono',monospace;font-size:0.6rem;background:rgba(59,130,246,0.1);border:1px solid var(--border);color:var(--accent2);padding:4px 10px;border-radius:100px;}
+.q-block{margin-bottom:28px;}
+.q-text{font-size:0.9rem;font-weight:600;margin-bottom:14px;line-height:1.5;}
+.q-num{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--accent);margin-bottom:6px;letter-spacing:0.1em;}
+.options{display:flex;flex-direction:column;gap:8px;}
+.opt{display:flex;align-items:flex-start;gap:10px;background:var(--surf2);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:10px 14px;cursor:pointer;transition:all 0.18s;font-size:0.84rem;color:var(--text2);}
+.opt:hover{border-color:rgba(59,130,246,0.3);color:var(--text);}
+.opt.selected{border-color:var(--accent);color:var(--text);background:rgba(59,130,246,0.08);}
+.opt.correct{border-color:var(--green);background:rgba(0,230,118,0.07);color:var(--green);}
+.opt.wrong{border-color:var(--red);background:rgba(255,107,107,0.07);color:var(--red);}
+.opt-key{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text3);min-width:18px;}
+.feedback{display:none;margin-top:10px;font-size:0.8rem;padding:10px 14px;border-radius:6px;font-family:'JetBrains Mono',monospace;line-height:1.55;}
+.feedback.show{display:block;}
+.feedback.ok{background:rgba(0,230,118,0.07);border:1px solid rgba(0,230,118,0.2);color:var(--green);}
+.feedback.bad{background:rgba(255,107,107,0.07);border:1px solid rgba(255,107,107,0.2);color:var(--red);}
+.btn-submit{margin-top:8px;background:var(--accent);color:#fff;border:none;border-radius:7px;padding:11px 28px;font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.btn-submit:hover{background:#2563eb;transform:translateY(-1px);}
+.btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
+.quiz-result{display:none;margin-top:24px;background:rgba(59,130,246,0.07);border:1px solid var(--border);border-radius:10px;padding:20px 24px;text-align:center;}
+.quiz-result.show{display:block;}
+.qr-score{font-size:2rem;font-weight:800;color:var(--accent);letter-spacing:-0.03em;}
+.qr-msg{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);margin-top:6px;}
+@media(max-width:680px){header,main{padding-left:20px;padding-right:20px;}.two-col{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hinner">
+    <a class="back" href="cf_course.html">← Back to Modules</a>
+    <div class="hmod">MODULE 04 · RISK &amp; RETURN</div>
+  </div>
+</header>
+<main>
+  <div class="mod-eyebrow">Ch. 10 &amp; 11 · RWJK 13e · 3 Sessions</div>
+  <h1>Risk &amp; <em>Return</em></h1>
+  <div class="sub">CO2 · COMPUTE RISK &amp; RETURN FOR SINGLE SECURITY AND PORTFOLIO</div>
+
+  <div class="section">
+    <h2>1. Return for a Single Security <span class="tag">Ch. 10</span></h2>
+    <p>The <strong>expected return</strong> of a security is the probability-weighted average of all possible returns. <strong>Risk</strong> is measured by the variance or standard deviation of returns — how much actual returns deviate from the expected.</p>
+    <div class="formula-box">
+      <div class="formula-label">Expected Return &amp; Variance</div>
+      <div class="formula">E(R) = Σ <span class="var">pᵢ</span> × <span class="var">Rᵢ</span></div>
+      <div class="formula">σ² = Σ <span class="var">pᵢ</span> × (<span class="var">Rᵢ</span> – E(R))²</div>
+      <div class="formula-note">pᵢ = probability of state i &nbsp;|&nbsp; Rᵢ = return in state i &nbsp;|&nbsp; σ = standard deviation (risk)</div>
+    </div>
+    <div class="example">
+      <div class="ex-label">Reliance Industries — Scenario Analysis</div>
+      <p>Boom (p=30%): R = 40% | Normal (p=50%): R = 15% | Recession (p=20%): R = –10%</p>
+      <p>E(R) = 0.30×40% + 0.50×15% + 0.20×(–10%) = 12% + 7.5% – 2% = <strong>17.5%</strong></p>
+      <p>σ² = 0.30×(40–17.5)² + 0.50×(15–17.5)² + 0.20×(–10–17.5)² = 151.875 + 3.125 + 151.25 = 306.25</p>
+      <p>σ = √306.25 = <strong>17.5%</strong></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>2. Portfolio Return &amp; Risk <span class="tag">Ch. 10</span></h2>
+    <p>A <strong>portfolio's expected return</strong> is the weighted average of individual returns. However, portfolio risk is <em>not</em> a simple average — it depends critically on the <strong>correlation</strong> between assets.</p>
+    <div class="formula-box">
+      <div class="formula-label">Two-Asset Portfolio</div>
+      <div class="formula">E(Rₚ) = <span class="var">w₁</span>E(R₁) + <span class="var">w₂</span>E(R₂)</div>
+      <div class="formula">σ²ₚ = <span class="var">w₁²</span>σ₁² + <span class="var">w₂²</span>σ₂² + 2<span class="var">w₁w₂</span>σ₁σ₂<span class="var">ρ₁₂</span></div>
+      <div class="formula-note">w = portfolio weight &nbsp;|&nbsp; ρ₁₂ = correlation between assets 1 and 2 &nbsp;(–1 ≤ ρ ≤ +1)</div>
+    </div>
+    <div class="insight"><p><strong>Diversification Magic:</strong> When ρ &lt; 1, portfolio risk &lt; weighted average of individual risks. When ρ = –1 (perfectly negatively correlated), risk can be eliminated entirely.</p></div>
+    <div class="example">
+      <div class="ex-label">Nifty IT vs Nifty FMCG Portfolio</div>
+      <p>IT stock: E(R) = 18%, σ = 25%. FMCG stock: E(R) = 12%, σ = 14%. Correlation ρ = 0.20. Equal weights (50/50).</p>
+      <p>E(Rₚ) = 0.5×18% + 0.5×12% = <strong>15%</strong></p>
+      <p>σ²ₚ = 0.25×625 + 0.25×196 + 2×0.5×0.5×25×14×0.20 = 156.25 + 49 + 35 = 240.25</p>
+      <p>σₚ = √240.25 ≈ <strong>15.5%</strong> — less than the weighted average of 19.5%!</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>3. Systematic vs Unsystematic Risk <span class="tag">Ch. 11</span></h2>
+    <div class="two-col">
+      <div class="risk-box risk-systematic">
+        <h4>🌍 Systematic Risk (Market Risk)</h4>
+        <p>Affects ALL stocks — cannot be diversified away. Examples: RBI rate hikes, inflation, global recession, COVID-19. Measured by <strong>Beta (β)</strong>.</p>
+      </div>
+      <div class="risk-box risk-unsystematic">
+        <h4>🏢 Unsystematic Risk (Firm-specific)</h4>
+        <p>Affects only a specific company or industry. Examples: Byju's accounting scandal, Adani short-seller report. <strong>Can be diversified away</strong> by holding a broad portfolio.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body"><p><strong>Key Insight:</strong> Rational investors hold diversified portfolios, so the market only compensates them for <em>systematic</em> risk. Unsystematic risk earns no extra return — you can eliminate it for free by diversifying.</p></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>4. Capital Asset Pricing Model (CAPM) <span class="tag">Ch. 11</span></h2>
+    <p>CAPM establishes the relationship between a stock's <strong>systematic risk (beta)</strong> and its <strong>required return</strong>. Beta measures a stock's sensitivity to market movements.</p>
+    <div class="formula-box">
+      <div class="formula-label">CAPM — Security Market Line</div>
+      <div class="formula">E(Rᵢ) = <span class="var">Rƒ</span> + <span class="var">βᵢ</span> × (E(Rₘ) – <span class="var">Rƒ</span>)</div>
+      <div class="formula-note">Rƒ = risk-free rate (10-yr G-Sec yield ≈ 7%) &nbsp;|&nbsp; βᵢ = beta of stock i &nbsp;|&nbsp; E(Rₘ) – Rƒ = market risk premium (India ≈ 5–7%)</div>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <tr><th>Beta</th><th>Interpretation</th><th>Indian Example</th></tr>
+        <tr><td><strong>β = 0</strong></td><td>No market sensitivity (risk-free)</td><td>Government T-Bills</td></tr>
+        <tr><td><strong>β = 0.5</strong></td><td>Half as volatile as market</td><td>FMCG/utilities (ITC, NTPC)</td></tr>
+        <tr><td><strong>β = 1.0</strong></td><td>Moves exactly with market</td><td>Nifty index fund</td></tr>
+        <tr><td><strong>β = 1.5</strong></td><td>50% more volatile than market</td><td>Midcap IT, PSU banks</td></tr>
+        <tr><td><strong>β &gt; 2</strong></td><td>Very aggressive</td><td>Small-cap growth stocks</td></tr>
+      </table>
+    </div>
+    <div class="example">
+      <div class="ex-label">CAPM Calculation — Infosys</div>
+      <p>Rƒ = <strong>7%</strong> (10-yr G-Sec). Market risk premium = <strong>6%</strong>. Infosys Beta = <strong>0.9</strong>.</p>
+      <p>Required return = 7% + 0.9 × 6% = 7% + 5.4% = <strong>12.4%</strong></p>
+      <p>This 12.4% is used as the <em>required rate of return on equity (Kₑ)</em> in the WACC calculation.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="quiz-section">
+    <div class="quiz-head"><h2>Module 4 Quiz</h2><span class="quiz-badge">CO2 · 4 Questions</span></div>
+    <div class="q-block" id="q1">
+      <div class="q-num">Q 1 / 4</div>
+      <div class="q-text">Stock A has E(R)=20% and σ=30%. Stock B has E(R)=14% and σ=20%. Portfolio is 40% A, 60% B. What is the portfolio expected return?</div>
+      <div class="options">
+        <div class="opt" onclick="pick(1,'A')"><span class="opt-key">A</span>17.0%</div>
+        <div class="opt" onclick="pick(1,'B')"><span class="opt-key">B</span>16.4%</div>
+        <div class="opt" onclick="pick(1,'C')"><span class="opt-key">C</span>15.2%</div>
+        <div class="opt" onclick="pick(1,'D')"><span class="opt-key">D</span>18.0%</div>
+      </div>
+      <div class="feedback" id="fb1"></div>
+    </div>
+    <div class="q-block" id="q2">
+      <div class="q-num">Q 2 / 4</div>
+      <div class="q-text">Which type of risk can be eliminated through diversification?</div>
+      <div class="options">
+        <div class="opt" onclick="pick(2,'A')"><span class="opt-key">A</span>Systematic risk</div>
+        <div class="opt" onclick="pick(2,'B')"><span class="opt-key">B</span>Market risk</div>
+        <div class="opt" onclick="pick(2,'C')"><span class="opt-key">C</span>Unsystematic (firm-specific) risk</div>
+        <div class="opt" onclick="pick(2,'D')"><span class="opt-key">D</span>Beta risk</div>
+      </div>
+      <div class="feedback" id="fb2"></div>
+    </div>
+    <div class="q-block" id="q3">
+      <div class="q-num">Q 3 / 4</div>
+      <div class="q-text">Risk-free rate = 6%, Market return = 13%, Beta = 1.2. Using CAPM, what is the required return?</div>
+      <div class="options">
+        <div class="opt" onclick="pick(3,'A')"><span class="opt-key">A</span>14.4%</div>
+        <div class="opt" onclick="pick(3,'B')"><span class="opt-key">B</span>13.6%</div>
+        <div class="opt" onclick="pick(3,'C')"><span class="opt-key">C</span>15.6%</div>
+        <div class="opt" onclick="pick(3,'D')"><span class="opt-key">D</span>12.4%</div>
+      </div>
+      <div class="feedback" id="fb3"></div>
+    </div>
+    <div class="q-block" id="q4">
+      <div class="q-num">Q 4 / 4</div>
+      <div class="q-text">A stock with Beta = 0.6 — what does this indicate about the stock?</div>
+      <div class="options">
+        <div class="opt" onclick="pick(4,'A')"><span class="opt-key">A</span>The stock is 40% more volatile than the market</div>
+        <div class="opt" onclick="pick(4,'B')"><span class="opt-key">B</span>The stock moves opposite to the market</div>
+        <div class="opt" onclick="pick(4,'C')"><span class="opt-key">C</span>The stock is less volatile than the market — it moves 0.6% for every 1% market move</div>
+        <div class="opt" onclick="pick(4,'D')"><span class="opt-key">D</span>The stock has no systematic risk</div>
+      </div>
+      <div class="feedback" id="fb4"></div>
+    </div>
+    <button class="btn-submit" id="submitBtn" onclick="submitQuiz()">Submit Answers</button>
+    <div class="quiz-result" id="quizResult"><div class="qr-score" id="qrScore"></div><div class="qr-msg" id="qrMsg"></div></div>
+  </div>
+</main>
+<script>
+const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwEA2oFByWVURilCo6gfrU9IcrkEPXS5DcFgvMWvMhPm-HpiE--1rLxI26SxxDRDWu8RQ/exec';
+const MODULE_NUM='4';
+const ANSWERS={1:'B',2:'C',3:'C',4:'C'};
+const EXPLANATIONS={
+  1:'E(Rₚ) = 0.40×20% + 0.60×14% = 8% + 8.4% = 16.4%. Option B.',
+  2:'Unsystematic (firm-specific) risk can be diversified away by holding a broad portfolio. Systematic/market risk cannot be eliminated.',
+  3:'CAPM: Rƒ + β(Rₘ – Rƒ) = 6% + 1.2×(13%–6%) = 6% + 1.2×7% = 6% + 8.4% = 14.4%. Wait — that is 14.4%, option A. Let me re-check: 6+1.2×7 = 6+8.4=14.4%. Option A is 14.4%. Actually 15.6% = 6+1.2×8. With Rₘ=13 and Rf=6, premium=7, 1.2×7=8.4, total=14.4%. Correct is A.',
+  4:'Beta = 0.6 means the stock is LESS volatile than the market. For a 1% market move, this stock moves only 0.6% — making it defensive (like FMCG or utilities).'
+};
+const ANSWERS2={1:'B',2:'C',3:'A',4:'C'};
+const picks={};
+function pick(q,opt){const block=document.getElementById('q'+q);block.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));block.querySelectorAll('.opt')[['A','B','C','D'].indexOf(opt)].classList.add('selected');picks[q]=opt;}
+function submitQuiz(){
+  if(Object.keys(picks).length<4){alert('Please answer all 4 questions.');return;}
+  const correctAnswers={1:'B',2:'C',3:'A',4:'C'};
+  const expl={
+    1:'E(Rₚ) = 0.40×20% + 0.60×14% = 8% + 8.4% = 16.4%.',
+    2:'Unsystematic (firm-specific) risk can be diversified away. Systematic/market risk cannot.',
+    3:'CAPM: 6% + 1.2×(13%–6%) = 6% + 8.4% = 14.4%. Option A.',
+    4:'Beta = 0.6 → stock moves 0.6% per 1% market move — less volatile (defensive).'
+  };
+  let score=0;
+  for(let q=1;q<=4;q++){const correct=correctAnswers[q];const chosen=picks[q];const opts=document.getElementById('q'+q).querySelectorAll('.opt');opts.forEach(o=>o.style.pointerEvents='none');opts[['A','B','C','D'].indexOf(correct)].classList.add('correct');if(chosen!==correct)opts[['A','B','C','D'].indexOf(chosen)].classList.add('wrong');else score++;const fb=document.getElementById('fb'+q);fb.textContent=expl[q];fb.className='feedback show '+(chosen===correct?'ok':'bad');}
+  document.getElementById('submitBtn').disabled=true;
+  const pct=Math.round(score/4*100);
+  document.getElementById('qrScore').textContent=score+'/4 ('+pct+'%)';
+  document.getElementById('qrMsg').textContent=pct>=75?'Well done! CO2 objectives demonstrated.':'Review the sections above and retry.';
+  document.getElementById('quizResult').classList.add('show');
+  localStorage.setItem('cf_m4_quiz',pct);track({action:'quiz',module:MODULE_NUM,score:pct});
+}
+function getSession(){try{return JSON.parse(localStorage.getItem('cfSession')||'null');}catch(e){return null;}}
+function track(params){try{const s=getSession();if(!s||!s.enrollId)return;params.id=s.enrollId;const cbName='tcb_'+Math.random().toString(36).slice(2);const qs=Object.entries(params).map(([k,v])=>encodeURIComponent(k)+'='+encodeURIComponent(v)).join('&');const sc=document.createElement('script');sc.src=APPS_SCRIPT_URL+'?'+qs+'&callback='+cbName;window[cbName]=function(){delete window[cbName];sc.remove();};sc.onerror=function(){delete window[cbName];sc.remove();};document.head.appendChild(sc);}catch(e){}}
+let totalMins=0,isVisible=true,activeStart=Date.now();
+document.addEventListener('visibilitychange',function(){if(document.hidden){if(isVisible)totalMins+=(Date.now()-activeStart)/60000;isVisible=false;}else{isVisible=true;activeStart=Date.now();}});
+setInterval(function(){if(!document.hidden){totalMins+=(Date.now()-activeStart)/60000;activeStart=Date.now();if(totalMins>=1){track({action:'time',module:MODULE_NUM,mins:totalMins.toFixed(1)});totalMins=0;}}},5*60*1000);
+window.addEventListener('beforeunload',function(){if(!document.hidden)totalMins+=(Date.now()-activeStart)/60000;if(totalMins>0.1)track({action:'time',module:MODULE_NUM,mins:totalMins.toFixed(1)});track({action:'log',event:'MODULE_EXIT',module:MODULE_NUM,detail:'',mins:totalMins.toFixed(1)});});
+window.addEventListener('load',function(){const s=getSession();if(!s||!s.enrollId)return;localStorage.setItem('cf_m4_seen','1');track({action:'log',event:'MODULE_OPEN',module:MODULE_NUM,detail:'',mins:0});});
+</script>
+</body>
+</html>

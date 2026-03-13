@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CorpFinLab · Instructor Dashboard · FIA 203</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#05080f;--surf:#0a0f1a;--surf2:#111827;--accent:#3b82f6;--accent2:#60a5fa;--text:#eef2f7;--text2:#7f8fa6;--text3:#3d4f6b;--border:rgba(59,130,246,0.15);--border2:rgba(255,255,255,0.06);--green:#00e676;--gold:#f59e0b;--red:#ff6b6b;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(59,130,246,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
+/* login */
+.login-wrap{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;}
+.login-box{background:var(--surf);border:1px solid var(--border2);border-radius:14px;padding:44px;width:100%;max-width:400px;margin:20px;}
+.login-box h1{font-size:1.4rem;font-weight:800;margin-bottom:4px;}
+.login-sub{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:28px;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text2);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;}
+.field input{width:100%;background:var(--surf2);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:11px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:0.82rem;outline:none;transition:border-color 0.2s;}
+.field input:focus{border-color:rgba(59,130,246,0.4);}
+.btn{width:100%;padding:12px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-family:'Syne',sans-serif;font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:6px;}
+.btn:hover{background:#2563eb;}
+.errmsg{display:none;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--red);background:rgba(255,107,107,0.07);border:1px solid rgba(255,107,107,0.2);border-radius:5px;padding:8px 12px;}
+.errmsg.show{display:block;}
+/* dashboard */
+#dashboard{display:none;position:relative;z-index:1;}
+header{position:sticky;top:0;z-index:100;background:rgba(5,8,15,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);padding:0 40px;}
+.hinner{max-width:1400px;margin:0 auto;height:62px;display:flex;align-items:center;justify-content:space-between;}
+.logo{display:flex;align-items:center;gap:12px;}
+.logo-mark{width:32px;height:32px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.72rem;}
+.logo-name{font-weight:800;font-size:1rem;letter-spacing:-0.02em;}
+.logo-name span{color:var(--accent);}
+.logo-sub{font-family:'JetBrains Mono',monospace;font-size:0.56rem;color:var(--text2);letter-spacing:0.08em;display:block;}
+.hright{display:flex;align-items:center;gap:12px;}
+.btn-sm{padding:6px 14px;border-radius:5px;font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;cursor:pointer;transition:all 0.2s;border:1px solid rgba(255,255,255,0.1);background:transparent;color:var(--text2);}
+.btn-sm:hover{border-color:rgba(59,130,246,0.4);color:var(--accent2);}
+.btn-sm.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+.btn-sm.primary:hover{background:#2563eb;}
+/* main */
+.main{max-width:1400px;margin:0 auto;padding:36px 40px 80px;}
+.page-title{font-size:1.6rem;font-weight:800;letter-spacing:-0.03em;margin-bottom:4px;}
+.page-sub{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text2);letter-spacing:0.08em;margin-bottom:36px;}
+/* stats */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:36px;}
+.stat-box{background:var(--surf);border:1px solid var(--border2);border-radius:10px;padding:18px 20px;}
+.stat-val{font-size:1.8rem;font-weight:800;letter-spacing:-0.03em;color:var(--text);}
+.stat-val .u{font-size:0.85rem;color:var(--accent);}
+.stat-lbl{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text3);letter-spacing:0.1em;text-transform:uppercase;margin-top:4px;}
+/* table */
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text3);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border2);}
+.tbl-wrap{overflow-x:auto;background:var(--surf);border:1px solid var(--border2);border-radius:12px;}
+table{width:100%;border-collapse:collapse;font-size:0.8rem;}
+th{background:rgba(59,130,246,0.07);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;padding:12px 16px;text-align:left;border-bottom:1px solid var(--border2);white-space:nowrap;}
+td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text2);white-space:nowrap;}
+td strong{color:var(--text);}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,0.02);}
+.badge{display:inline-flex;align-items:center;justify-content:center;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:0.6rem;padding:2px 8px;font-weight:600;}
+.badge.seen{background:rgba(0,230,118,0.12);color:var(--green);border:1px solid rgba(0,230,118,0.25);}
+.badge.unseen{background:rgba(255,255,255,0.04);color:var(--text3);border:1px solid rgba(255,255,255,0.08);}
+.score{font-family:'JetBrains Mono',monospace;font-size:0.72rem;}
+.score.hi{color:var(--green);}
+.score.mid{color:var(--gold);}
+.score.lo{color:var(--red);}
+.score.na{color:var(--text3);}
+.loading{text-align:center;padding:60px;font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text3);}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(59,130,246,0.25);border-top-color:var(--accent);border-radius:50%;animation:sp 0.7s linear infinite;margin-right:8px;vertical-align:middle;}
+@keyframes sp{to{transform:rotate(360deg)}}
+.last-updated{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text3);}
+@media(max-width:700px){header,.main{padding-left:16px;padding-right:16px;}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <h1>CorpFinLab</h1>
+    <div class="login-sub">INSTRUCTOR DASHBOARD · FIA 203</div>
+    <div class="field">
+      <label>Dashboard Password</label>
+      <input type="password" id="pwdInput" placeholder="Enter dashboard password">
+    </div>
+    <button class="btn" onclick="checkPwd()">Access Dashboard →</button>
+    <div class="errmsg" id="errMsg">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header>
+    <div class="hinner">
+      <div class="logo">
+        <div class="logo-mark">CF</div>
+        <div>
+          <div class="logo-name"><span>CorpFin</span>Lab</div>
+          <span class="logo-sub">INSTRUCTOR · FIA 203</span>
+        </div>
+      </div>
+      <div class="hright">
+        <span class="last-updated" id="lastUpdated"></span>
+        <button class="btn-sm primary" onclick="loadData()">↻ Refresh</button>
+        <button class="btn-sm" onclick="exportCSV()">Export CSV</button>
+        <button class="btn-sm" onclick="signOut()">Sign Out</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="page-title">Student Progress Dashboard</div>
+    <div class="page-sub">FIA 203 CORPORATE FINANCE-I · TERM II · AY 2025–26</div>
+
+    <div class="stats-row" id="statsRow">
+      <div class="stat-box"><div class="stat-val" id="statStudents">—</div><div class="stat-lbl">Students</div></div>
+      <div class="stat-box"><div class="stat-val" id="statLogins">—</div><div class="stat-lbl">Total Logins</div></div>
+      <div class="stat-box"><div class="stat-val" id="statModComp">—<span class="u">%</span></div><div class="stat-lbl">Avg Modules Seen</div></div>
+      <div class="stat-box"><div class="stat-val" id="statAvgScore">—<span class="u">%</span></div><div class="stat-lbl">Avg Quiz Score</div></div>
+      <div class="stat-box"><div class="stat-val" id="statTotalMins">—</div><div class="stat-lbl">Total Time (min)</div></div>
+    </div>
+
+    <div class="sec-label">Student Summary</div>
+    <div class="tbl-wrap">
+      <div class="loading" id="tableLoading"><span class="spinner"></span>Loading data from Google Sheets…</div>
+      <table id="dataTable" style="display:none">
+        <thead>
+          <tr>
+            <th>Enrollment ID</th>
+            <th>Name</th>
+            <th>Last Login</th>
+            <th>M1 Seen</th><th>M1 Mins</th><th>M1 Quiz</th>
+            <th>M2 Seen</th><th>M2 Mins</th><th>M2 Quiz</th>
+            <th>M3 Seen</th><th>M3 Mins</th><th>M3 Quiz</th>
+            <th>M4 Seen</th><th>M4 Mins</th><th>M4 Quiz</th>
+            <th>M5 Seen</th><th>M5 Mins</th><th>M5 Quiz</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwEA2oFByWVURilCo6gfrU9IcrkEPXS5DcFgvMWvMhPm-HpiE--1rLxI26SxxDRDWu8RQ/exec';
+const DASH_PWD='pani126CF';
+let rawData=[];
+
+function checkPwd(){
+  const pwd=document.getElementById('pwdInput').value;
+  if(pwd===DASH_PWD){
+    document.getElementById('loginWrap').style.display='none';
+    document.getElementById('dashboard').style.display='block';
+    sessionStorage.setItem('cfDash','1');
+    loadData();
+  } else {
+    document.getElementById('errMsg').classList.add('show');
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('loginWrap').style.display!=='none')checkPwd();});
+
+if(sessionStorage.getItem('cfDash')){
+  document.getElementById('loginWrap').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+  loadData();
+}
+
+function loadData(){
+  document.getElementById('tableLoading').style.display='block';
+  document.getElementById('dataTable').style.display='none';
+  const cbName='dcb_'+Math.random().toString(36).slice(2);
+  window[cbName]=function(data){
+    delete window[cbName];
+    if(data&&data.summary){renderTable(data.summary);}
+    else{document.getElementById('tableLoading').innerHTML='<span style="color:#ff6b6b">Could not load data. Check Apps Script URL.</span>';}
+  };
+  const sc=document.createElement('script');
+  sc.src=APPS_SCRIPT_URL+'?action=summary&callback='+cbName;
+  sc.onerror=function(){delete window[cbName];document.getElementById('tableLoading').innerHTML='<span style="color:#ff6b6b">Network error. Check Apps Script URL.</span>';};
+  document.head.appendChild(sc);
+}
+
+function renderTable(rows){
+  rawData=rows;
+  document.getElementById('tableLoading').style.display='none';
+  document.getElementById('dataTable').style.display='table';
+  const tbody=document.getElementById('tableBody');
+  tbody.innerHTML='';
+  let totalLogins=0,totalSeen=0,totalQuiz=0,quizCount=0,totalMins=0;
+  rows.forEach(r=>{
+    const seen=[r.m1_seen,r.m2_seen,r.m3_seen,r.m4_seen,r.m5_seen].filter(x=>x==='✅').length;
+    totalSeen+=seen;
+    const scores=[r.m1_quiz,r.m2_quiz,r.m3_quiz,r.m4_quiz,r.m5_quiz].filter(x=>x&&x!=='');
+    scores.forEach(s=>{totalQuiz+=parseFloat(s)||0;quizCount++;});
+    const mins=[r.m1_mins,r.m2_mins,r.m3_mins,r.m4_mins,r.m5_mins].reduce((a,b)=>a+(parseFloat(b)||0),0);
+    totalMins+=mins;
+    if(r.last_login)totalLogins++;
+    tbody.innerHTML+=`<tr>
+      <td><strong>${r.id||''}</strong></td>
+      <td>${r.name||'—'}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:0.65rem">${r.last_login||'Never'}</td>
+      ${[1,2,3,4,5].map(m=>`
+        <td>${seenBadge(r['m'+m+'_seen'])}</td>
+        <td style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text2)">${r['m'+m+'_mins']||'0'}</td>
+        <td>${scoreBadge(r['m'+m+'_quiz'])}</td>
+      `).join('')}
+    </tr>`;
+  });
+  document.getElementById('statStudents').textContent=rows.length;
+  document.getElementById('statLogins').textContent=totalLogins;
+  document.getElementById('statModComp').innerHTML=rows.length?Math.round(totalSeen/rows.length/5*100)+'<span class="u">%</span>':'—<span class="u">%</span>';
+  document.getElementById('statAvgScore').innerHTML=quizCount?Math.round(totalQuiz/quizCount)+'<span class="u">%</span>':'—<span class="u">%</span>';
+  document.getElementById('statTotalMins').textContent=Math.round(totalMins);
+  document.getElementById('lastUpdated').textContent='Updated: '+new Date().toLocaleTimeString();
+}
+
+function seenBadge(v){return v==='✅'?'<span class="badge seen">✓ Seen</span>':'<span class="badge unseen">—</span>';}
+function scoreBadge(v){
+  if(!v||v==='')return '<span class="score na">—</span>';
+  const n=parseFloat(v);
+  const cls=n>=75?'hi':n>=50?'mid':'lo';
+  return `<span class="score ${cls}">${n}%</span>`;
+}
+
+function exportCSV(){
+  if(!rawData.length)return;
+  const headers=['ID','Name','LastLogin','M1Seen','M1Mins','M1Quiz','M2Seen','M2Mins','M2Quiz','M3Seen','M3Mins','M3Quiz','M4Seen','M4Mins','M4Quiz','M5Seen','M5Mins','M5Quiz'];
+  const rows=rawData.map(r=>[r.id,r.name,r.last_login,r.m1_seen,r.m1_mins,r.m1_quiz,r.m2_seen,r.m2_mins,r.m2_quiz,r.m3_seen,r.m3_mins,r.m3_quiz,r.m4_seen,r.m4_mins,r.m4_quiz,r.m5_seen,r.m5_mins,r.m5_quiz].join(','));
+  const csv=[headers.join(','),...rows].join('\n');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);a.download='CorpFinLab_FIA203_'+new Date().toISOString().slice(0,10)+'.csv';a.click();
+}
+
+function signOut(){sessionStorage.removeItem('cfDash');location.reload();}
+</script>
+</body>
+</html>
