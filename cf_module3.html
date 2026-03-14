@@ -4,250 +4,473 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Module 3 — Capital Budgeting · CorpFinLab</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f6fa;--surf:#ffffff;--surf2:#f0f2f8;--accent:#2563eb;--accent2:#3b82f6;--text:#0f172a;--text2:#475569;--text3:#94a3b8;--border:rgba(37,99,235,0.15);--border2:rgba(15,23,42,0.08);--green:#0a7c3e;--gold:#b45309;--red:#dc2626;}
+:root{--bg:#f5f6fa;--surf:#ffffff;--surf2:#f0f2f8;--surf3:#e8ecf5;--blue:#2563eb;--blue2:#3b82f6;--teal:#0e8c65;--teal2:#1D9E75;--amber:#c97b10;--purple:#5b52c8;--purple2:#7F77DD;--green:#0a7c3e;--red:#dc2626;--gold:#b45309;--text:#0f172a;--text2:#475569;--text3:#94a3b8;--border:rgba(37,99,235,0.18);--border2:rgba(15,23,42,0.1);}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;line-height:1.6;}
-body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(59,130,246,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.02) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
-header{position:sticky;top:0;z-index:100;background:rgba(5,8,15,0.9);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);padding:0 40px;}
-.hinner{max-width:960px;margin:0 auto;height:60px;display:flex;align-items:center;justify-content:space-between;}
-.back{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text2);text-decoration:none;transition:color 0.2s;}
-.back:hover{color:var(--accent2);}
-.hmod{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--accent);letter-spacing:0.1em;}
-main{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:48px 40px 100px;}
-.mod-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--accent);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
-.mod-eyebrow::before{content:'';width:22px;height:1px;background:var(--accent);}
-h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:8px;}
-h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:var(--accent);}
-.sub{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);letter-spacing:0.06em;margin-bottom:40px;}
-.section{margin-bottom:48px;}
-h2{font-size:1.25rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border2);}
-h2 .tag{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--accent);background:rgba(37,99,235,0.07);border-radius:4px;padding:2px 8px;margin-left:10px;font-weight:400;letter-spacing:0.06em;vertical-align:middle;}
-p{color:var(--text2);font-size:0.93rem;margin-bottom:14px;line-height:1.7;}strong{color:var(--text);}
-.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin:20px 0;}
-.ccard{background:var(--surf);border:1px solid var(--border2);border-radius:10px;padding:18px;}
-.ccard-icon{font-size:1.3rem;margin-bottom:8px;}
-.ccard h4{font-size:0.88rem;font-weight:700;margin-bottom:5px;}
-.ccard p{font-size:0.78rem;color:var(--text2);margin:0;line-height:1.5;}
-.ccard .decision{font-family:'JetBrains Mono',monospace;font-size:0.65rem;margin-top:8px;padding:4px 8px;border-radius:4px;}
-.accept{background:rgba(0,230,118,0.1);color:var(--green);}
-.reject{background:rgba(255,107,107,0.1);color:var(--red);}
-.formula-box{background:var(--surf2);border:1px solid var(--border);border-radius:10px;padding:20px 24px;margin:20px 0;font-family:'JetBrains Mono',monospace;}
-.formula-label{font-size:0.6rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;}
-.formula{font-size:1rem;color:var(--text);line-height:1.7;}
-.formula .var{color:var(--accent2);}
-.formula-note{font-size:0.68rem;color:var(--text3);margin-top:10px;line-height:1.6;}
-.example{background:linear-gradient(135deg,rgba(37,99,235,0.05),rgba(96,165,250,0.02));border:1px solid rgba(37,99,235,0.2);border-radius:10px;padding:20px 24px;margin:20px 0;}
-.ex-label{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--accent2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
-.ex-label::before{content:'📌';}
-.example p{font-size:0.85rem;margin-bottom:8px;}
-.example p:last-child{margin-bottom:0;}
-.tbl-wrap{overflow-x:auto;margin:20px 0;}
-table{width:100%;border-collapse:collapse;font-size:0.82rem;}
-th{background:rgba(37,99,235,0.07);color:var(--accent2);font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
-td{padding:10px 14px;border-bottom:1px solid var(--border2);color:var(--text2);}
-td strong{color:var(--text);}tr:hover td{background:rgba(15,23,42,0.03);}
-.callout{display:flex;gap:14px;background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:18px 20px;margin:20px 0;}
-.callout-icon{font-size:1.2rem;flex-shrink:0;}
-.callout-body p{font-size:0.84rem;color:var(--text2);margin:0;}
-.callout-body strong{color:var(--gold);}
-.insight{background:rgba(10,124,62,0.06);border-left:3px solid var(--green);padding:14px 18px;margin:20px 0;border-radius:0 8px 8px 0;}
-.insight p{font-size:0.84rem;color:var(--text2);margin:0;}
-.insight strong{color:var(--green);}
-.quiz-section{background:var(--surf);border:1px solid var(--border2);border-radius:14px;padding:32px;margin-top:56px;}
-.quiz-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
-.quiz-head h2{border:none;padding:0;margin:0;font-size:1.1rem;}
-.quiz-badge{font-family:'JetBrains Mono',monospace;font-size:0.6rem;background:rgba(37,99,235,0.07);border:1px solid var(--border);color:var(--accent2);padding:4px 10px;border-radius:100px;}
-.q-block{margin-bottom:28px;}
-.q-text{font-size:0.9rem;font-weight:600;margin-bottom:14px;line-height:1.5;}
-.q-num{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--accent);margin-bottom:6px;letter-spacing:0.1em;}
-.options{display:flex;flex-direction:column;gap:8px;}
-.opt{display:flex;align-items:flex-start;gap:10px;background:var(--surf2);border:1px solid rgba(255,255,255,0.08);border-radius:7px;padding:10px 14px;cursor:pointer;transition:all 0.18s;font-size:0.84rem;color:var(--text2);}
-.opt:hover{border-color:rgba(37,99,235,0.3);color:var(--text);}
-.opt.selected{border-color:var(--accent);color:var(--text);background:rgba(37,99,235,0.07);}
+body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(37,99,235,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(37,99,235,0.04) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
+header{position:sticky;top:0;z-index:100;background:rgba(245,246,250,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);box-shadow:0 1px 0 rgba(15,23,42,0.06);padding:0 32px;}
+.hinner{max-width:1000px;margin:0 auto;height:58px;display:flex;align-items:center;gap:16px;}
+.back{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);text-decoration:none;transition:color 0.2s;}.back:hover{color:var(--blue2);}
+.hmod{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--blue);letter-spacing:0.1em;}.hspacer{flex:1;}
+.bp-btn{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--teal);text-decoration:none;padding:5px 11px;border:1px solid rgba(14,140,101,0.3);border-radius:6px;display:flex;align-items:center;gap:5px;transition:background 0.2s;white-space:nowrap;}.bp-btn:hover{background:rgba(14,140,101,0.08);}
+main{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:40px 32px 100px;}
+.mod-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--blue);letter-spacing:0.18em;margin-bottom:12px;display:flex;align-items:center;gap:10px;}.mod-eyebrow::before{content:'';width:20px;height:1px;background:var(--blue);}
+h1{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;letter-spacing:-0.03em;line-height:1.1;margin-bottom:6px;}
+h1 em{font-family:'Playfair Display',serif;font-style:italic;font-weight:400;color:var(--blue);}
+.mod-sub{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text2);letter-spacing:0.06em;margin-bottom:36px;}
+.ctab-bar{display:flex;gap:4px;margin-bottom:0;border-bottom:1px solid var(--border2);}
+.ctab{font-family:'JetBrains Mono',monospace;font-size:0.68rem;padding:10px 18px;cursor:pointer;border-radius:8px 8px 0 0;color:var(--text2);border:1px solid transparent;border-bottom:none;transition:all 0.18s;white-space:nowrap;}.ctab:hover{color:var(--text);background:rgba(15,23,42,0.04);}.ctab.active{color:var(--text);background:var(--surf);border-color:var(--border2);border-bottom:1px solid var(--surf);}
+.cpanel{display:none;background:var(--surf);border:1px solid var(--border2);border-top:none;border-radius:0 0 14px 14px;padding:28px 28px 32px;box-shadow:0 4px 16px rgba(15,23,42,0.06);}.cpanel.active{display:block;}
+.spill-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px;}
+.spill{font-family:'JetBrains Mono',monospace;font-size:0.62rem;padding:6px 14px;border-radius:20px;cursor:pointer;border:1px solid var(--border2);color:var(--text2);background:var(--bg);transition:all 0.18s;}.spill:hover{color:var(--text);}
+.spill.active.s-concepts{background:var(--blue);color:#fff;border-color:var(--blue);}.spill.active.s-formulas{background:var(--purple);color:#fff;border-color:var(--purple);}.spill.active.s-decoded{background:var(--teal);color:#fff;border-color:var(--teal);}.spill.active.s-game{background:var(--amber);color:#fff;border-color:var(--amber);}.spill.active.s-quiz{background:var(--blue);color:#fff;border-color:var(--blue);}
+.spanel{display:none;}.spanel.active{display:block;}
+.concept-intro{font-size:0.9rem;color:var(--text2);line-height:1.75;margin-bottom:24px;}.concept-intro strong{color:var(--text);}
+.concept-block{margin-bottom:28px;}.concept-block h3{font-size:1rem;font-weight:700;margin-bottom:12px;}
+.ccard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:14px 0;}
+.ccard{background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:18px;}.ccard h4{font-size:0.88rem;font-weight:700;margin-bottom:6px;}.ccard p{font-size:0.8rem;color:var(--text2);line-height:1.55;margin:0;}
+.callout{border-radius:10px;padding:16px 18px;margin:16px 0;}.callout-body{font-size:0.84rem;color:var(--text2);line-height:1.7;}.callout-body strong{color:var(--text);}
+.callout.insight{background:rgba(14,140,101,0.06);border:1px solid rgba(14,140,101,0.2);}.callout.insight .callout-body strong{color:var(--teal);}
+.callout.warning{background:rgba(180,83,9,0.05);border:1px solid rgba(180,83,9,0.2);}.callout.warning .callout-body strong{color:var(--gold);}
+.callout.info{background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.2);}.callout.info .callout-body strong{color:var(--blue);}
+.example-box{background:rgba(14,140,101,0.06);border:1px solid rgba(14,140,101,0.22);border-radius:10px;padding:18px 20px;margin:16px 0;}
+.ex-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--teal);letter-spacing:0.15em;margin-bottom:10px;}
+.example-box p{font-size:0.84rem;color:var(--text2);line-height:1.7;margin-bottom:8px;}.example-box p:last-child{margin:0;}
+.tbl-wrap{overflow-x:auto;margin:16px 0;}table{width:100%;border-collapse:collapse;font-size:0.82rem;}
+th{background:rgba(37,99,235,0.06);color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;padding:9px 14px;text-align:left;border-bottom:1px solid var(--border);}
+td{padding:9px 14px;border-bottom:1px solid var(--border2);color:var(--text2);}td strong{color:var(--text);}tr:hover td{background:rgba(15,23,42,0.02);}
+.formula-grid{display:grid;gap:14px;}
+.fcard{background:var(--surf2);border:1px solid rgba(91,82,200,0.2);border-radius:10px;padding:20px 24px;}
+.fcard-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--purple);letter-spacing:0.15em;margin-bottom:10px;}
+.fcard-formula{font-family:'JetBrains Mono',monospace;font-size:1.05rem;color:var(--text);line-height:1.5;margin-bottom:12px;}.fcard-formula .v{color:var(--blue2);}
+.fcard-vars{display:grid;gap:5px;margin-bottom:10px;}.fcard-var{display:flex;gap:10px;font-family:'JetBrains Mono',monospace;font-size:0.68rem;}.fcard-var .sym{color:var(--blue2);min-width:60px;}.fcard-var .def{color:var(--text2);}
+.fcard-example{background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.1);border-radius:7px;padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text2);line-height:1.7;margin-top:10px;}.fcard-example strong{color:var(--text);}
+.decoded-intro{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text2);line-height:1.7;margin-bottom:20px;}
+.fc-progress{display:flex;gap:3px;margin-bottom:12px;}.fc-pip{height:3px;border-radius:2px;background:var(--surf3);flex:1;transition:background 0.3s;}.fc-pip.done{background:var(--teal);}.fc-pip.current{background:var(--teal);}
+.fc-counter{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text2);margin-bottom:14px;}
+.fc-front{background:var(--surf);border:1px solid var(--border2);box-shadow:0 2px 8px rgba(15,23,42,0.06);border-radius:12px;padding:32px 28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:180px;cursor:pointer;user-select:none;}
+.fc-front .fc-type{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text3);letter-spacing:0.15em;margin-bottom:14px;}
+.fc-front .fc-term{font-size:1.5rem;font-weight:800;letter-spacing:-0.02em;}
+.fc-front .fc-hint{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text3);margin-top:14px;}
+.fc-back{background:rgba(14,140,101,0.05);border:1px solid rgba(14,140,101,0.22);border-radius:12px;padding:24px 28px;display:none;min-height:180px;cursor:pointer;}.fc-back.show{display:block;}
+.fc-def-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--teal);letter-spacing:0.12em;margin-bottom:8px;}
+.fc-def{font-size:0.9rem;color:var(--text);line-height:1.7;margin-bottom:14px;}
+.fc-plain-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;color:var(--text2);letter-spacing:0.12em;margin-bottom:6px;}
+.fc-plain{font-size:0.82rem;color:var(--text2);line-height:1.6;}
+.fc-nav{display:flex;gap:8px;margin-top:14px;}.fc-btn{flex:1;padding:9px;border-radius:20px;font-family:'JetBrains Mono',monospace;font-size:0.65rem;cursor:pointer;border:1px solid var(--border2);background:var(--surf);color:var(--text2);transition:all 0.18s;}.fc-btn:hover{color:var(--text);border-color:rgba(15,23,42,0.25);}
+.fc-btn.primary{background:var(--teal);color:#fff;border-color:var(--teal);}.fc-btn.primary:hover{background:#0b6e4f;}
+.game-wrap{background:var(--surf);border:1px solid rgba(201,123,16,0.25);box-shadow:0 2px 8px rgba(15,23,42,0.06);border-radius:14px;overflow:hidden;}
+.game-header{background:rgba(201,123,16,0.06);border-bottom:1px solid rgba(201,123,16,0.18);padding:18px 24px;}
+.game-title{font-size:1rem;font-weight:700;color:var(--amber);}.game-desc{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);margin-top:3px;}
+.game-body{padding:24px;}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:20px;}
+.proj-card{background:var(--bg);border:2px solid var(--border2);border-radius:12px;padding:20px;cursor:pointer;transition:all 0.2s;}
+.proj-card:hover{border-color:var(--amber);}
+.proj-card.selected{border-color:var(--blue);background:rgba(37,99,235,0.04);}
+.proj-card.winner{border-color:var(--green);background:rgba(10,124,62,0.06);}
+.proj-name{font-weight:700;font-size:0.95rem;margin-bottom:12px;}
+.proj-stat{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:0.7rem;padding:5px 0;border-bottom:1px solid var(--border2);}
+.proj-stat:last-child{border:none;}.proj-stat .label{color:var(--text2);}.proj-stat .val{color:var(--text);font-weight:600;}
+.proj-stat .val.pos{color:var(--green);}.proj-stat .val.neg{color:var(--red);}
+.game-verdict{background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:18px;margin-top:4px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;line-height:1.7;}
+.game-verdict strong{color:var(--text);}
+.surgeon-item{background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:16px 18px;margin-bottom:10px;}
+.surgeon-desc{font-size:0.88rem;color:var(--text);margin-bottom:12px;line-height:1.55;}
+.surgeon-opts{display:flex;gap:8px;flex-wrap:wrap;}
+.s-opt{font-family:'JetBrains Mono',monospace;font-size:0.65rem;padding:6px 14px;border-radius:20px;cursor:pointer;border:1px solid var(--border2);background:var(--surf);color:var(--text2);transition:all 0.18s;}.s-opt:hover{color:var(--text);}
+.s-opt.s-include{border-color:var(--green);color:var(--green);background:rgba(10,124,62,0.08);}
+.s-opt.s-exclude{border-color:var(--red);color:var(--red);background:rgba(220,38,38,0.07);}
+.surgeon-fb{display:none;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:0.7rem;padding:10px 14px;border-radius:7px;line-height:1.6;}.surgeon-fb.show{display:block;}
+.surgeon-fb.ok{background:rgba(10,124,62,0.07);border:1px solid rgba(10,124,62,0.25);color:var(--green);}
+.surgeon-fb.bad{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);color:var(--red);}
+.surgeon-score{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);margin-bottom:18px;}
+.surgeon-score span{color:var(--amber);font-size:1rem;font-weight:700;}
+.quiz-wrap{background:var(--surf);border:1px solid var(--border2);box-shadow:0 1px 3px rgba(15,23,42,0.08);border-radius:14px;padding:28px;}
+.quiz-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;}.quiz-title{font-size:1rem;font-weight:700;}
+.quiz-badge{font-family:'JetBrains Mono',monospace;font-size:0.58rem;background:rgba(37,99,235,0.07);border:1px solid rgba(37,99,235,0.2);color:var(--blue);padding:3px 10px;border-radius:100px;}
+.q-block{margin-bottom:28px;}.q-num{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--blue);letter-spacing:0.1em;margin-bottom:6px;}.q-text{font-size:0.9rem;font-weight:600;margin-bottom:14px;line-height:1.55;}
+.options{display:flex;flex-direction:column;gap:7px;}
+.opt{display:flex;align-items:flex-start;gap:10px;background:var(--bg);border:1px solid rgba(15,23,42,0.1);border-radius:8px;padding:10px 14px;cursor:pointer;transition:all 0.18s;font-size:0.84rem;color:var(--text2);}
+.opt:hover{border-color:rgba(37,99,235,0.35);color:var(--text);background:rgba(37,99,235,0.04);}
+.opt.selected{border-color:var(--blue);color:var(--text);background:rgba(37,99,235,0.07);}
 .opt.correct{border-color:var(--green);background:rgba(10,124,62,0.08);color:var(--green);}
 .opt.wrong{border-color:var(--red);background:rgba(220,38,38,0.07);color:var(--red);}
-.opt-key{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text3);min-width:18px;}
-.feedback{display:none;margin-top:10px;font-size:0.8rem;padding:10px 14px;border-radius:6px;font-family:'JetBrains Mono',monospace;line-height:1.55;}
-.feedback.show{display:block;}
-.feedback.ok{background:rgba(10,124,62,0.08);border:1px solid rgba(10,124,62,0.25);color:var(--green);}
-.feedback.bad{background:rgba(220,38,38,0.07);border:1px solid rgba(220,38,38,0.2);color:var(--red);}
-.btn-submit{margin-top:8px;background:var(--accent);color:#fff;border:none;border-radius:7px;padding:11px 28px;font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;}
-.btn-submit:hover{background:#2563eb;transform:translateY(-1px);}
-.btn-submit:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
-.quiz-result{display:none;margin-top:24px;background:rgba(37,99,235,0.06);border:1px solid var(--border);border-radius:10px;padding:20px 24px;text-align:center;}
-.quiz-result.show{display:block;}
-.qr-score{font-size:2rem;font-weight:800;color:var(--accent);letter-spacing:-0.03em;}
-.qr-msg{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);margin-top:6px;}
-@media(max-width:680px){header,main{padding-left:20px;padding-right:20px;}}
+.opt-key{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--text3);min-width:16px;}
+.q-feedback{display:none;margin-top:10px;font-size:0.78rem;padding:10px 14px;border-radius:6px;font-family:'JetBrains Mono',monospace;line-height:1.55;}.q-feedback.show{display:block;}
+.q-feedback.ok{background:rgba(10,124,62,0.07);border:1px solid rgba(10,124,62,0.25);color:var(--green);}
+.q-feedback.bad{background:rgba(220,38,38,0.06);border:1px solid rgba(220,38,38,0.2);color:var(--red);}
+.btn-submit{margin-top:8px;background:var(--blue);color:#fff;border:none;border-radius:8px;padding:10px 26px;font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.2s;}.btn-submit:hover{background:#1d4ed8;}.btn-submit:disabled{opacity:0.4;cursor:not-allowed;}
+.quiz-result{display:none;margin-top:24px;background:rgba(37,99,235,0.05);border:1px solid rgba(37,99,235,0.2);border-radius:10px;padding:20px 24px;text-align:center;}.quiz-result.show{display:block;}
+.qr-score{font-size:2rem;font-weight:800;color:var(--blue);}.qr-msg{font-family:'JetBrains Mono',monospace;font-size:0.68rem;color:var(--text2);margin-top:6px;}
+@media(max-width:680px){header,main{padding-left:16px;padding-right:16px;}}
 </style>
 </head>
 <body>
 <header>
-  <div class="hinner" style="display:flex;align-items:center;width:100%;">
-    <a class="back" href="cf_course.html">← Back to Modules</a>
-    <div class="hmod">MODULE 03 · CAPEX</div>
-  <a href="cf_bigpicture.html" style="font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:#0e8c65;text-decoration:none;padding:6px 12px;border:1px solid rgba(14,140,101,0.3);border-radius:6px;display:flex;align-items:center;gap:6px;margin-left:auto;" onmouseover="this.style.background='rgba(14,140,101,0.08)'" onmouseout="this.style.background='transparent'"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#0e8c65" stroke-width="1"/><line x1="6" y1="2" x2="6" y2="10" stroke="#0e8c65" stroke-width="1"/><line x1="2" y1="6" x2="10" y2="6" stroke="#0e8c65" stroke-width="1"/></svg>Big Picture</a>
+  <div class="hinner">
+    <a class="back" href="cf_course.html">← Modules</a>
+    <div class="hmod">MODULE 03 · Ch. 5 &amp; 6</div>
+    <div class="hspacer"></div>
+    <a href="cf_bigpicture.html" class="bp-btn">
+      <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#0e8c65" stroke-width="1"/><line x1="6" y1="2" x2="6" y2="10" stroke="#0e8c65" stroke-width="1"/><line x1="2" y1="6" x2="10" y2="6" stroke="#0e8c65" stroke-width="1"/></svg>Big Picture
+    </a>
   </div>
 </header>
 <main>
   <div class="mod-eyebrow">Ch. 5 &amp; 6 · RWJK 13e · 5 Sessions</div>
-  <h1>Capital Budgeting Techniques<br>&amp; <em>Project Cash Flows</em></h1>
-  <div class="sub">CO3 · APPLY CAPITAL BUDGETING TECHNIQUES TO RANK PROJECTS</div>
+  <h1><em>Capital Budgeting</em></h1>
+  <div class="mod-sub">CO3 · EVALUATE INVESTMENT PROJECTS USING NPV, IRR AND CASH FLOW ANALYSIS</div>
 
-  <div class="section">
-    <h2>1. Overview of Capital Budgeting <span class="tag">Ch. 5</span></h2>
-    <p>Capital budgeting is the process of evaluating and selecting <strong>long-term investments</strong> that are consistent with the firm's goal of maximising shareholder wealth. These are major decisions — factory expansions, new product lines, acquisitions — that commit large sums for many years.</p>
-    <div class="cards">
-      <div class="ccard"><div class="ccard-icon">✅</div><h4>NPV</h4><p>Net Present Value — theoretically superior. Accept if NPV &gt; 0.</p><div class="decision accept">ACCEPT: NPV > 0</div></div>
-      <div class="ccard"><div class="ccard-icon">📉</div><h4>IRR</h4><p>Internal Rate of Return. Accept if IRR &gt; Cost of Capital.</p><div class="decision accept">ACCEPT: IRR > r</div></div>
-      <div class="ccard"><div class="ccard-icon">📆</div><h4>Payback Period</h4><p>Years to recover initial investment. Simpler but ignores TVM.</p><div class="decision reject">REJECT: PP > Cutoff</div></div>
-      <div class="ccard"><div class="ccard-icon">📊</div><h4>ARR</h4><p>Accounting Rate of Return = Avg Net Income / Avg Book Value.</p><div class="decision accept">ACCEPT: ARR > Target</div></div>
-    </div>
+  <div class="ctab-bar">
+    <div class="ctab active" onclick="switchCTab(0)">CB techniques</div>
+    <div class="ctab" onclick="switchCTab(1)">Project cash flows</div>
   </div>
 
-  <div class="section">
-    <h2>2. Net Present Value (NPV) <span class="tag">Ch. 5</span></h2>
-    <div class="formula-box">
-      <div class="formula-label">Net Present Value</div>
-      <div class="formula">NPV = –<span class="var">C₀</span> + <span class="var">CF₁</span>/(1+<span class="var">r</span>) + <span class="var">CF₂</span>/(1+<span class="var">r</span>)² + … + <span class="var">CFₙ</span>/(1+<span class="var">r</span>)ⁿ</div>
-      <div class="formula-note">C₀ = initial investment &nbsp;|&nbsp; CF = cash flow &nbsp;|&nbsp; r = discount rate (cost of capital)</div>
+  <!-- ══ TAB 0: CB TECHNIQUES ══ -->
+  <div class="cpanel active" id="ct0">
+    <div class="spill-bar">
+      <div class="spill s-concepts active" onclick="switchSTab(0,0)">Concepts</div>
+      <div class="spill s-formulas" onclick="switchSTab(0,1)">Formulas</div>
+      <div class="spill s-decoded" onclick="switchSTab(0,2)">Finance Decoded</div>
+      <div class="spill s-game" onclick="switchSTab(0,3)">Game</div>
+      <div class="spill s-quiz" onclick="switchSTab(0,4)">Quiz</div>
     </div>
-    <div class="insight"><p><strong>NPV Rule:</strong> Accept a project if NPV &gt; 0 (it creates value). Reject if NPV &lt; 0. Among mutually exclusive projects, choose the one with the highest positive NPV.</p></div>
-    <div class="example">
-      <div class="ex-label">Tata Motors — New EV Plant</div>
-      <p>Initial investment = <strong>₹500 crore</strong>. Expected cash flows over 5 years: ₹80, ₹120, ₹150, ₹160, ₹200 crore. Cost of capital = <strong>12%</strong>.</p>
-      <p>NPV = –500 + 80/1.12 + 120/1.12² + 150/1.12³ + 160/1.12⁴ + 200/1.12⁵</p>
-      <p>NPV = –500 + 71.43 + 95.66 + 106.76 + 101.68 + 113.48 = <strong>–₹10.99 crore</strong></p>
-      <p>Decision: <strong>Reject</strong> — the project destroys value at 12% cost of capital.</p>
-    </div>
-  </div>
 
-  <div class="section">
-    <h2>3. Internal Rate of Return (IRR) <span class="tag">Ch. 5</span></h2>
-    <p>The IRR is the discount rate that makes <strong>NPV = 0</strong>. It is found by trial and error (or interpolation). Accept if IRR exceeds the required rate of return.</p>
-    <div class="formula-box">
-      <div class="formula-label">IRR Definition</div>
-      <div class="formula">0 = –<span class="var">C₀</span> + Σ <span class="var">CFₜ</span>/(1+<span class="var">IRR</span>)<sup>t</sup></div>
-      <div class="formula-note">Solve for IRR — the rate that makes NPV = 0</div>
-    </div>
-    <div class="callout">
-      <div class="callout-icon">⚠️</div>
-      <div class="callout-body"><p><strong>IRR Pitfalls:</strong> (1) Multiple IRRs when cash flows change sign more than once. (2) IRR ignores the <em>scale</em> of investment — a small project with 30% IRR may be worse than a large one at 15%. (3) For mutually exclusive projects, always use <strong>NPV</strong> as the final arbiter.</p></div>
-    </div>
-  </div>
+    <div class="spanel active" id="ct0-s0">
+      <div class="concept-intro"><strong>Capital budgeting</strong> is the process of evaluating and selecting long-term investments. The firm has limited capital — it must choose which projects to fund. The correct rule: accept all projects with <strong>positive NPV</strong>, because they increase shareholder wealth by more than their cost of capital.</div>
 
-  <div class="section">
-    <h2>4. Payback Period &amp; ARR <span class="tag">Ch. 5</span></h2>
-    <div class="tbl-wrap">
-      <table>
-        <tr><th>Method</th><th>What it measures</th><th>Strength</th><th>Weakness</th></tr>
-        <tr><td><strong>Payback Period</strong></td><td>Years to recover C₀ from cash flows</td><td>Simple, liquidity focus</td><td>Ignores TVM, ignores CFs after payback</td></tr>
-        <tr><td><strong>Discounted Payback</strong></td><td>Years to recover C₀ from discounted CFs</td><td>Accounts for TVM</td><td>Still ignores later CFs</td></tr>
-        <tr><td><strong>ARR</strong></td><td>Avg Net Income / Avg Book Investment</td><td>Uses accounting data</td><td>Not cash based, ignores TVM</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>5. Incremental Project Cash Flows <span class="tag">Ch. 6</span></h2>
-    <p>When evaluating a project, only <strong>incremental (relevant) cash flows</strong> matter — flows that occur <em>because</em> of the decision. Sunk costs are irrelevant; opportunity costs and side effects (cannibalisation) must be included.</p>
-    <div class="cards">
-      <div class="ccard"><div class="ccard-icon">🚫</div><h4>Sunk Costs</h4><p>Already spent — irrelevant. A ₹50 cr feasibility study already done should NOT be included.</p></div>
-      <div class="ccard"><div class="ccard-icon">🔄</div><h4>Opportunity Costs</h4><p>What you give up. Using own land has an opportunity cost = its market rental value.</p></div>
-      <div class="ccard"><div class="ccard-icon">💥</div><h4>Side Effects</h4><p>Cannibalisation — new Maruti CNG car reducing sales of existing petrol model.</p></div>
-      <div class="ccard"><div class="ccard-icon">🏭</div><h4>Working Capital</h4><p>New project needs inventory/receivables — cash outflow at start, recovered at end.</p></div>
-    </div>
-    <div class="example">
-      <div class="ex-label">Project Cash Flow Structure</div>
-      <p><strong>Year 0:</strong> –Equipment cost – Working Capital investment</p>
-      <p><strong>Year 1–n:</strong> (Revenue – Costs – Depreciation) × (1 – tax) + Depreciation = NOPAT + D&amp;A</p>
-      <p><strong>Final Year (extra):</strong> + Salvage value (after tax) + Recovery of Working Capital</p>
-    </div>
-  </div>
-
-  <!-- QUIZ -->
-  <div class="quiz-section">
-    <div class="quiz-head"><h2>Module 3 Quiz</h2><span class="quiz-badge">CO3 · 4 Questions</span></div>
-    <div class="q-block" id="q1">
-      <div class="q-num">Q 1 / 4</div>
-      <div class="q-text">A project has an initial investment of ₹2,00,000 and generates cash flows of ₹80,000 per year for 3 years. At a 10% cost of capital, what is the NPV?</div>
-      <div class="options">
-        <div class="opt" onclick="pick(1,'A')"><span class="opt-key">A</span>₹40,000</div>
-        <div class="opt" onclick="pick(1,'B')"><span class="opt-key">B</span>₹–1,052</div>
-        <div class="opt" onclick="pick(1,'C')"><span class="opt-key">C</span>₹10,500</div>
-        <div class="opt" onclick="pick(1,'D')"><span class="opt-key">D</span>₹–40,000</div>
+      <div class="concept-block">
+        <h3>The four main techniques</h3>
+        <div class="ccard-grid">
+          <div class="ccard"><h4>Net Present Value (NPV)</h4><p>PV of all future cash inflows minus the initial investment, discounted at WACC. The theoretically correct method. Accept if NPV &gt; 0.</p></div>
+          <div class="ccard"><h4>Internal Rate of Return (IRR)</h4><p>The discount rate that makes NPV = 0. Accept if IRR &gt; WACC (hurdle rate). Easy to understand but has pitfalls with mutually exclusive projects.</p></div>
+          <div class="ccard"><h4>Payback period</h4><p>How many years to recover the initial investment from undiscounted cash flows. Simple, widely used — but ignores time value of money and cash flows after payback.</p></div>
+          <div class="ccard"><h4>Discounted payback</h4><p>Same as payback but uses discounted cash flows. Better than simple payback — but still ignores cash flows beyond the payback point.</p></div>
+          <div class="ccard"><h4>Profitability Index (PI)</h4><p>PI = PV of future CFs / Initial investment. PI &gt; 1 means accept. Useful when capital is rationed — rank projects by PI to maximise value per rupee invested.</p></div>
+        </div>
       </div>
-      <div class="feedback" id="fb1"></div>
-    </div>
-    <div class="q-block" id="q2">
-      <div class="q-num">Q 2 / 4</div>
-      <div class="q-text">Which of these is a sunk cost and therefore IRRELEVANT to a capital budgeting decision?</div>
-      <div class="options">
-        <div class="opt" onclick="pick(2,'A')"><span class="opt-key">A</span>Market rent forgone on land being used for the project</div>
-        <div class="opt" onclick="pick(2,'B')"><span class="opt-key">B</span>₹25 lakh feasibility study already completed and paid for</div>
-        <div class="opt" onclick="pick(2,'C')"><span class="opt-key">C</span>Working capital needed for the new project</div>
-        <div class="opt" onclick="pick(2,'D')"><span class="opt-key">D</span>Cannibalisation of existing product sales</div>
+
+      <div class="concept-block">
+        <h3>The NPV–IRR conflict</h3>
+        <div class="callout warning">
+          <div class="callout-body"><strong>When NPV and IRR give conflicting rankings for mutually exclusive projects, always follow NPV.</strong> IRR assumes reinvestment at the IRR rate — often unrealistic. NPV assumes reinvestment at WACC — the actual cost of capital. IRR also fails when cash flows change sign multiple times (multiple IRRs problem).</div>
+        </div>
+        <div class="tbl-wrap"><table>
+          <thead><tr><th>Criterion</th><th>Accept rule</th><th>Limitation</th><th>Use when</th></tr></thead>
+          <tbody>
+            <tr><td><strong>NPV</strong></td><td>NPV &gt; 0</td><td>Requires WACC estimate</td><td>Always — theoretically correct</td></tr>
+            <tr><td><strong>IRR</strong></td><td>IRR &gt; WACC</td><td>Misleads for mutually exclusive projects, multiple sign changes</td><td>Cross-check with NPV</td></tr>
+            <tr><td><strong>Payback</strong></td><td>PB &lt; target</td><td>Ignores TVM, terminal CFs</td><td>Liquidity-focused quick screen</td></tr>
+            <tr><td><strong>PI</strong></td><td>PI &gt; 1</td><td>Ignores scale</td><td>Capital rationing</td></tr>
+          </tbody>
+        </table></div>
       </div>
-      <div class="feedback" id="fb2"></div>
-    </div>
-    <div class="q-block" id="q3">
-      <div class="q-num">Q 3 / 4</div>
-      <div class="q-text">Project A has IRR = 18%; Project B has IRR = 22%. The cost of capital is 12%. These projects are mutually exclusive and have very different scales. Which should you choose?</div>
-      <div class="options">
-        <div class="opt" onclick="pick(3,'A')"><span class="opt-key">A</span>Project B — it has the higher IRR</div>
-        <div class="opt" onclick="pick(3,'B')"><span class="opt-key">B</span>Project A — it has the lower IRR (safer)</div>
-        <div class="opt" onclick="pick(3,'C')"><span class="opt-key">C</span>The project with the higher NPV</div>
-        <div class="opt" onclick="pick(3,'D')"><span class="opt-key">D</span>Whichever has the shorter payback period</div>
+
+      <div class="example-box">
+        <div class="ex-label">INDIAN MARKET EXAMPLES</div>
+        <p><strong>Tata Steel — Kalinganagar expansion:</strong> ₹23,500 cr project evaluated over 10 years. NPV positive at assumed WACC of 10.5% → approved. IRR was 14.2% — above hurdle. Both methods agreed here.</p>
+        <p><strong>Infosys — Campus vs Cloud:</strong> A new physical campus (high upfront, long payback) vs cloud infrastructure (lower capex, faster payback). Payback favoured cloud; NPV favoured campus. Management chose NPV — the theoretically correct metric.</p>
       </div>
-      <div class="feedback" id="fb3"></div>
     </div>
-    <div class="q-block" id="q4">
-      <div class="q-num">Q 4 / 4</div>
-      <div class="q-text">What is the main weakness of the simple Payback Period method?</div>
-      <div class="options">
-        <div class="opt" onclick="pick(4,'A')"><span class="opt-key">A</span>It is too complex to calculate</div>
-        <div class="opt" onclick="pick(4,'B')"><span class="opt-key">B</span>It ignores cash flows after the payback date and the time value of money</div>
-        <div class="opt" onclick="pick(4,'C')"><span class="opt-key">C</span>It always gives the same result as NPV</div>
-        <div class="opt" onclick="pick(4,'D')"><span class="opt-key">D</span>It requires the cost of capital</div>
+
+    <div class="spanel" id="ct0-s1">
+      <div class="formula-grid">
+        <div class="fcard">
+          <div class="fcard-label">Net Present Value</div>
+          <div class="fcard-formula"><span class="v">NPV</span> = −<span class="v">C₀</span> + Σ <span class="v">CFt</span>/(1+<span class="v">r</span>)ᵗ</div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">C₀</span><span class="def">Initial investment (cash outflow at t=0, enter as positive)</span></div>
+            <div class="fcard-var"><span class="sym">CFt</span><span class="def">Net cash flow in period t</span></div>
+            <div class="fcard-var"><span class="sym">r</span><span class="def">Discount rate = WACC</span></div>
+            <div class="fcard-var"><span class="sym">n</span><span class="def">Life of the project in periods</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> Invest ₹1,00,000. CFs: ₹40K, ₹40K, ₹40K. WACC = 10%.<br>NPV = −1,00,000 + 40,000/1.1 + 40,000/1.21 + 40,000/1.331 = −1,00,000 + 99,474 = <strong>−₹526 → Reject</strong></div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">IRR definition</div>
+          <div class="fcard-formula">NPV = 0 when r = <span class="v">IRR</span></div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">IRR</span><span class="def">The discount rate that sets NPV to zero. Solved iteratively (trial and error or financial calculator).</span></div>
+          </div>
+          <div class="fcard-example"><strong>Decision rule:</strong> Accept if IRR &gt; WACC. If IRR = 14% and WACC = 10% → accept. If IRR = 8% and WACC = 10% → reject. For MUTUALLY EXCLUSIVE projects, always rank by NPV, not IRR.</div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">Payback period</div>
+          <div class="fcard-formula">PB = Year before full recovery + (Remaining cost / CF in recovery year)</div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">PB</span><span class="def">Number of years to recover the initial investment</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> Invest ₹1,00,000. CFs: Yr1 ₹40K, Yr2 ₹40K, Yr3 ₹30K.<br>After Yr2: recovered ₹80K. Remaining = ₹20K. Yr3 CF = ₹30K.<br>PB = 2 + (20,000/30,000) = <strong>2.67 years</strong></div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">Profitability Index</div>
+          <div class="fcard-formula"><span class="v">PI</span> = PV of future CFs / <span class="v">C₀</span></div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">PI</span><span class="def">Value created per rupee invested. PI &gt; 1 → accept.</span></div>
+            <div class="fcard-var"><span class="sym">C₀</span><span class="def">Initial investment</span></div>
+          </div>
+          <div class="fcard-example"><strong>Capital rationing example:</strong> Budget ₹50L. Project A: PI = 1.4 (NPV ₹20L, invest ₹50L). Project B: PI = 1.8 (NPV ₹8L, invest ₹10L). Rank by PI: choose B first, then as much of A as budget allows.</div>
+        </div>
       </div>
-      <div class="feedback" id="fb4"></div>
     </div>
-    <button class="btn-submit" id="submitBtn" onclick="submitQuiz()">Submit Answers</button>
-    <div class="quiz-result" id="quizResult"><div class="qr-score" id="qrScore"></div><div class="qr-msg" id="qrMsg"></div></div>
+
+    <div class="spanel" id="ct0-s2">
+      <div class="decoded-intro">7 capital budgeting terms — tap to flip.</div>
+      <div class="fc-progress" id="fc0-progress"></div><div class="fc-counter" id="fc0-counter"></div>
+      <div id="fc0-front" class="fc-front" onclick="flipCard(0)"></div>
+      <div id="fc0-back" class="fc-back"></div>
+      <div class="fc-nav"><button class="fc-btn" onclick="prevCard(0)">← Previous</button><button class="fc-btn primary" onclick="nextCard(0)">Next →</button></div>
+    </div>
+
+    <div class="spanel" id="ct0-s3">
+      <div class="game-wrap">
+        <div class="game-header"><div class="game-title">Project Picker</div><div class="game-desc">3 mutually exclusive projects — spot the NPV–IRR conflict and choose correctly</div></div>
+        <div class="game-body">
+          <p style="font-size:0.85rem;color:var(--text2);margin-bottom:18px;line-height:1.6;">Tata Motors must choose ONE of three proposals to use a vacant plot in Pune. WACC = <strong style="color:var(--blue);">10%</strong>. All figures in ₹ crore. Click the project you would choose — then see why.</p>
+          <div class="proj-grid" id="proj-grid"></div>
+          <div class="game-verdict" id="proj-verdict" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spanel" id="ct0-s4">
+      <div class="quiz-wrap"><div class="quiz-head"><div class="quiz-title">CB techniques</div><div class="quiz-badge">4 questions</div></div><div id="quiz0"></div></div>
+    </div>
+  </div>
+
+  <!-- ══ TAB 1: PROJECT CASH FLOWS ══ -->
+  <div class="cpanel" id="ct1">
+    <div class="spill-bar">
+      <div class="spill s-concepts active" onclick="switchSTab(1,0)">Concepts</div>
+      <div class="spill s-formulas" onclick="switchSTab(1,1)">Formulas</div>
+      <div class="spill s-decoded" onclick="switchSTab(1,2)">Finance Decoded</div>
+      <div class="spill s-game" onclick="switchSTab(1,3)">Game</div>
+      <div class="spill s-quiz" onclick="switchSTab(1,4)">Quiz</div>
+    </div>
+
+    <div class="spanel active" id="ct1-s0">
+      <div class="concept-intro">The hardest part of capital budgeting is not the NPV formula — it is identifying the <strong>correct cash flows</strong> to discount. Only <strong>incremental, after-tax cash flows</strong> belong in the analysis. Many common-sense items must be excluded.</div>
+
+      <div class="concept-block">
+        <h3>The golden rules of project cash flows</h3>
+        <div class="ccard-grid">
+          <div class="ccard"><h4>Incremental only</h4><p>Only cash flows that CHANGE because of the project. The firm's existing fixed overhead does NOT change → exclude it.</p></div>
+          <div class="ccard"><h4>Exclude sunk costs</h4><p>Money already spent that cannot be recovered. A ₹5 cr feasibility study paid last year is gone whether you proceed or not → irrelevant to the NPV decision.</p></div>
+          <div class="ccard"><h4>Include opportunity costs</h4><p>The value of the next best use of a resource. If the firm uses its own land for a project, the forgone rent is a real cost — include it.</p></div>
+          <div class="ccard"><h4>Include side effects (erosion)</h4><p>If a new product cannibalises existing product sales, the lost revenue is an incremental cost. Maruti's new model reducing sales of an existing model → include this.</p></div>
+          <div class="ccard"><h4>After-tax cash flows</h4><p>Always use after-tax figures. Depreciation is not a cash flow but creates a tax shield — include the tax saving from depreciation.</p></div>
+          <div class="ccard"><h4>Net Working Capital (NWC)</h4><p>Projects often tie up cash in receivables and inventory. NWC increases are outflows at the start; recovered (inflow) at project end.</p></div>
+        </div>
+      </div>
+
+      <div class="concept-block">
+        <h3>Three components of operating cash flow</h3>
+        <div class="callout insight">
+          <div class="callout-body"><strong>OCF = EBIT + Depreciation − Taxes</strong><br>Equivalently: OCF = (Sales − Costs) × (1−T) + Depreciation × T<br>The second term (Dep × T) is the <strong>depreciation tax shield</strong> — the cash saved on taxes because depreciation reduces taxable income.</div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="ex-label">MARUTI SUZUKI — NEW MODEL LAUNCH</div>
+        <p><strong>Initial investment:</strong> ₹2,400 cr plant + ₹300 cr NWC = ₹2,700 cr outflow at t=0.</p>
+        <p><strong>Sunk cost excluded:</strong> ₹80 cr R&D spent over the past 2 years → irrelevant, already spent.</p>
+        <p><strong>Opportunity cost included:</strong> The factory site could have been leased for ₹40 cr/year → include as annual cost.</p>
+        <p><strong>Erosion included:</strong> New Alto EV expected to cannibalise 15,000 units/year from existing Alto petrol → include lost contribution margin.</p>
+        <p><strong>Terminal CF:</strong> At year 10, plant sold for ₹400 cr salvage + ₹300 cr NWC recovered = ₹700 cr inflow.</p>
+      </div>
+    </div>
+
+    <div class="spanel" id="ct1-s1">
+      <div class="formula-grid">
+        <div class="fcard">
+          <div class="fcard-label">Operating Cash Flow (OCF) — three equivalent forms</div>
+          <div class="fcard-formula"><span class="v">OCF</span> = EBIT + Dep − Taxes</div>
+          <div class="fcard-formula" style="font-size:0.85rem;"><span class="v">OCF</span> = (Sales − Costs)(1−T) + Dep×T</div>
+          <div class="fcard-formula" style="font-size:0.85rem;"><span class="v">OCF</span> = Net income + Dep  (if no interest)</div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">Dep×T</span><span class="def">Depreciation tax shield — cash saved on tax due to depreciation deduction</span></div>
+            <div class="fcard-var"><span class="sym">T</span><span class="def">Corporate tax rate</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> Sales ₹500L, Costs ₹300L, Dep ₹50L, T = 25%.<br>OCF = (500−300)(0.75) + 50(0.25) = 150 + 12.5 = <strong>₹162.5L</strong></div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">Total project cash flow</div>
+          <div class="fcard-formula"><span class="v">CF</span> = OCF − ΔNWC − Capital expenditure</div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">ΔNWC</span><span class="def">Change in net working capital. Increase in NWC = cash outflow.</span></div>
+            <div class="fcard-var"><span class="sym">Capex</span><span class="def">Capital expenditure on fixed assets</span></div>
+          </div>
+          <div class="fcard-example"><strong>Year 0:</strong> CF = 0 − 300 − 2,400 = −₹2,700 cr (Maruti example)<br><strong>Operating years:</strong> CF = OCF − ΔNWC (usually 0 in mid-years)<br><strong>Terminal year:</strong> CF = OCF + NWC recovered + Salvage value (after-tax)</div>
+        </div>
+        <div class="fcard">
+          <div class="fcard-label">After-tax salvage value</div>
+          <div class="fcard-formula">After-tax salvage = <span class="v">S</span> − T×(<span class="v">S</span>−<span class="v">BV</span>)</div>
+          <div class="fcard-vars">
+            <div class="fcard-var"><span class="sym">S</span><span class="def">Salvage (sale) price of asset at end of project</span></div>
+            <div class="fcard-var"><span class="sym">BV</span><span class="def">Book value (accounting value) of asset at that time</span></div>
+            <div class="fcard-var"><span class="sym">T×(S−BV)</span><span class="def">Tax on the gain if S &gt; BV. Tax saving if S &lt; BV.</span></div>
+          </div>
+          <div class="fcard-example"><strong>Example:</strong> Asset sold for ₹400 cr, book value ₹250 cr, T = 25%.<br>After-tax salvage = 400 − 0.25×(400−250) = 400 − 37.5 = <strong>₹362.5 cr</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spanel" id="ct1-s2">
+      <div class="decoded-intro">6 project cash flow terms — tap to flip.</div>
+      <div class="fc-progress" id="fc1-progress"></div><div class="fc-counter" id="fc1-counter"></div>
+      <div id="fc1-front" class="fc-front" onclick="flipCard(1)"></div>
+      <div id="fc1-back" class="fc-back"></div>
+      <div class="fc-nav"><button class="fc-btn" onclick="prevCard(1)">← Previous</button><button class="fc-btn primary" onclick="nextCard(1)">Next →</button></div>
+    </div>
+
+    <div class="spanel" id="ct1-s3">
+      <div class="game-wrap">
+        <div class="game-header"><div class="game-title">Cash Flow Surgeon</div><div class="game-desc">10 items from a Tata Motors project — classify each as Include or Exclude from the NPV analysis</div></div>
+        <div class="game-body">
+          <div class="surgeon-score">Classified: <span id="surg-done">0</span>/10 &nbsp;·&nbsp; Correct: <span id="surg-correct">0</span></div>
+          <div id="surgeon-items"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="spanel" id="ct1-s4">
+      <div class="quiz-wrap"><div class="quiz-head"><div class="quiz-title">Project cash flows</div><div class="quiz-badge">4 questions</div></div><div id="quiz1"></div></div>
+    </div>
   </div>
 </main>
+
 <script>
-const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbwEA2oFByWVURilCo6gfrU9IcrkEPXS5DcFgvMWvMhPm-HpiE--1rLxI26SxxDRDWu8RQ/exec';
-const MODULE_NUM='3';
-const ANSWERS={1:'B',2:'B',3:'C',4:'B'};
-const EXPLANATIONS={
-  1:'NPV = –2,00,000 + 80,000 × [1–1/(1.10)³]/0.10 = –2,00,000 + 80,000 × 2.4869 = –2,00,000 + 1,98,948 = –₹1,052. Marginally negative — reject.',
-  2:'A sunk cost is one already incurred and unrecoverable regardless of the decision. The feasibility study is paid — it should NOT affect the go/no-go decision.',
-  3:'For mutually exclusive projects with different scales, IRR can mislead. Always use NPV to pick the project that creates more absolute value.',
-  4:'Payback ignores all cash flows after the cutoff date (a very profitable year-4 CF is completely ignored) and does not discount cash flows for time value.'
-};
-const picks={};
-function pick(q,opt){const block=document.getElementById('q'+q);block.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));block.querySelectorAll('.opt')[['A','B','C','D'].indexOf(opt)].classList.add('selected');picks[q]=opt;}
-function submitQuiz(){
-  if(Object.keys(picks).length<4){alert('Please answer all 4 questions.');return;}
-  let score=0;
-  for(let q=1;q<=4;q++){const correct=ANSWERS[q];const chosen=picks[q];const opts=document.getElementById('q'+q).querySelectorAll('.opt');opts.forEach(o=>o.style.pointerEvents='none');opts[['A','B','C','D'].indexOf(correct)].classList.add('correct');if(chosen!==correct)opts[['A','B','C','D'].indexOf(chosen)].classList.add('wrong');else score++;const fb=document.getElementById('fb'+q);fb.textContent=EXPLANATIONS[q];fb.className='feedback show '+(chosen===correct?'ok':'bad');}
-  document.getElementById('submitBtn').disabled=true;
-  const pct=Math.round(score/4*100);
-  document.getElementById('qrScore').textContent=score+'/4 ('+pct+'%)';
-  document.getElementById('qrMsg').textContent=pct>=75?'Well done! CO3 objectives demonstrated.':'Review the sections above and retry.';
-  document.getElementById('quizResult').classList.add('show');
-  localStorage.setItem('cf_m3_quiz',pct);track({action:'quiz',module:MODULE_NUM,score:pct});
+function switchCTab(i){document.querySelectorAll('.ctab').forEach((t,j)=>t.classList.toggle('active',j===i));document.querySelectorAll('.cpanel').forEach((p,j)=>p.classList.toggle('active',j===i));}
+function switchSTab(ct,st){var cp=document.getElementById('ct'+ct);cp.querySelectorAll('.spill').forEach((s,i)=>s.classList.toggle('active',i===st));cp.querySelectorAll('.spanel').forEach((p,i)=>p.classList.toggle('active',i===st));}
+
+var flashcards=[
+  [{term:'NPV',def:'Net Present Value. The sum of present values of all project cash inflows minus the initial investment. The theoretically correct capital budgeting criterion.',plain:'NPV tells you in today\'s money how much value a project creates or destroys. NPV = +₹50 cr means the project adds ₹50 cr to shareholder wealth after recovering the cost of capital.'},
+   {term:'IRR',def:'Internal Rate of Return. The discount rate that makes the NPV of a project equal to zero. Accept if IRR exceeds the WACC.',plain:'Think of IRR as the project\'s own rate of return — what the project "earns." If it earns more than the firm\'s cost of capital (WACC), it creates value.'},
+   {term:'Payback period',def:'The time required to recover the initial investment from the project\'s undiscounted cash flows.',plain:'How many years until you get your money back? A payback of 3 years means after 3 years of cash flows you have recovered what you spent. Does not account for what happens after year 3.'},
+   {term:'Hurdle rate',def:'The minimum required rate of return a project must earn to be accepted. Typically equal to the firm\'s WACC.',plain:'The bar a project must clear. If WACC = 10%, any project earning less than 10% is rejected — it does not cover the cost of capital raised to fund it.'},
+   {term:'Mutually exclusive',def:'Projects where accepting one automatically means rejecting all others. The firm can only choose ONE.',plain:'Like choosing between building a hotel OR a shopping mall on the same plot — you cannot do both. When projects are mutually exclusive, always rank by NPV, not IRR.'},
+   {term:'Profitability Index',def:'PI = PV of future cash flows / Initial investment. Measures value created per rupee invested.',plain:'PI = 1.4 means every ₹1 invested returns ₹1.40 in PV. Useful when capital is limited — rank projects by PI to get the most value from a fixed budget.'},
+   {term:'Capital rationing',def:'A situation where the firm has limited capital and cannot fund all positive-NPV projects. Must rank and select the best combination.',plain:'Imagine the firm has ₹50 cr to invest but has five projects each needing ₹20 cr. It cannot fund all five — it must pick the combination with the highest total NPV.'}],
+  [{term:'Incremental cash flow',def:'The additional cash flow that results ONLY from undertaking the project — the difference between cash flows with and without the project.',plain:'Ask: "Would this cash flow exist if we did not do the project?" If yes → exclude. If no → include. Only changes matter.'},
+   {term:'Sunk cost',def:'A cost that has already been incurred and cannot be recovered, regardless of whether the project proceeds.',plain:'The ₹80 cr already spent on R&D is gone. The project cannot "earn it back." Sunk costs are irrelevant to the go/no-go decision — do not include them in NPV.'},
+   {term:'Opportunity cost',def:'The value of the best alternative use of a resource that is foregone when it is used for a project.',plain:'If you use your own factory space for a new project, the rent you could have earned is an opportunity cost. Even though no money changes hands, it is a real economic cost.'},
+   {term:'Erosion',def:'The reduction in cash flows from existing products caused by a new product introduced by the same firm. Also called cannibalisation.',plain:'Maruti\'s new EV stealing sales from its petrol model — the lost sales are a side effect of the new project and must be included in the NPV as a negative cash flow.'},
+   {term:'Depreciation tax shield',def:'The tax saving resulting from depreciation being deductible as an expense. Shield = Depreciation × Tax rate.',plain:'If depreciation is ₹50L and the tax rate is 25%, the firm saves ₹12.5L in taxes it would otherwise pay. This tax shield is a REAL cash benefit of depreciation, even though depreciation itself is not a cash flow.'},
+   {term:'Net Working Capital (NWC)',def:'Current assets minus current liabilities required to support operations. An increase in NWC is a cash outflow (investment); it is recovered at project end.',plain:'Starting a factory requires stocking inventory and extending credit to customers before collecting cash. This "tied-up" money is an upfront cost. You get it back when the project ends and inventory is sold and receivables collected.'}]
+];
+var fcState=[{idx:0,flipped:false},{idx:0,flipped:false}];
+function renderCard(t){var cards=flashcards[t],st=fcState[t],card=cards[st.idx];
+  document.getElementById('fc'+t+'-progress').innerHTML=cards.map((_,i)=>'<div class="fc-pip'+(i<st.idx?' done':i===st.idx?' current':'')+'"></div>').join('');
+  document.getElementById('fc'+t+'-counter').textContent=(st.idx+1)+' of '+cards.length+' terms';
+  var fr=document.getElementById('fc'+t+'-front');fr.innerHTML='<div class="fc-type">TERM</div><div class="fc-term">'+card.term+'</div><div class="fc-hint">tap to reveal →</div>';fr.style.display=st.flipped?'none':'flex';
+  var bk=document.getElementById('fc'+t+'-back');bk.innerHTML='<div class="fc-def-label">DEFINITION</div><div class="fc-def">'+card.def+'</div><div class="fc-plain-label">PLAIN ENGLISH</div><div class="fc-plain">'+card.plain+'</div>';bk.style.display=st.flipped?'block':'none';}
+function flipCard(t){fcState[t].flipped=!fcState[t].flipped;renderCard(t);}
+function nextCard(t){fcState[t].idx=Math.min(fcState[t].idx+1,flashcards[t].length-1);fcState[t].flipped=false;renderCard(t);}
+function prevCard(t){fcState[t].idx=Math.max(fcState[t].idx-1,0);fcState[t].flipped=false;renderCard(t);}
+
+// PROJECT PICKER GAME
+var projects=[
+  {name:'Project Alpha — EV Assembly Line',invest:500,cfs:[80,120,160,180,180,150],irr:18.2,npv:null,color:'var(--blue)'},
+  {name:'Project Beta — Hybrid Platform',invest:200,cfs:[60,70,80,80,70,60],irr:24.1,npv:null,color:'var(--purple)'},
+  {name:'Project Gamma — Parts Logistics Hub',invest:800,cfs:[100,150,200,220,220,200],irr:16.8,npv:null,color:'var(--teal)'}
+];
+var wacc=0.10;
+function calcNPV(cfs,invest,r){return cfs.reduce((s,cf,t)=>s+cf/Math.pow(1+r,t+1),0)-invest;}
+projects.forEach(p=>p.npv=Math.round(calcNPV(p.cfs,p.invest,wacc)*100)/100);
+var projAnswered=false;
+function renderProjGame(){
+  var html='';
+  projects.forEach(function(p,i){
+    html+='<div class="proj-card" id="pc'+i+'" onclick="pickProject('+i+')">';
+    html+='<div class="proj-name" style="color:'+p.color+'">'+p.name+'</div>';
+    html+='<div class="proj-stat"><span class="label">Investment</span><span class="val">₹'+p.invest+' cr</span></div>';
+    html+='<div class="proj-stat"><span class="label">NPV @ 10%</span><span class="val '+(p.npv>0?'pos':'neg')+'">₹'+p.npv.toFixed(1)+' cr</span></div>';
+    html+='<div class="proj-stat"><span class="label">IRR</span><span class="val">'+p.irr+'%</span></div>';
+    html+='<div class="proj-stat"><span class="label">Payback</span><span class="val">~'+( Math.ceil(p.invest/p.cfs[0]))+'–'+(Math.ceil(p.invest/p.cfs[1]))+' yrs</span></div>';
+    html+='</div>';
+  });
+  document.getElementById('proj-grid').innerHTML=html;
 }
-function getSession(){try{return JSON.parse(localStorage.getItem('cfSession')||'null');}catch(e){return null;}}
-function track(params){try{const s=getSession();if(!s||!s.enrollId)return;params.id=s.enrollId;const cbName='tcb_'+Math.random().toString(36).slice(2);const qs=Object.entries(params).map(([k,v])=>encodeURIComponent(k)+'='+encodeURIComponent(v)).join('&');const sc=document.createElement('script');sc.src=APPS_SCRIPT_URL+'?'+qs+'&callback='+cbName;window[cbName]=function(){delete window[cbName];sc.remove();};sc.onerror=function(){delete window[cbName];sc.remove();};document.head.appendChild(sc);}catch(e){}}
-let totalMins=0,isVisible=true,activeStart=Date.now();
-document.addEventListener('visibilitychange',function(){if(document.hidden){if(isVisible)totalMins+=(Date.now()-activeStart)/60000;isVisible=false;}else{isVisible=true;activeStart=Date.now();}});
-setInterval(function(){if(!document.hidden){totalMins+=(Date.now()-activeStart)/60000;activeStart=Date.now();if(totalMins>=1){track({action:'time',module:MODULE_NUM,mins:totalMins.toFixed(1)});totalMins=0;}}},5*60*1000);
-window.addEventListener('beforeunload',function(){if(!document.hidden)totalMins+=(Date.now()-activeStart)/60000;if(totalMins>0.1)track({action:'time',module:MODULE_NUM,mins:totalMins.toFixed(1)});track({action:'log',event:'MODULE_EXIT',module:MODULE_NUM,detail:'',mins:totalMins.toFixed(1)});});
-window.addEventListener('load',function(){const s=getSession();if(!s||!s.enrollId)return;localStorage.setItem('cf_m3_seen','1');track({action:'log',event:'MODULE_OPEN',module:MODULE_NUM,detail:'',mins:0});});
+function pickProject(i){
+  if(projAnswered)return;projAnswered=true;
+  var best=projects.reduce((b,p,j)=>p.npv>projects[b].npv?j:b,0);
+  projects.forEach(function(_,j){
+    var el=document.getElementById('pc'+j);
+    if(j===best)el.classList.add('winner');
+  });
+  document.getElementById('pc'+i).classList.add('selected');
+  var correct=i===best;
+  var msg='<strong>'+(correct?'✓ Correct!':'✗ Not quite.')+'</strong><br><br>';
+  msg+='The correct choice is <strong>'+projects[best].name+'</strong> with the highest NPV of ₹'+projects[best].npv.toFixed(1)+' cr.<br><br>';
+  msg+='<strong>Key insight:</strong> Project Beta has the highest IRR (24.1%) but the smallest NPV (₹'+projects[1].npv.toFixed(1)+' cr). Project Gamma has the highest NPV despite the lowest IRR. ';
+  msg+='For mutually exclusive projects, <strong>NPV wins</strong>. Higher IRR on a smaller investment does not create more shareholder wealth than a lower IRR on a much larger investment.';
+  var vd=document.getElementById('proj-verdict');vd.innerHTML=msg;vd.style.display='block';
+  vd.style.borderColor=correct?'rgba(10,124,62,0.3)':'rgba(220,38,38,0.2)';
+  vd.style.background=correct?'rgba(10,124,62,0.06)':'rgba(220,38,38,0.05)';}
+
+// CASH FLOW SURGEON
+var surgeonItems=[
+  {desc:'Tata Motors paid ₹120 cr to consultants last year to study the feasibility of building a new plant.',correct:'E',exp:'Sunk cost — already paid, cannot be recovered. Irrelevant to NPV decision.'},
+  {desc:'The new plant will use a factory site owned by Tata Motors, which could otherwise be leased for ₹30 cr/year.',correct:'I',exp:'Opportunity cost — the forgone lease income is a real economic cost of using the land.'},
+  {desc:'Expected annual revenues from selling vehicles produced at the new plant: ₹800 cr/year.',correct:'I',exp:'Incremental revenue directly from the project — core cash inflow to include.'},
+  {desc:'Annual depreciation on the new plant: ₹100 cr/year (straight-line over 10 years).',correct:'I',exp:'Depreciation is not a cash flow, but the depreciation tax shield (100 × Tax rate) IS a real cash saving. Include via the OCF formula.'},
+  {desc:'The Head Office allocates ₹15 cr/year of corporate overhead to every new project.',correct:'E',exp:'Allocated overhead — this cost exists regardless of whether the project goes ahead. Not incremental → exclude.'},
+  {desc:'The new EV model is expected to reduce sales of Tata\'s existing Nexon model by ₹60 cr/year.',correct:'I',exp:'Erosion / cannibalisation — a negative side effect of the new project. Must be included as a cash outflow.'},
+  {desc:'Working capital of ₹200 cr needed at start: inventory, receivables buffer.',correct:'I',exp:'NWC increase at t=0 is a cash outflow. Recovered at project end — include both the outflow and the terminal inflow.'},
+  {desc:'Interest expense on the loan taken to fund the plant: ₹40 cr/year.',correct:'E',exp:'Financing costs are NOT included in project cash flows. They are captured in the WACC (discount rate). Double-counting them in cash flows and WACC would understate NPV.'},
+  {desc:'The plant qualifies for a government PLI (Production-Linked Incentive) subsidy of ₹50 cr in Year 2.',correct:'I',exp:'Incremental cash inflow directly from the project — a real cash benefit. Include.'},
+  {desc:'Salvage value of the plant at end of Year 10: estimated ₹300 cr (book value at that time: ₹0).',correct:'I',exp:'Terminal cash flow — after-tax salvage = 300 − Tax × (300−0). Real cash inflow at end of project life. Include.'}
+];
+var surgAnswered=new Array(10).fill(false),surgCorrect=0;
+function renderSurgeon(){
+  var html='';
+  surgeonItems.forEach(function(item,i){
+    html+='<div class="surgeon-item"><div class="surgeon-desc">'+(i+1)+'. '+item.desc+'</div>';
+    html+='<div class="surgeon-opts"><button class="s-opt'+(surgAnswered[i]&&surgeonItems[i].correct==='I'?' s-include':'')+'" onclick="surgAnswer('+i+',\'I\')">✓ Include in NPV</button>';
+    html+='<button class="s-opt'+(surgAnswered[i]&&surgeonItems[i].correct==='E'?' s-exclude':'')+'" onclick="surgAnswer('+i+',\'E\')">✗ Exclude from NPV</button></div>';
+    html+='<div class="surgeon-fb'+(surgAnswered[i]?' show '+(/* need to store user answer */surgState[i]===item.correct?'ok':'bad'):'')+'">'+
+      (surgAnswered[i]?(surgState[i]===item.correct?'✓ Correct! ':'✗ Wrong. ')+item.exp:'')+'</div></div>';
+  });
+  document.getElementById('surgeon-items').innerHTML=html;
+  document.getElementById('surg-done').textContent=surgAnswered.filter(Boolean).length;
+  document.getElementById('surg-correct').textContent=surgCorrect;}
+var surgState=new Array(10).fill(null);
+function surgAnswer(i,choice){
+  if(surgAnswered[i])return;surgAnswered[i]=true;surgState[i]=choice;
+  if(choice===surgeonItems[i].correct)surgCorrect++;renderSurgeon();}
+
+var quizData=[
+  [{q:'A firm is evaluating two mutually exclusive projects. Project A: NPV = ₹80 cr, IRR = 14%. Project B: NPV = ₹120 cr, IRR = 11%. WACC = 9%. Which should the firm choose?',opts:['Project A — higher IRR means better return','Project B — higher NPV means more shareholder wealth created','Either — both have IRR above WACC','Neither — IRR must exceed 14% to accept'],ans:1,exp:'For mutually exclusive projects, always choose the higher NPV. NPV measures absolute wealth creation. Project B adds ₹120 cr to shareholder wealth vs ₹80 cr for A, despite a lower IRR. IRR can mislead when project scales differ.'},
+   {q:'A project requires ₹5,00,000 investment. Cash flows: Yr1 ₹2,00,000; Yr2 ₹2,00,000; Yr3 ₹1,50,000. What is the payback period?',opts:['2.5 years','2.67 years','3.0 years','1.5 years'],ans:1,exp:'After Yr1: recovered ₹2L (balance ₹3L). After Yr2: recovered ₹4L (balance ₹1L). Yr3 CF = ₹1.5L. PB = 2 + (1,00,000/1,50,000) = 2 + 0.67 = 2.67 years.'},
+   {q:'Which statement about the Profitability Index is CORRECT?',opts:['PI < 1 means accept the project','PI is most useful when the firm has unlimited capital','PI = PV of future CFs ÷ Initial investment; useful for capital rationing','PI gives the same ranking as NPV for all mutually exclusive projects'],ans:2,exp:'PI = PV of future CFs / Initial investment. PI > 1 → accept (equivalent to NPV > 0). It is especially useful under capital rationing — ranking projects by PI maximises value per rupee invested.'},
+   {q:'IRR is said to have a "reinvestment rate assumption." What does this mean?',opts:['IRR assumes all cash flows are reinvested at the WACC','IRR assumes all intermediate cash flows are reinvested at the IRR itself','IRR requires the firm to reinvest in the same project','IRR does not make any reinvestment assumption'],ans:1,exp:'IRR implicitly assumes that all cash flows generated by the project can be reinvested at the IRR rate. If IRR = 25%, this assumes reinvestment at 25% — often unrealistic. NPV assumes reinvestment at WACC, which is more realistic.'}],
+  [{q:'Tata Motors spent ₹150 cr on a feasibility study last year for a new factory. The study shows the factory will have NPV of ₹200 cr. Should the ₹150 cr be deducted from NPV?',opts:['Yes — it is a project cost','No — it is a sunk cost and irrelevant to the NPV decision','Yes — but only 50% of it','No — but it should be added back as a tax deduction'],ans:1,exp:'The ₹150 cr is a sunk cost — it was spent before the decision and cannot be recovered regardless of what happens next. Sunk costs are always excluded from NPV analysis. The NPV decision is forward-looking.'},
+   {q:'A new product launch is expected to generate ₹100 cr revenue but will cannibalise ₹25 cr of sales from an existing product. What is the incremental revenue to include in NPV?',opts:['₹100 cr','₹125 cr','₹75 cr','₹25 cr'],ans:2,exp:'Incremental revenue = new revenue − revenue lost from erosion = ₹100 cr − ₹25 cr = ₹75 cr. The cannibalisation (erosion) is a real cost of the new project and must be reflected in the cash flows.'},
+   {q:'A project has: Sales ₹400L, Cash costs ₹200L, Depreciation ₹60L, Tax rate 25%. What is OCF?',opts:['₹200L','₹165L','₹150L','₹140L'],ans:1,exp:'OCF = (Sales − Costs)(1−T) + Dep×T = (400−200)(0.75) + 60(0.25) = 150 + 15 = ₹165L. Alternatively: EBIT = 400−200−60 = ₹140L. Tax = 35L. OCF = 140+60−35 = ₹165L. Both give the same answer.'},
+   {q:'Why is interest expense excluded from project cash flows in NPV analysis?',opts:['Interest is not a real cash flow','Interest is already captured in the WACC used to discount cash flows','Interest is a sunk cost','Interest is excluded only for leveraged firms'],ans:1,exp:'The financing cost (interest) is already embedded in the WACC discount rate. Including it in cash flows AND using WACC as the discount rate would be double-counting — it would understate NPV and lead to rejecting good projects.'}]
+];
+var quizState=[{answers:[],submitted:[],done:false},{answers:[],submitted:[],done:false}];
+function renderQuiz(qi){var qs=quizData[qi],st=quizState[qi],html='';
+  qs.forEach(function(q,i){html+='<div class="q-block"><div class="q-num">Q'+(i+1)+'</div><div class="q-text">'+q.q+'</div><div class="options">';
+    q.opts.forEach(function(o,j){var cls='opt';if(st.submitted[i]!==undefined){if(j===q.ans)cls+=' correct';else if(j===st.answers[i])cls+=' wrong';}else if(j===st.answers[i])cls+=' selected';
+      html+='<div class="'+cls+'" onclick="quizSelect('+qi+','+i+','+j+')"><span class="opt-key">'+['A','B','C','D'][j]+'</span>'+o+'</div>';});
+    html+='</div><div class="q-feedback'+(st.submitted[i]!==undefined?' show '+(st.answers[i]===q.ans?'ok':'bad'):'')+'">'+
+      (st.submitted[i]!==undefined?(st.answers[i]===q.ans?'✓ Correct! ':'✗ Incorrect. ')+q.exp:'')+'</div>';
+    html+='<button class="btn-submit" onclick="quizSubmit('+qi+','+i+')"'+(st.submitted[i]!==undefined?' disabled':'')+'>Submit</button></div>';});
+  if(st.done){var sc=qs.filter((_,i)=>st.answers[i]===qs[i].ans).length;html+='<div class="quiz-result show"><div class="qr-score">'+sc+'/'+qs.length+'</div><div class="qr-msg">'+(['Review and retry','Good effort','Well done!','Perfect!'][sc]||'')+'</div></div>';}
+  document.getElementById('quiz'+qi).innerHTML=html;}
+function quizSelect(qi,qn,oi){if(quizState[qi].submitted[qn]!==undefined)return;quizState[qi].answers[qn]=oi;renderQuiz(qi);}
+function quizSubmit(qi,qn){if(quizState[qi].answers[qn]===undefined)return;quizState[qi].submitted[qn]=true;if(quizData[qi].every((_,i)=>quizState[qi].submitted[i]))quizState[qi].done=true;renderQuiz(qi);}
+
+var SESS_KEY='cfSession',APPSURL='https://script.google.com/macros/s/AKfycbwEA2oFByWVURilCo6gfrU9IcrkEPXS5DcFgvMWvMhPm-HpiE--1rLxI26SxxDRDWu8RQ/exec';
+function gs(p){try{var q=Object.keys(p).map(k=>k+'='+encodeURIComponent(p[k])).join('&'),cb='cf_cb_'+Date.now();window[cb]=function(){};var s=document.createElement('script');s.src=APPSURL+'?'+q+'&callback='+cb;document.head.appendChild(s);}catch(e){}}
+var sess=JSON.parse(localStorage.getItem(SESS_KEY)||'null');
+if(!sess||sess.expires<Date.now())window.location.href='index.html';
+else gs({action:'module_open',id:sess.enrollId,module:'3'});
+
+renderCard(0);renderCard(1);renderProjGame();renderSurgeon();renderQuiz(0);renderQuiz(1);
 </script>
 </body>
 </html>
